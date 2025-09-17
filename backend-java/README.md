@@ -1,6 +1,6 @@
 # Backend (Java – Spring Boot)
 
-This folder contains the Java backend for SalesFlow Lite.  
+This folder will contain the Java backend for SalesFlow Lite.  
 It provides APIs for managing products, sales entries, and stock tracking.
 
 ## Tech Stack
