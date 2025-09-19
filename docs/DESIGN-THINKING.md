@@ -27,7 +27,7 @@
 
 ### Accessibility Challenges
 - Unstable internet connectivity
-- Various language preferences (French, Lingala, Swahili)
+- Various language preferences (English , French, Lingala, Swahili)
 - Limited technology experience
 - Cost sensitivity
 
