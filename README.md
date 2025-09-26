@@ -1,37 +1,47 @@
 # SalesFlow Lite
 
-SalesFlow Lite is a lightweight sales and inventory management application designed for small businesses.  
-It helps merchants track products, record sales, monitor stock levels, and analyze business performance — even offline.
+**A user-centered sales & inventory tool for small merchants**  
 
-## Features
-- Product CRUD management (create, edit, delete, view)
-- Track stock levels and adjustments
-- Enter sales transactions with totals and taxes
-- Automatic low-stock alerts
-- Dashboard with daily revenue, top products, and stock status
-- Export data (CSV format)
-- Multilingual support (English, French, Lingala, Swahili)
-- Works offline using local storage and syncs when back online
-- Mobile-friendly, fast, and simple to use
+SalesFlow Lite is a lightweight sales and inventory management tool designed for small businesses and merchants.  
+It enables product tracking, sales recording, stock monitoring, and reporting — all in a simple, offline-friendly interface.  
+The system supports multiple languages and is built with modularity for easy future extensions.
 
-## Tech Stack
-- **Frontend**: React  
-- **Backend**: Java / Python (planned modular integration)  
-- **Storage**: IndexedDB (offline), API server (online)  
+---
 
-## Getting Started
+## 🎯 Our Design Thinking Approach
 
-### Prerequisites
-- Node.js (>= 18)
-- npm or yarn package manager
+We followed a **Design Thinking** cycle to build this product:
 
-### Installation
+- **Empathize**: Interviewed merchants and stakeholders to uncover real pain points in daily sales and inventory work  
+- **Define**: Mapped personas, problems, and needs (e.g. “quick entry”, “stock ruptures”, offline use)  
+- **Ideate**: Brainstormed features and prioritized them (MVP first, advanced later)  
+- **Prototype & Test**: Built small increments, got user feedback, iterated  
+- **Implement**: Now building in modular layers (frontend, backends) guided by real user needs  
+
+
+
+---
+
+## 🚀 Requirements (MVP + Advanced)
+
+| Feature | Description |
+|--------|-------------|
+| Product Management | CRUD operations + stock tracking |
+| Sales Entry | Quick form, auto calculations |
+| Dashboard & Analytics | Daily totals, top products, stock status |
+| Stock Alerts | Notifies when inventory is low |
+| Offline Support | Work without internet, sync when online |
+| Data Export | Export to CSV |
+| Multilingual UI | Languages: English, French, Lingala, Swahili |
+| **External Data Analysis** | Import Excel documents (XLSX/CSV), merge with system data, run insights & comparative reports |
+
+---
+
+## 🛠️ Getting Started
+
 ```bash
-# Clone repository
 git clone https://github.com/rado4002/-SalesFlow-Lite.git
-
-# Navigate to project folder
 cd -SalesFlow-Lite
-
-# Install dependencies
-npm install
+npm install     # frontend dependencies (React)
+# backend setup (Java / Python) instructions to come
+npm start       # launch dev frontend
