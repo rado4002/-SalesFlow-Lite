@@ -1,35 +1,27 @@
-# Backend (Python – FastAPI)
+# 🚀 Analytics Dashboard API
 
-This folder contains the Python backend for SalesFlow Lite.  
-It provides APIs for analytics, CSV/PDF export, and predictive features.
+<div align="center">
 
-## Tech Stack
-- Python 3.10+
-- FastAPI
-- Uvicorn
+![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-blue.svg)
 
-## Features
-- CSV export
-- PDF export (optional/advanced)
-- Predictive analytics (optional/advanced)
+**Real-time business analytics & ML API with FastAPI**
 
-## How to Run
+</div>
 
-1. Install Python 3.10 or above.
-2. Install dependencies:
+## 📋 Features
 
-   ```
-   pip install -r requirements.txt
-   ```
+- **📊 Real-Time Dashboard** - Sales, stock, and revenue monitoring
+- **🤖 ML Forecasting** - 7-day sales predictions & anomaly detection  
+- **📁 Excel Import/Export** - Data processing with validation
+- **🚨 Smart Alerts** - Proactive business intelligence
+- **🔐 Secure API** - JWT authentication & async performance
 
-3. Run the server:
+## 🛠️ Tech Stack
 
-   ```
-   uvicorn main:app --reload
-   ```
-
-4. The backend will start on [http://localhost:8000](http://localhost:8000)
-
-## API Documentation
-
-Visit [http://localhost:8000/docs](http://localhost:8000/docs) for auto-generated API docs.
+**Backend:** FastAPI, Python 3.11+, Pydantic, SQLAlchemy  
+**Database:** PostgreSQL, Redis  
+**ML & Data:** scikit-learn, pandas, numpy  
+**Auth & Security:** JWT, bcrypt  
+**Tools:** Docker, pytest, httpx
