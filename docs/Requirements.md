@@ -1,6 +1,4 @@
 
-
-```markdown
 # SalesFlow Lite - Requirements
 
 ## Functional Requirements
