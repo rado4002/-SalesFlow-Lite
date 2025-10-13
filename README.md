@@ -7,8 +7,10 @@ It enables product tracking, sales recording, stock monitoring, and reporting �
 The system supports multiple languages and is built with modularity for easy future extensions.
 
 ---
+## 🧭 Software Process
+Our project follows a **Hybrid Plan-Driven + Iterative** process.
 
-## 🎯 Our Design Thinking Approach
+### Phase 1: Plan-Driven Design
 
 We followed a **Design Thinking** cycle to build this product:
 
@@ -16,23 +18,38 @@ We followed a **Design Thinking** cycle to build this product:
 - **Define**: Mapped personas, problems, and needs (e.g. “quick entry”, “stock ruptures”, offline use)  
 - **Ideate**: Brainstormed features and prioritized them (MVP first, advanced later)  
 - **Prototype & Test**: Built small increments, got user feedback, iterated  
-- **Implement**: Now building in modular layers (frontend, backends) guided by real user needs  
+- **Implement**: Now building in modular layers (frontend, backends) guided by real user needs
+  
+### Phase 2: Iterative Development
 
+Once the design is validated, we move into **iterative development cycles**, guided by Agile principles:
+
+- Build → Test → Review → Improve
+- Short sprints focused on incremental delivery
+- Continuous integration, testing, and feedback
+- Adaptation based on real user data
 
 
 ---
 
 ## 🚀 Requirements (MVP + Advanced)
 
+## 🚀 Requirements Breakdown
+
+### 🧩 MVP (Minimum Viable Product)
 | Feature | Description |
-|--------|-------------|
-| Product Management | CRUD operations + stock tracking |
-| Sales Entry | Quick form, auto calculations |
-| Dashboard & Analytics | Daily totals, top products, stock status |
-| Stock Alerts | Notifies when inventory is low |
-| Offline Support | Work without internet, sync when online |
-| Data Export | Export to CSV |
-| Multilingual UI | Languages: English, French, Lingala, Swahili |
+|----------|--------------|
+| **Product Management** | CRUD operations + stock tracking |
+| **Sales Entry** | Quick form, auto calculations |
+| **Dashboard & Analytics** | Daily totals, top products, stock status |
+| **Stock Alerts** | Notifies when inventory is low |
+| **Data Export** | Export to CSV |
+
+### 💡 Advanced Features
+| Feature | Description |
+|----------|--------------|
+| **Offline Support** | Work without internet, sync when online |
+| **Multilingual UI** | Languages: English, French, Lingala, Swahili |
 | **External Data Analysis** | Import Excel documents (XLSX/CSV), merge with system data, run insights & comparative reports |
 
 ---
