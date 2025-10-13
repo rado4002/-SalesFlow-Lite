@@ -29,7 +29,9 @@ The **SalesFlow-Lite Java Backend** provides a robust and scalable foundation fo
 
 ### System Flow Diagram
 
-```
+
+```mermaid
+
 graph TB
    A[Client Mobile/Web] --> B[API Gateway]
    B --> C[Authentication]
@@ -216,7 +218,7 @@ src/main/java/com/salesflow/
 
 ### Sync Architecture
 
-```
+```mermaid
 sequenceDiagram
    participant M as Mobile Client
    participant S as Server
