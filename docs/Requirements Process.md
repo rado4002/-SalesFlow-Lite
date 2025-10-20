@@ -1,13 +1,13 @@
 
-#   Requiements Process - SalesFlow AI
+#   Requirements Process - SalesFlow AI
 
 ## Overview
 
-This document outlines the  Requiements thinking approach taken for the SalesFlow AI project, incorporating feedback from ten diverse stakeholders representing our target users in the Democratic Republic of Congo. The process follows three key phases: Empathy, Definition, and Ideation.
+This document outlines the  Requirements thinking approach taken for the SalesFlow AI project, incorporating feedback from ten diverse stakeholders representing our target users in the Democratic Republic of Congo. The process follows three key phases: elicitation, analysis, and validation.
 
 ## 🎯 Requiements  Phases
 
-### Phase 1: Empathy - Understanding User Needs
+### Phase 1: Elicitation - Understanding User Needs
 
 **Methods Used:**
 - Field meetings with small merchants
@@ -19,7 +19,7 @@ This document outlines the  Requiements thinking approach taken for the SalesFlo
 - **Amina Nzuzi**: "Field observations and key questions like 'How do you track sales?' build a solid foundation"
 - **Fatuma Kabila**: "On-site meetings build trust and reveal pain points like stock ruptures"
 
-### Phase 2: Definition - Framing the Problem
+### Phase 2: Analysis - Framing the Problem
 
 **Core Problem Statement:**
 Small merchants in DRC lack accessible tools for inventory management and data-driven decision making, leading to stockouts, inefficient operations, and reliance on intuition rather than data.
@@ -35,7 +35,7 @@ Small merchants in DRC lack accessible tools for inventory management and data-d
 - **Dr. Emile Kabongo**: "Specific pain points such as manual data entry inefficiencies are well-articulated"
 - **Luc Tshibangu**: "The persona is grounded in reality, highlighting affordability concerns"
 
-### Phase 3: Ideation - Generating Solutions
+### Phase 3: Validation - Generating Solutions
 
 **Brainstorming Approach:**
 - Impact/Effort matrix for feature prioritization
@@ -147,4 +147,4 @@ Based on stakeholder feedback, we'll measure:
 
 ---
 
-*This Requiements process ensures SalesFlow AI addresses real user needs while maintaining technical feasibility and business viability. The stakeholder feedback has been instrumental in shaping a user-centered solution for DRC's small merchants.*
+*This Requirements process ensures SalesFlow AI addresses real user needs while maintaining technical feasibility and business viability. The stakeholder feedback has been instrumental in shaping a user-centered solution for DRC's small merchants.*
