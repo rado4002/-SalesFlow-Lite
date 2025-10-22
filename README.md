@@ -53,6 +53,18 @@ Once the design is validated, we move into **iterative development cycles**, gui
 | **External Data Analysis** | Import Excel documents (XLSX/CSV), merge with system data, run insights & comparative reports |
 
 ---
+## 📊 TASK DISTRIBUTION - SALESFLOW-LITE PROJECT
+
+| ID | Module/Component | Responsible | Status | Date |
+|----|------------------|-------------|--------|------|
+| **PHASE 1: SOFTWARE PROCESS** | **SOFTWARE PROCESS(entire process)** | **BILUGE MOISE 比路** | ✅ Completed | 2025-09-27 |
+| **PHASE 2: REQUIREMENTS PROCESS** | **R.ELICITATION** | **VOLDI BOKANGA 少坎** | ✅ Completed  | 2025-10-02 |
+| **PHASE 2: REQUIREMENTS PROCESS** | **R.ANALYSIS** | **BILUGE MOISE 比路** | ✅ Completed | 2025-10-02 |
+| **PHASE 2: REQUIREMENTS PROCESS** | **R.VALIDATION** | **VOLDI BOKANGA 少坎** | ✅ Completed  | 2025-10-02 |
+| **PHASE 3: REQUIREMENTS** | **REQUIREMENTS** | **BILUGE MOISE 比路** | ✅ Completed  | 2025-10-02 |
+| **PHASE 4: ARCHITECTURE** | **ARCHITECTURE** | **BOTH**| ✅ Completed | 2025-10-13 |
+
+
 
 ## 🛠️ Getting Started
 
