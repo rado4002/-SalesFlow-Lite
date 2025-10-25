@@ -51,6 +51,8 @@ Once the design is validated, we move into **iterative development cycles**, gui
 | **Offline Support** | Work without internet, sync when online |
 | **Multilingual UI** | Languages: English, French, Lingala, Swahili |
 | **External Data Analysis** | Import Excel documents (XLSX/CSV), merge with system data, run insights & comparative reports |
+ML forecasting  | 7-day sales predictions & anomaly detection |
+
 
 ---
 ## 📊 TASK DISTRIBUTION - SALESFLOW-LITE PROJECT
