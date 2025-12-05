@@ -1,20 +1,23 @@
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react({
-      babel: {
-        plugins: [['babel-plugin-react-compiler']],
-      },
-    }),
-  ],
+  plugins: [react()],
 
-  // 👇 ADD THIS SECTION
   server: {
-    port: 5173,       // Force Vite to use 5173
-    strictPort: true  // Throw error if 5173 is busy instead of switching
-  }
-})
+    port: 5173,
+    strictPort: true,
+    open: true,
+
+    proxy: {
+      "^/api/": {
+        target: "http://localhost:8080",
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path, // KEEP /api/v1/auth/login EXACTLY
+      },
+    },
+  },
+
+  clearScreen: false,
+});

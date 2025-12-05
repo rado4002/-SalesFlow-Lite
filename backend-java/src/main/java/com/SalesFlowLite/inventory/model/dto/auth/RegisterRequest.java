@@ -1,5 +1,7 @@
+// src/main/java/com/SalesFlowLite/inventory/model/dto/auth/RegisterRequest.java
 package com.SalesFlowLite.inventory.model.dto.auth;
 
+import com.SalesFlowLite.inventory.model.entity.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
@@ -8,19 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RegisterRequest {
-
-    @NotBlank(message = "Phone number is required")
-    private String phoneNumber;
-
-    @NotBlank(message = "Username is required")
-    private String username;
-
-    @Email(message = "Invalid email format")
-    private String email;
-
-    @NotBlank(message = "Password is required")
-    private String password;
-
-    @NotBlank(message = "Role is required")
-    private String role;  // ADMIN / USER / MANAGER
+    @NotBlank private String username;
+    @NotBlank private String phoneNumber;
+    @Email @NotBlank private String email;
+    @NotBlank private String password;
+    private Role role = Role.USER; // default
 }

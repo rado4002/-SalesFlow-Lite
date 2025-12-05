@@ -1,24 +1,10 @@
+// src/main/java/com/SalesFlowLite/inventory/model/entity/User.java
 package com.SalesFlowLite.inventory.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import jakarta.persistence.*;
+import lombok.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "users")
@@ -30,17 +16,12 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.UUID)
-    @Column(length = 36, updatable = false)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)   // <-- AUTO-INCREMENT BIGINT
+    private Long id;                                      // <-- Long, not String/UUID
 
     @Column(name = "phone_number", nullable = false, unique = true, length = 20)
     private String phoneNumber;
 
-    /**
-     * Stored as BCrypt-hashed value. Never store plain-text passwords.
-     * Exclude from JSON responses by default.
-     */
     @JsonIgnore
     @Column(nullable = false)
     private String password;
@@ -63,7 +44,7 @@ public class User {
     @Column(name = "updated_at", nullable = true)
     private LocalDateTime updatedAt;
 
-    // Ensure createdAt/updatedAt are set consistently on persist/update
+    // -------------------------------------------------------------------------
     @PrePersist
     protected void onCreate() {
         if (this.createdAt == null) this.createdAt = LocalDateTime.now();
@@ -75,11 +56,10 @@ public class User {
         this.updatedAt = LocalDateTime.now();
     }
 
-    // convenience for debug / logs (avoid printing password)
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +

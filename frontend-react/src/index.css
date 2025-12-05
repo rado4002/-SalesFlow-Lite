@@ -1,68 +1,230 @@
+/* ============================================================================
+   SALESFLOW PREMIUM GLOBAL THEME  
+   Enhanced Indigo Branding • Perfect for Light & Dark • Ultra Clean UI
+   ========================================================================== */
+
+/* --------------------------
+   ROOT VARIABLES
+   -------------------------- */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* BACKGROUND */
+  --bg-dark: #0d0f17;
+  --bg-light: #ffffff;
 
+  /* TEXT */
+  --text-dark: #e4e9f2;
+  --text-light: #0f1724;
+
+  /* BRAND */
+  --primary: #4f46e5;
+  --primary-600: #4338ca;
+  --primary-700: #3730a3;
+
+  /* MUTED */
+  --muted-dark: #9aa4b2;
+  --muted-light: #6b7280;
+
+  /* SURFACES */
+  --card-bg-dark: #161921;
+  --card-bg-light: #ffffff;
+
+  /* BORDERS */
+  --border-dark: #252834;
+  --border-light: #e6e9ee;
+
+  /* TYPOGRAPHY */
+  font-family: "Inter", system-ui, Avenir, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+/* --------------------------
+   REDUCED MOTION
+   -------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0 !important;
+    transition-duration: 0 !important;
+    scroll-behavior: auto !important;
+  }
 }
-a:hover {
-  color: #535bf2;
+
+/* --------------------------
+   GLOBAL TRANSITIONS
+   -------------------------- */
+* {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* --------------------------
+   BODY + BASE
+   -------------------------- */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
+  background: var(--bg-dark);
+  color: var(--text-dark);
+  font-size: 16px;
   min-width: 320px;
-  min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+/* LINKS */
+a {
+  color: var(--primary);
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+a:hover {
+  color: var(--primary-600);
 }
 
+/* --------------------------
+   CARD
+   -------------------------- */
+.card {
+  background: var(--card-bg-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+  color: var(--text-dark);
+}
+
+/* --------------------------
+   SIDEBAR
+   -------------------------- */
+.sidebar {
+  width: 18rem;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background: linear-gradient(180deg, #10121b 0%, #0b0d14 100%);
+  color: var(--text-dark);
+
+  border-right: 1px solid var(--border-dark);
+  box-shadow: 2px 0 24px rgba(0, 0, 0, 0.45);
+}
+
+/* SIDEBAR LINK */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  color: rgba(255, 255, 255, 0.92);
+
+  transition:
+    background 0.12s ease,
+    transform 0.08s ease;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.04);
+  transform: translateX(4px);
+}
+
+.nav-link.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.45);
+}
+
+/* --------------------------
+   TOPBAR
+   -------------------------- */
+.topbar {
+  position: sticky;
+  top: 0;
+  height: 4.5rem;
+
+  backdrop-filter: blur(12px);
+  background: rgba(16, 18, 27, 0.7);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+}
+
+/* --------------------------
+   RESPONSIVE
+   -------------------------- */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+    z-index: 60;
+    transition: transform 0.35s ease;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding-top: 6rem;
+  }
+
+  .topbar {
+    left: 0;
+  }
+}
+
+/* --------------------------
+   LIGHT MODE
+   -------------------------- */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    background-color: var(--bg-light);
+    color: var(--text-light);
   }
-  a:hover {
-    color: #747bff;
+
+  body {
+    background: var(--bg-light);
+    color: var(--text-light);
   }
-  button {
-    background-color: #f9f9f9;
+
+  .card {
+    background: var(--card-bg-light);
+    border: 1px solid var(--border-light);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+    color: var(--text-light);
+  }
+
+  .sidebar {
+    background: linear-gradient(180deg, #ffffff, #f7f8fb);
+    color: var(--text-light);
+    border-right: 1px solid var(--border-light);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-link {
+    color: var(--text-light);
+  }
+
+  .nav-link.active {
+    background: var(--primary);
+    color: white;
+  }
+
+  .topbar {
+    background: rgba(255, 255, 255, 0.88);
+    border-bottom: 1px solid var(--border-light);
   }
 }

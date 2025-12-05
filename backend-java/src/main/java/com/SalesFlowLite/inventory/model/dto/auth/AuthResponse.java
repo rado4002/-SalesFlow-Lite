@@ -1,19 +1,23 @@
 package com.SalesFlowLite.inventory.model.dto.auth;
 
+import com.SalesFlowLite.inventory.model.entity.User;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AuthResponse {
 
-    private String token;
+    private String accessToken;
+    private String refreshToken;
+    private String refreshExpiresAt;
 
-    private String phoneNumber;
+    private String tokenType;   // "Bearer"
+    private String message;     // success message
 
-    private String username;
-
-    private String role;   // <-- FIXED (STRING)
+    private User user;          // OPTIONAL → for frontend use
 }

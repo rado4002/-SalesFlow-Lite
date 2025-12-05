@@ -21,7 +21,7 @@ public class JwtUtil {
 
     private String loadOrCreateSecret() {
         try {
-            // 1. Read existing secret
+            // Check if secret already exists
             if (Files.exists(SECRET_PATH)) {
                 String existing = Files.readString(SECRET_PATH).trim();
                 if (!existing.isEmpty()) {
@@ -29,12 +29,12 @@ public class JwtUtil {
                 }
             }
 
-            // 2. Generate 256-bit secret
+            // Generate 256-bit (32 bytes) secret
             byte[] keyBytes = new byte[32];
             new SecureRandom().nextBytes(keyBytes);
             String secret = Base64.getEncoder().encodeToString(keyBytes);
 
-            // 3. Write secret to file (Windows-friendly)
+            // Save secret to file
             Files.writeString(
                     SECRET_PATH,
                     secret,

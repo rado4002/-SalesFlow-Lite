@@ -6,6 +6,7 @@ import com.SalesFlowLite.inventory.service.SaleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -16,11 +17,15 @@ public class SaleController {
 
     private final SaleService saleService;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<SaleResponse> create(@Valid @RequestBody CreateSaleRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(saleService.createSale(request));
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(saleService.createSale(request));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public ResponseEntity<List<SaleResponse>> getAll() {
         return ResponseEntity.ok(saleService.getAllSales());

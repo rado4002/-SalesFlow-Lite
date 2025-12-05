@@ -1,15 +1,12 @@
+// src/main/java/com/SalesFlowLite/inventory/service/UserService.java
 package com.SalesFlowLite.inventory.service;
 
-import com.SalesFlowLite.inventory.model.dto.auth.AuthResponse;
-import com.SalesFlowLite.inventory.model.dto.auth.LoginRequest;
-import com.SalesFlowLite.inventory.model.dto.auth.RegisterRequest;
-import com.SalesFlowLite.inventory.model.entity.Role;
+import com.SalesFlowLite.inventory.model.dto.user.ChangePasswordRequest;
+import com.SalesFlowLite.inventory.model.dto.user.UpdateUserRequest;
+import com.SalesFlowLite.inventory.model.dto.user.UserResponse;
 import com.SalesFlowLite.inventory.model.entity.User;
 import com.SalesFlowLite.inventory.repository.UserRepository;
-import com.SalesFlowLite.inventory.security.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,76 +16,55 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final AuthenticationManager authenticationManager;
-    private final JwtService jwtService;
 
-    // ----------------------------
-    // REGISTER USER
-    // ----------------------------
-    public AuthResponse registerUser(RegisterRequest request) {
+    // ================================
+    // /me
+    // ================================
+    public UserResponse getCurrentUser(String phoneNumber) {
+        User user = userRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        if (userRepository.findByPhoneNumber(request.getPhoneNumber()).isPresent()) {
-            throw new RuntimeException("User already exists with this phone number.");
-        }
-
-        User user = User.builder()
-                .phoneNumber(request.getPhoneNumber())
-                .username(request.getUsername())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
+        return UserResponse.builder()
+                .id(user.getId().toString())           // <-- CONVERT Long → String
+                .phoneNumber(user.getPhoneNumber())
+                .username(user.getUsername())
+                .email(user.getEmail())
+                .role(user.getRole().name())
                 .build();
+    }
 
+    // ================================
+    // UPDATE USER
+    // ================================
+    public UserResponse updateUser(String phoneNumber, UpdateUserRequest request) {
+        User user = userRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
         userRepository.save(user);
 
-        String token = jwtService.generateToken(
-                user.getPhoneNumber(),
-                user.getRole().name(),
-                user.getUsername()
-        );
-
-        return AuthResponse.builder()
-                .token(token)
+        return UserResponse.builder()
+                .id(user.getId().toString())           // <-- CONVERT Long → String
                 .phoneNumber(user.getPhoneNumber())
                 .username(user.getUsername())
+                .email(user.getEmail())
                 .role(user.getRole().name())
                 .build();
     }
 
-    // ----------------------------
-    // LOGIN USER
-    // ----------------------------
-    public AuthResponse authenticate(LoginRequest request) {
+    // ================================
+    // CHANGE PASSWORD
+    // ================================
+    public void changePassword(String phoneNumber, ChangePasswordRequest request) {
+        User user = userRepository.findByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getPhoneNumber(),
-                        request.getPassword()
-                )
-        );
+        if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+            throw new RuntimeException("Old password is incorrect");
+        }
 
-        User user = userRepository.findByPhoneNumber(request.getPhoneNumber())
-                .orElseThrow(() -> new RuntimeException("Invalid credentials."));
-
-        String token = jwtService.generateToken(
-                user.getPhoneNumber(),
-                user.getRole().name(),
-                user.getUsername()
-        );
-
-        return AuthResponse.builder()
-                .token(token)
-                .phoneNumber(user.getPhoneNumber())
-                .username(user.getUsername())
-                .role(user.getRole().name())
-                .build();
-    }
-
-    // ----------------------------
-    // USED BY SECURITY
-    // ----------------------------
-    public User loadUserByPhoneNumber(String phoneNumber) {
-        return userRepository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new RuntimeException("User not found."));
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+        userRepository.save(user);
     }
 }
