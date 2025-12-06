@@ -1,3 +1,4 @@
+// backend-java/src/main/java/com/SalesFlowLite/inventory/controller/ProductController.java
 package com.SalesFlowLite.inventory.controller;
 
 import com.SalesFlowLite.inventory.model.dto.ProductDto;
@@ -7,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.*;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController

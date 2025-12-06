@@ -1,4 +1,4 @@
-// src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
+// backend-java/src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
 package com.SalesFlowLite.inventory.config;
 
 import com.SalesFlowLite.inventory.security.JwtAuthenticationFilter;
@@ -59,27 +59,28 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(
-                                "/auth/**",                    // ← ADDED: /auth/login
-                                "/api/v1/auth/**",             // ← already there
+                                "/auth/**",
+                                "/api/v1/auth/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/h2-console/**"
                         ).permitAll()
+                        .requestMatchers("/api/v1/sales/history/**").hasAnyRole("ADMIN", "PYTHON_SERVICE")
+                        .requestMatchers("/api/v1/sales/**").hasAnyRole("ADMIN", "PYTHON_SERVICE")
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         http.headers(headers -> headers.frameOptions(frame -> frame.disable()));
-
         return http.build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOriginPatterns(List.of("http://localhost:5173"));
+        config.setAllowedOriginPatterns(List.of("*")); // ou List.of("http://localhost:8000")
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("Authorization"));

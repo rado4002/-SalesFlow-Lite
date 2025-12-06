@@ -1,7 +1,9 @@
+// backend-java/src/main/java/com/SalesFlowLite/inventory/service/ProductService.java
 package com.SalesFlowLite.inventory.service;
 
 import com.SalesFlowLite.inventory.model.dto.ProductDto;
 import com.SalesFlowLite.inventory.model.entity.Product;
+
 import java.util.List;
 
 public interface ProductService {
@@ -12,7 +14,7 @@ public interface ProductService {
 
     ProductDto getProductById(Long id);
 
-    Product findByIdWithPessimisticLock(Long id);  // ← for safe stock deduction
+    Product findByIdWithPessimisticLock(Long id); // ← for safe stock deduction
 
     ProductDto updateProduct(Long id, ProductDto dto);
 
@@ -20,5 +22,5 @@ public interface ProductService {
 
     List<ProductDto> getLowStockProducts();
 
-    void reduceStock(Product product, int quantity);  // ← safe stock reduction
+    void reduceStock(Product product, int quantity); // ← safe stock reduction
 }

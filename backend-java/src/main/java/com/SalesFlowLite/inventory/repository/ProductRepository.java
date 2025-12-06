@@ -1,3 +1,4 @@
+// backend-java/src/main/java/com/SalesFlowLite/inventory/repository/ProductRepository.java
 package com.SalesFlowLite.inventory.repository;
 
 import com.SalesFlowLite.inventory.model.entity.Product;
