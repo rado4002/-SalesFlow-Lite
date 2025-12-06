@@ -1,0 +1,16 @@
+# Build output 
+target 
+*.log
+#Maven
+.mvn/
+mvnw
+mvnw.cmd
+#IDE
+.idea/
+*.iml
+*.iws
+#os
+.DS_Store 
+Thumbs.db
+#Secrets 
+jwt-secret.key

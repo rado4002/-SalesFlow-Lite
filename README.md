@@ -1,64 +1,34 @@
-# SalesFlow Lite
+# Backend (Java – Spring Boot)
 
-**A user-centered sales & inventory tool for small merchants**  
+This folder  contains the Java backend for SalesFlow Lite.  
+It provides APIs for managing products, sales entries, and stock tracking.
 
-SalesFlow Lite is a lightweight sales and inventory management tool designed for small businesses and merchants.  
-It enables product tracking, sales recording, stock monitoring, and reporting — all in a simple, offline-friendly interface.  
-The system supports multiple languages and is built with modularity for easy future extensions.
+## Tech Stack
+- Java 17+
+- Spring Boot
+- Maven or Gradle
 
----
-## 🧭 Software Process
-Our project follows a **Hybrid Plan-Driven + Iterative** process.
+## Features
+- Product CRUD (Create, Read, Update, Delete)
+- Sales entry endpoints
+- Stock alerts
+- (Add more features as you build them)
 
-### Phase 1: Plan-Driven Design
+## How to Run
 
-We followed a **Design Thinking** cycle to build this product:
+1. Install Java (version 17 or above).
+2. Install Maven or Gradle.
+3. Clone this repository.
+4. Open a terminal in this folder.
+5. Run:
 
-- **Empathize**: Interviewed merchants and stakeholders to uncover real pain points in daily sales and inventory work  
-- **Define**: Mapped personas, problems, and needs (e.g. “quick entry”, “stock ruptures”, offline use)  
-- **Ideate**: Brainstormed features and prioritized them (MVP first, advanced later)  
-- **Prototype & Test**: Built small increments, got user feedback, iterated  
-- **Implement**: Now building in modular layers (frontend, backends) guided by real user needs
-  
-### Phase 2: Iterative Development
+   ```
+   ./mvnw spring-boot:run
+   ```
+   *(or use Gradle if your project uses it)*
 
-Once the design is validated, we move into **iterative development cycles**, guided by Agile principles:
+6. The backend will start on [http://localhost:8080](http://localhost:8080)
 
-- Build → Test → Review → Improve
-- Short sprints focused on incremental delivery
-- Continuous integration, testing, and feedback
-- Adaptation based on real user data
+## API Documentation
 
-
----
-
-## 🚀 Requirements (MVP + Advanced)
-
-## 🚀 Requirements Breakdown
-
-### 🧩 MVP (Minimum Viable Product)
-| Feature | Description |
-|----------|--------------|
-| **Product Management** | CRUD operations + stock tracking |
-| **Sales Entry** | Quick form, auto calculations |
-| **Dashboard & Analytics** | Daily totals, top products, stock status |
-| **Stock Alerts** | Notifies when inventory is low |
-| **Data Export** | Export to CSV |
-
-### 💡 Advanced Features
-| Feature | Description |
-|----------|--------------|
-| **Offline Support** | Work without internet, sync when online |
-| **Multilingual UI** | Languages: English, French, Lingala, Swahili |
-| **External Data Analysis** | Import Excel documents (XLSX/CSV), merge with system data, run insights & comparative reports |
-
----
-
-## 🛠️ Getting Started
-
-```bash
-git clone https://github.com/rado4002/-SalesFlow-Lite.git
-cd -SalesFlow-Lite
-npm install     # frontend dependencies (React)
-# backend setup (Java / Python) instructions to come
-npm start       # launch dev frontend
+API docs will be added as endpoints are built.
