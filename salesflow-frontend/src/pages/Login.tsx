@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { authAPI } from "../services/api";
+import { authAPI } from "../services/api/javaApi";
 import { useAuth } from "../contexts/AuthContext";
 import type { LoginCredentials } from "../types/auth";
 
@@ -16,10 +16,16 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  // ----------------------------------------------------------
+  // FORM CHANGE HANDLER
+  // ----------------------------------------------------------
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  // ----------------------------------------------------------
+  // SUBMIT HANDLER
+  // ----------------------------------------------------------
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -27,7 +33,7 @@ const Login = () => {
 
     try {
       // ----------------------------------------------------------
-      // 🔵 DEV MODE → Bypass total, pas d’appel backend Java
+      // DEV MODE — Instant login without backend
       // ----------------------------------------------------------
       if (devMode) {
         const fakeUser = {
@@ -47,44 +53,58 @@ const Login = () => {
       }
 
       // ----------------------------------------------------------
-      // 🔴 PROD MODE → Vrai login backend Java
+      // PROD MODE — REAL LOGIN
       // ----------------------------------------------------------
       const data = await authAPI.login(form);
 
-      // save token
-      localStorage.setItem("token", data.token);
-      setToken(data.token);
+      // Save JWT token returned by backend
+      localStorage.setItem("token", data.accessToken);
+      setToken(data.accessToken);
 
-      // save user
-      setUser(data.user);
+      // Backend already returns user object → use it
+      if (data.user) {
+        setUser({
+          username: data.user.username,
+          role: data.user.role,
+          phoneNumber: data.user.phoneNumber,
+        });
+      }
 
-      // redirect
       navigate("/dashboard");
 
-    } catch (error) {
+    } catch (error: any) {
       console.error("Login error:", error);
-      setErrorMsg("Invalid phone number or password");
+
+      // cleanup previous session
+      localStorage.removeItem("token");
+      setUser(null);
+      setToken(null);
+
+      const msg =
+        error?.response?.data?.message ||
+        "Invalid phone number or password";
+
+      setErrorMsg(msg);
     } finally {
       setLoading(false);
     }
   };
 
+  // ----------------------------------------------------------
+  // UI
+  // ----------------------------------------------------------
   return (
     <div className="min-h-screen flex justify-center items-center bg-gray-100">
       <div className="bg-white p-10 rounded-xl shadow-lg w-full max-w-md">
-
         <h1 className="text-3xl font-bold text-center mb-6 text-gray-800">
           SalesFlow Lite
         </h1>
 
         {errorMsg && (
-          <div className="text-red-500 text-center mb-4">
-            {errorMsg}
-          </div>
+          <div className="text-red-500 text-center mb-4">{errorMsg}</div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
-
           <div>
             <label className="block text-gray-700 font-medium mb-1">
               Phone Number
@@ -124,13 +144,11 @@ const Login = () => {
           </button>
         </form>
 
-        {/* OPTIONAL : Indicate dev mode */}
         {devMode && (
           <p className="text-center text-sm text-green-600 mt-4 font-medium">
             DEV MODE ACTIVE — Login bypass enabled
           </p>
         )}
-
       </div>
     </div>
   );

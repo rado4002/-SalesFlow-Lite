@@ -1,3 +1,7 @@
+// ==================================================
+// AuthContext.tsx — Version corrigée avec nouvelle API
+// ==================================================
+
 import {
   createContext,
   useContext,
@@ -13,12 +17,17 @@ import type {
   AuthResponse,
 } from "../types/auth";
 
-import { authAPI } from "../services/api";
-const devMode = import.meta.env.VITE_ENV === "dev";
+// 🔥 IMPORTANT : on importe depuis le bon fichier :
+import { authAPI } from "../services/api/javaApi";
 
+const devMode = import.meta.env.VITE_ENV === "dev";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
+
+// ==================================================
+// PROVIDER
+// ==================================================
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(
@@ -26,43 +35,32 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   );
   const [isLoading, setIsLoading] = useState(true);
 
-
-  // ----------------------------------------------
-  // 🔥 DEV / PROD SWITCH
-  // ----------------------------------------------
-  const devMode = import.meta.env.VITE_ENV === "dev";
-
-  // ----------------------------------------------
-  // INIT AUTH
-  // ----------------------------------------------
+  // -------------------------------------------------
+  // INIT AUTH (DEV + PROD)
+  // -------------------------------------------------
   useEffect(() => {
     const initializeAuth = async () => {
-      // ------------------------------------------
-      // 🔵 DEV MODE → auto login + fake token
-      // ------------------------------------------
+      // ---------- DEV MODE ----------
       if (devMode) {
         const fakeUser: User = {
           username: "developer",
           role: "admin",
           phoneNumber: "0771000001",
         };
-
         setUser(fakeUser);
         setToken("dev-token-123456");
         localStorage.setItem("token", "dev-token-123456");
-
         setIsLoading(false);
         return;
       }
 
-      // ------------------------------------------
-      // 🔴 PROD MODE → Verify token via backend Java
-      // ------------------------------------------
+      // ---------- PROD MODE ----------
       const storedToken = localStorage.getItem("token");
 
       if (storedToken) {
         try {
-          const me = await authAPI.verifyToken(storedToken);
+          // axios instance attaches the token automatically
+          const me = await authAPI.me();
 
           setUser({
             username: me.username,
@@ -72,7 +70,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
           setToken(storedToken);
         } catch (err) {
-          console.error("❌ Invalid token:", err);
+          console.error("Invalid or expired token:", err);
+
           localStorage.removeItem("token");
           setUser(null);
           setToken(null);
@@ -85,11 +84,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     initializeAuth();
   }, []);
 
-  // ----------------------------------------------
+  // -------------------------------------------------
   // LOGIN
-  // ----------------------------------------------
+  // -------------------------------------------------
   const login = async (credentials: LoginCredentials) => {
-    // 🔵 DEV MODE → bypass login completely
     if (devMode) return;
 
     setIsLoading(true);
@@ -97,20 +95,16 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     try {
       const response: AuthResponse = await authAPI.login(credentials);
 
-      localStorage.setItem("token", response.token);
-      setToken(response.token);
+      // Save access token
+      localStorage.setItem("token", response.accessToken);
+      setToken(response.accessToken);
 
-      // If user info is included in token response
+      // User included inside login response
       if (response.user) {
-        setUser(response.user);
-      } else {
-        // Otherwise fetch via /auth/me
-        const me = await authAPI.verifyToken(response.token);
-
         setUser({
-          username: me.username,
-          role: me.role,
-          phoneNumber: me.phoneNumber,
+          username: response.user.username,
+          role: response.user.role,
+          phoneNumber: response.user.phoneNumber,
         });
       }
     } finally {
@@ -118,18 +112,23 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
   };
 
-  // ----------------------------------------------
+  // -------------------------------------------------
   // LOGOUT
-  // ----------------------------------------------
-  const logout = () => {
+  // -------------------------------------------------
+  const logout = async () => {
+    if (!devMode) {
+      try {
+        await authAPI.logout();
+      } catch {
+        console.warn("Logout request failed — ignored in frontend.");
+      }
+    }
+
     localStorage.removeItem("token");
     setUser(null);
     setToken(null);
   };
 
-  // ----------------------------------------------
-  // CONTEXT VALUE
-  // ----------------------------------------------
   const value: AuthContextType = {
     user,
     token,
@@ -141,12 +140,21 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     devMode,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
+
+// ==================================================
+// HOOK
+// ==================================================
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("useAuth must be inside AuthProvider");
+  if (!ctx) throw new Error("useAuth must be used inside AuthProvider");
   return ctx;
 };
-console.log("🔥 DEV MODE =", devMode, "VITE_ENV =", import.meta.env.VITE_ENV);
+
+console.log("DEV MODE =", devMode, "VITE_ENV =", import.meta.env.VITE_ENV);

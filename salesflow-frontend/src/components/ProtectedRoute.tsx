@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
   const { token, isLoading, devMode } = useAuth();
 
+  // ⏳ Tant que AuthContext charge le token, on attend
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
@@ -27,4 +28,3 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 };
 
 export default ProtectedRoute;
-

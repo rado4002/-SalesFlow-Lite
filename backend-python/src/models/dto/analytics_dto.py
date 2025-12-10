@@ -1,50 +1,104 @@
 # src/models/dto/analytics_dto.py
 
-from typing import List, Dict, Any
-from datetime import datetime
-from pydantic import BaseModel
+from __future__ import annotations
+
+from enum import Enum
+from typing import List, Optional
+from datetime import date
+from pydantic import BaseModel, Field, ConfigDict
 
 
-# ---------------------------------------------------------
-# 1. SalesRecordDTO
-# ---------------------------------------------------------
-class SalesRecordDTO(BaseModel):
-    """
-    Represents a single sales event transformed for analytics processing.
-    - date: ISO date string (YYYY-MM-DD)
-    - amount: quantity * price
-    - product_id: reference to the product sold
-    """
-    date: str
-    amount: float
+# ============================================================
+# ENUMS
+# ============================================================
+class AnalyticsPeriod(str, Enum):
+    daily = "daily"
+    weekly = "weekly"
+    monthly = "monthly"
+    quarterly = "quarterly"
+
+
+class ProductStockStatus(str, Enum):
+    ok = "OK"
+    low = "LOW_STOCK"
+    out = "OUT_OF_STOCK"
+    dead = "DEAD_STOCK"
+
+
+# ============================================================
+# STOCK ANALYTICS
+# ============================================================
+class ProductStockSnapshot(BaseModel):
     product_id: int
+    name: str
+    current_stock: float
+    min_stock: float
+    unit_price: float
+    stock_value: float
+
+    last_sale_date: Optional[date] = None
+    coverage_days: Optional[float] = None
+    status: ProductStockStatus = ProductStockStatus.ok
 
 
-# ---------------------------------------------------------
-# 2. SalesTrendDTO
-# ---------------------------------------------------------
-class SalesTrendDTO(BaseModel):
-    """
-    Represents a trend analysis over a given time period.
-    - period: e.g., "2025-01", "2025-W03", "2025-Q1"
-    - total_sales: total revenue for the period
-    - growth_rate: % change compared to previous period
-    """
-    period: str
-    total_sales: float
-    growth_rate: float  # expressed as percentage, e.g., 12.5
+class StockKPI(BaseModel):
+    total_stock_value: float
+    out_of_stock_count: int
+    low_stock_count: int
+    low_stock_ratio: float
+
+    urgent_reorder_count: int
+    dead_stock_count: int
+
+    rotation_per_year: Optional[float] = None
+    avg_coverage_days: Optional[float] = None
 
 
-# ---------------------------------------------------------
-# 3. AnalyticsResultDTO
-# ---------------------------------------------------------
-class AnalyticsResultDTO(BaseModel):
-    """
-    Main analytics payload returned to the frontend.
-    - metrics: computed KPIs (dict)
-    - trends: list of SalesTrendDTO
-    - timestamp: moment of analysis generation
-    """
-    metrics: Dict[str, Any]
-    trends: List[SalesTrendDTO]
-    timestamp: datetime
+class StockAnalyticsResponse(BaseModel):
+    period: AnalyticsPeriod
+    period_label: str = Field(..., description="Human readable period label")
+    as_of: date
+    kpis: StockKPI
+    critical_products: List[ProductStockSnapshot]
+
+    # LE FIX CRITIQUE QUI FAISAIT TOUT RENTRER EN null
+    model_config = ConfigDict(from_attributes=True)
+
+
+# ============================================================
+# SALES ANALYTICS
+# ============================================================
+class DailySalesPoint(BaseModel):
+    date: date
+    total_revenue: float
+    total_quantity: float
+    total_transactions: int
+
+
+class TopProductSales(BaseModel):
+    product_id: int
+    name: str
+    total_quantity: float
+    revenue: float
+    share_of_revenue: float
+
+
+class SalesKPI(BaseModel):
+    total_revenue: float
+    total_quantity: float
+    total_transactions: int
+    average_ticket: float
+    top_products: List[TopProductSales]
+    seasonal_hint: Optional[str] = None
+
+
+class SalesAnalyticsResponse(BaseModel):
+    period: AnalyticsPeriod
+    start_date: date
+    end_date: date
+    period_label: str = Field(..., description="Human readable label")
+    kpis: SalesKPI
+    daily: List[DailySalesPoint]
+
+    # Même fix ici
+    model_config = ConfigDict(from_attributes=True)

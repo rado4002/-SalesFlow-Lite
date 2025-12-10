@@ -1,214 +1,259 @@
 import { useState } from "react";
-import { pythonApi } from "../services/api";
-import {
-  LineChart,
-  Line,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
+import { mlAPI } from "../services/mlAPI";
+import type {
+  ForecastResult,
+  AnomalyResponse,
+  ForecastRequest,
+  AnomalyRequest,
+  AnalyticsPeriod,
+} from "../types/ml";
 
-// Types
-interface ForecastSummary {
-  total: number;
-  daily_average: number;
-  peak_value: number;
-  peak_day: string | null;
-}
-
-interface ForecastResponse {
-  product_id: number;
-  dates: string[];
-  predictions: number[];
-  trend: "upward" | "downward" | "stable";
-  summary: ForecastSummary;
-}
-
-export default function ML() {
+export default function MLPage() {
+  // Inputs utilisateur
   const [productId, setProductId] = useState<string>("1");
-  const [days, setDays] = useState<string>("90");
-  const [loading, setLoading] = useState(false);
-  const [forecast, setForecast] = useState<ForecastResponse | null>(null);
+  const [historyDays, setHistoryDays] = useState(90);
+  const [forecastDays, setForecastDays] = useState(7);
+  const [period, setPeriod] = useState<AnalyticsPeriod>("daily");
+
+  // Résultats
+  const [forecast, setForecast] = useState<ForecastResult | null>(null);
+  const [anomalies, setAnomalies] = useState<AnomalyResponse | null>(null);
+
+  // État du chargement & erreurs
+  const [loadingForecast, setLoadingForecast] = useState(false);
+  const [loadingAnomalies, setLoadingAnomalies] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // ---------------------------------------------------------
-  // FORECAST REQUEST
+  // FORECAST
   // ---------------------------------------------------------
-  const fetchForecast = async () => {
-    setLoading(true);
+  const handleForecast = async () => {
     setError(null);
     setForecast(null);
+    setLoadingForecast(true);
 
-    const pId = Number(productId.trim());
-    const hDays = Number(days.trim());
-
-    // Validation
-    if (!productId || isNaN(pId) || pId <= 0) {
-      setError("Product ID must be a valid positive number.");
-      setLoading(false);
+    const pid = Number(productId);
+    if (!pid || pid <= 0) {
+      setError("Product ID must be a positive number.");
+      setLoadingForecast(false);
       return;
     }
 
-    if (!days || isNaN(hDays) || hDays <= 0) {
-      setError("History days must be a valid positive number.");
-      setLoading(false);
-      return;
-    }
-
-    // ✅ OPTION A — WRAPPED PAYLOAD (backend-compatible)
-    const payload = {
-      payload: {
-        product_id: pId,
-        history_days: hDays,
-        forecast_days: 7,
-      },
-      required_roles: [],
+    const payload: ForecastRequest = {
+      product_id: pid,
+      history_days: historyDays,
+      forecast_days: forecastDays,
+      period,
     };
 
-    console.log("🚀 ML PAYLOAD SENT =", payload);
-
     try {
-      const response = await pythonApi.post("/ml/forecast", payload);
-      console.log("✔ ML RESPONSE =", response.data);
-
-      setForecast(response.data);
+      const result = await mlAPI.forecastSales(payload);
+      setForecast(result);
     } catch (err: any) {
-      console.error("❌ Forecast error:", err);
-
-      const detail = err?.response?.data?.detail || err?.message || "Error";
-      setError(typeof detail === "string" ? detail : JSON.stringify(detail));
+      console.error("❌ Forecast error", err);
+      const msg = err.response?.data?.detail || err.message;
+      setError("Forecast failed : " + String(msg));
     } finally {
-      setLoading(false);
+      setLoadingForecast(false);
     }
   };
 
   // ---------------------------------------------------------
-  // CHART DATA
+  // ANOMALY DETECTION
   // ---------------------------------------------------------
-  const chartData =
-    forecast?.dates?.map((date, idx) => ({
-      date,
-      predicted: forecast.predictions[idx] ?? 0,
-    })) || [];
+  const handleAnomalies = async () => {
+    setError(null);
+    setAnomalies(null);
+    setLoadingAnomalies(true);
 
-  const getTrendColor = (trend: string) => {
-    if (trend === "upward") return "text-green-600";
-    if (trend === "downward") return "text-red-600";
-    return "text-gray-600";
+    const pid = Number(productId);
+    if (!pid || pid <= 0) {
+      setError("Product ID must be a positive number.");
+      setLoadingAnomalies(false);
+      return;
+    }
+
+    const payload: AnomalyRequest = {
+      product_id: pid,
+      history_days: historyDays,
+      period,
+    };
+
+    try {
+      const result = await mlAPI.detectAnomalies(payload);
+      setAnomalies(result);
+    } catch (err: any) {
+      console.error("❌ Anomaly error", err);
+      const msg = err.response?.data?.detail || err.message;
+      setError("Anomaly detection failed : " + String(msg));
+    } finally {
+      setLoadingAnomalies(false);
+    }
   };
 
   // ---------------------------------------------------------
-  // RENDER UI
+  // RENDERING
   // ---------------------------------------------------------
   return (
-    <div className="space-y-10 p-6">
-      <h1 className="text-3xl font-bold text-gray-900">Machine Learning</h1>
+    <div className="min-h-screen p-6 bg-gray-50">
+      <div className="max-w-6xl mx-auto space-y-10">
+        
+        <h1 className="text-4xl font-bold">Machine Learning</h1>
 
-      <div className="bg-white rounded-xl shadow p-6 space-y-6">
-        <h2 className="text-xl font-semibold">📈 Sales Forecast (7 days)</h2>
+        {/* ======================= FORMULAIRE ML ======================= */}
+        <div className="bg-white p-6 rounded-xl shadow space-y-6">
+          <h2 className="text-2xl font-semibold">ML Parameters</h2>
 
-        {/* FORM */}
-        <div className="flex items-center gap-4">
-          <div>
-            <label className="text-sm font-medium">Product ID</label>
-            <input
-              type="number"
-              className="border p-2 rounded w-32"
-              value={productId}
-              onChange={(e) => setProductId(e.target.value)}
-            />
+          <div className="grid md:grid-cols-4 gap-6">
+            <div>
+              <label className="font-medium">Product ID</label>
+              <input
+                type="number"
+                className="w-full mt-1 p-2 border rounded"
+                value={productId}
+                onChange={(e) => setProductId(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label className="font-medium">History Days</label>
+              <input
+                type="number"
+                className="w-full mt-1 p-2 border rounded"
+                value={historyDays}
+                onChange={(e) => setHistoryDays(Number(e.target.value))}
+              />
+            </div>
+
+            <div>
+              <label className="font-medium">Forecast Days</label>
+              <input
+                type="number"
+                className="w-full mt-1 p-2 border rounded"
+                value={forecastDays}
+                onChange={(e) => setForecastDays(Number(e.target.value))}
+              />
+            </div>
+
+            <div>
+              <label className="font-medium">Period</label>
+              <select
+                className="w-full mt-1 p-2 border rounded"
+                value={period}
+                onChange={(e) => setPeriod(e.target.value as AnalyticsPeriod)}
+              >
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </div>
           </div>
 
-          <div>
-            <label className="text-sm font-medium">History (days)</label>
-            <input
-              type="number"
-              className="border p-2 rounded w-32"
-              value={days}
-              onChange={(e) => setDays(e.target.value)}
-            />
-          </div>
+          <div className="flex gap-4 pt-4">
+            <button
+              onClick={handleForecast}
+              disabled={loadingForecast}
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            >
+              {loadingForecast ? "Forecasting..." : "Run Forecast"}
+            </button>
 
-          <button
-            onClick={fetchForecast}
-            className="px-5 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
-          >
-            Generate Forecast
-          </button>
+            <button
+              onClick={handleAnomalies}
+              disabled={loadingAnomalies}
+              className="px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50"
+            >
+              {loadingAnomalies ? "Scanning..." : "Detect Anomalies"}
+            </button>
+          </div>
         </div>
 
-        {/* Loading */}
-        {loading && <p className="text-blue-500 animate-pulse">Loading…</p>}
-
-        {/* Error */}
+        {/* ======================= ERROR ======================= */}
         {error && (
-          <div className="p-4 bg-red-200 text-red-800 rounded-xl break-all">
+          <div className="p-4 bg-red-100 border border-red-400 rounded-lg text-red-700">
             {error}
           </div>
         )}
 
-        {/* Forecast Result */}
+        {/* ======================= FORECAST RESULT ======================= */}
         {forecast && (
-          <div className="space-y-10">
-            {/* SUMMARY */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              <div className="bg-gray-50 p-4 rounded-xl shadow">
-                <p className="text-sm text-gray-500">Total (7 days)</p>
+          <div className="bg-white p-6 rounded-xl shadow">
+            <h2 className="text-2xl font-bold text-blue-600 mb-4">
+              Forecast Results
+            </h2>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+              <div className="bg-blue-50 p-4 rounded">
+                <p>Total</p>
                 <p className="text-2xl font-bold">{forecast.summary.total}</p>
               </div>
 
-              <div className="bg-gray-50 p-4 rounded-xl shadow">
-                <p className="text-sm text-gray-500">Daily Average</p>
+              <div className="bg-green-50 p-4 rounded">
+                <p>Daily Avg</p>
                 <p className="text-2xl font-bold">
                   {forecast.summary.daily_average}
                 </p>
               </div>
 
-              <div className="bg-gray-50 p-4 rounded-xl shadow">
-                <p className="text-sm text-gray-500">Peak Value</p>
+              <div className="bg-purple-50 p-4 rounded">
+                <p>Peak</p>
                 <p className="text-2xl font-bold">
                   {forecast.summary.peak_value}
                 </p>
-                <p className="text-xs text-gray-500">
-                  {forecast.summary.peak_day}
-                </p>
+                <p>{forecast.summary.peak_day}</p>
               </div>
 
-              <div className="bg-gray-50 p-4 rounded-xl shadow">
-                <p className="text-sm text-gray-500">Trend</p>
-                <p
-                  className={`text-2xl font-bold ${getTrendColor(
-                    forecast.trend
-                  )}`}
+              <div className="bg-gray-100 p-4 rounded">
+                <p>Trend</p>
+                <p className="text-xl font-bold">{forecast.summary.trend}</p>
+              </div>
+            </div>
+
+            <h3 className="font-semibold mb-3">Predictions</h3>
+            <div className="max-h-64 overflow-auto space-y-2">
+              {forecast.dates.map((date, i) => (
+                <div
+                  key={i}
+                  className="flex justify-between bg-gray-50 p-2 rounded"
                 >
-                  {forecast.trend.toUpperCase()}
-                </p>
+                  <span>{date}</span>
+                  <span>{forecast.predictions[i]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ======================= ANOMALIES RESULT ======================= */}
+        {anomalies && (
+          <div className="bg-white p-6 rounded-xl shadow">
+            <h2 className="text-2xl font-bold text-red-600 mb-4">
+              Anomalies ({anomalies.count})
+            </h2>
+
+            {anomalies.count === 0 ? (
+              <p className="text-green-600 font-medium">
+                No anomalies detected.
+              </p>
+            ) : (
+              <div className="space-y-4">
+                {anomalies.anomalies.map((a, i) => (
+                  <div
+                    key={i}
+                    className="p-4 rounded-lg border-l-4 bg-red-50 border-red-500"
+                  >
+                    <p className="font-bold">{a.date}</p>
+                    <p className="text-sm">
+                      {a.type} — {a.severity.toUpperCase()}
+                    </p>
+                    <p>{a.explanation}</p>
+                    <p className="text-xs text-gray-600">
+                      Score Z: {a.score}
+                    </p>
+                  </div>
+                ))}
               </div>
-            </div>
-
-            {/* CHART */}
-            <div className="bg-white rounded-xl shadow p-6">
-              <h3 className="text-lg font-semibold mb-4">
-                Sales Forecast Graph
-              </h3>
-
-              <ResponsiveContainer width="100%" height={350}>
-                <LineChart data={chartData}>
-                  <CartesianGrid stroke="#e5e7eb" />
-                  <XAxis dataKey="date" />
-                  <YAxis />
-                  <Tooltip />
-                  <Line
-                    type="monotone"
-                    dataKey="predicted"
-                    stroke="#2563eb"
-                    strokeWidth={3}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-            </div>
+            )}
           </div>
         )}
       </div>

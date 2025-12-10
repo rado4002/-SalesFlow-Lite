@@ -1,59 +1,68 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+// src/App.tsx
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
-import { AuthProvider } from "./contexts/AuthContext";
-import ProtectedRoute from "./components/ProtectedRoute";
+// Layout
 import MainLayout from "./components/Layout/MainLayout";
 
+// Auth
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
+
 // Pages
-import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Stock from "./pages/Stock";
+import Products from "./pages/Products";
+import Inventory from "./pages/Inventory";
+import Sales from "./pages/Sales";
 import Analytics from "./pages/Analytics";
 import ML from "./pages/ML";
-import Reports from "./pages/Reports";
-import StockAlerts from "./pages/StockAlerts";
-import ExcelUpload from "./pages/ExcelUpload";   // ⬅️ NEW IMPORT
+import ImportExcelPage from "./pages/ImportExcel";   // <-- renommé proprement
+import Settings from "./pages/Settings";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
-function App() {
+export default function App() {
   return (
     <AuthProvider>
-      <Router>
+      <BrowserRouter>
+
         <Routes>
 
-          {/* 🔓 Login sans layout */}
+          {/* PUBLIC ROUTES */}
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-          {/* 🔐 Bloc Protégé : nécessite JWT + affiche MainLayout */}
+          {/* PROTECTED ROUTES (tout sous MainLayout) */}
           <Route
+            path="/"
             element={
               <ProtectedRoute>
                 <MainLayout />
               </ProtectedRoute>
             }
           >
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/stock" element={<Stock />} />
-            <Route path="/stock-alerts" element={<StockAlerts />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/ml" element={<ML />} />
-            <Route path="/reports" element={<Reports />} />
+            {/* REDIRECT ROOT → DASHBOARD */}
+            <Route index element={<Navigate to="/dashboard" replace />} />
 
-            {/* ⬇️ NEW: Excel Import Page */}
-            <Route path="/excel-upload" element={<ExcelUpload />} />
+            <Route path="dashboard" element={<Dashboard />} />
+            <Route path="products" element={<Products />} />
+            <Route path="inventory" element={<Inventory />} />
+            <Route path="sales" element={<Sales />} />
+
+            {/* PAS BESOIN DE ProtectedRoute DANS ProtectedRoute */}
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="ml" element={<ML />} />
+
+            {/* ✔ Import Excel */}
+            <Route path="excel-upload" element={<ImportExcelPage />} />
+
+            <Route path="settings" element={<Settings />} />
           </Route>
 
-          {/* 🔄 Redirection par défaut */}
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
-
+          {/* CATCH-ALL */}
+          <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>
-      </Router>
+
+      </BrowserRouter>
     </AuthProvider>
   );
 }
-
-export default App;

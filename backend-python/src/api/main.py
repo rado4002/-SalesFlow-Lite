@@ -10,11 +10,13 @@ from dotenv import load_dotenv
 
 # Routers
 from src.api.routes.health import router as health_router
-from src.api.routes.stock import router as stock_router
 from src.api.routes.analytics import router as analytics_router
 from src.api.routes.excel import router as excel_router
 from src.api.routes.ml import router as ml_router
-from src.api.routes.ml import router as ml_router
+from src.api.routes.reports import router as reports_router   # <-- NEW
+
+# Scheduler
+from src.scheduler.tasks import start_scheduler               # <-- NEW
 
 # Exception handlers
 from src.utils.exceptions import (
@@ -22,29 +24,30 @@ from src.utils.exceptions import (
     generic_exception_handler
 )
 
-# Load .env environment variables
+# Load .env
 load_dotenv()
 
 
 # ---------------------------------------------------------
-# FastAPI APP CONFIG
+# FASTAPI CONFIG
 # ---------------------------------------------------------
 app = FastAPI(
     title="SalesFlow API",
-    version="0.1.0",
-    description="Analytics / ML Microservice for SalesFlow with unified Java JWT validation."
+    version="0.2.0",
+    description="Analytics / ML / Reports microservice for SalesFlow with unified Java JWT validation."
 )
 
 
 # ---------------------------------------------------------
-# CORS (Frontend React)
+# CORS (React + Java + FastAPI)
 # ---------------------------------------------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:5174",  # React (Vite)
-        "http://localhost:8081",  # FastAPI
+        "http://127.0.0.1:5174",  # React Vite Dev
+        "http://127.0.0.1:4173",  # React Vite Preview
         "http://localhost:8080",  # Spring Boot
+        "http://localhost:8081",  # FastAPI
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -58,18 +61,26 @@ app.add_middleware(
 @app.on_event("startup")
 async def startup_event():
     logging.basicConfig(level=logging.INFO)
-    logging.info("🚀 FastAPI (Analytics/ML) server started")
+
+    logging.info("🚀 FastAPI (Analytics / ML / Reports) started")
     logging.info(f"JAVA_JWT_SECRET loaded: {bool(os.getenv('JAVA_JWT_SECRET'))}")
+
+    # Start scheduler (if enabled)
+    if os.getenv("ENABLE_SCHEDULER", "true").lower() == "true":
+        logging.info("⏰ Scheduler enabled: starting background jobs…")
+        start_scheduler()
+    else:
+        logging.info("⏹ Scheduler disabled")
 
 
 # ---------------------------------------------------------
 # ROUTERS
 # ---------------------------------------------------------
 app.include_router(health_router)
-app.include_router(stock_router)
 app.include_router(analytics_router)
-app.include_router(excel_router)   # NEW: Excel upload router
-app.include_router(ml_router)      # NEW: Machine Learning router
+app.include_router(excel_router)
+app.include_router(ml_router)
+app.include_router(reports_router)      # <-- NEW
 
 
 # ---------------------------------------------------------
@@ -80,43 +91,41 @@ app.add_exception_handler(Exception, generic_exception_handler)
 
 
 # ---------------------------------------------------------
-# CUSTOM OPENAPI SCHEMA — ADDS JWT LOCK 🔒
+# CUSTOM OPENAPI SCHEMA — ADD JWT LOCK 🔒
 # ---------------------------------------------------------
 def custom_openapi():
     """
     Customize Swagger Documentation:
-    - Adds BearerAuth (JWT)
-    - Applies it to all endpoints except /health
+    - Add BearerAuth (JWT)
+    - Lock all endpoints except /health
     """
     if app.openapi_schema:
         return app.openapi_schema
 
-    # Base schema
     openapi_schema = get_openapi(
         title="SalesFlow API",
-        version="0.1.0",
-        description="Unified SalesFlow API with Java JWT validation",
+        version="0.2.0",
+        description="Unified Analytics / ML / Reports API with Java JWT validation",
         routes=app.routes,
     )
 
-    # 🔐 Add BearerAuth to securitySchemes
+    # 🔐 Add BearerAuth
     openapi_schema["components"]["securitySchemes"] = {
         "BearerAuth": {
             "type": "http",
             "scheme": "bearer",
-            "bearerFormat": "JWT",
+            "bearerFormat": "JWT"
         }
     }
 
-    # 🔐 Apply BearerAuth to all endpoints except /health
+    # 🔐 Apply security to all endpoints except /health
     for path, methods in openapi_schema.get("paths", {}).items():
         for method, details in methods.items():
-            if "/health" not in path:  # leave health endpoint public
+            if "/health" not in path:
                 details.setdefault("security", [{"BearerAuth": []}])
 
     app.openapi_schema = openapi_schema
     return app.openapi_schema
 
 
-# Override OpenAPI generator
-app.openapi = custom_openapi
+

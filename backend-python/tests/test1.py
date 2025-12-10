@@ -9,11 +9,10 @@
 
 # print(res.status_code)
 # print(res.text)
+# test_health.py
 import httpx
-
 try:
-    r = httpx.get("http://localhost:8080/api/v1", timeout=5)
-    print(r.status_code, r.text)
+    r = httpx.get("http://localhost:8080/actuator/health", timeout=5)
+    print(f"Java is ALIVE: {r.status_code} → {r.json()}")
 except Exception as e:
-    print("ERROR:", e)
-
+    print(f"Java is DOWN: {type(e).__name__}: {e}")

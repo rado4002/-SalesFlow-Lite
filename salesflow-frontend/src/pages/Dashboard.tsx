@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { pythonApi } from "../services/api";
+import { pythonApi } from "../services/api/pythonApi";
+
 import {
   LineChart,
   Line,
@@ -39,12 +40,11 @@ const Dashboard = () => {
       const end = "2025-01-31";
 
       const res = await pythonApi.get(
-  `/analytics/sales-trend?start_date=${start}&end_date=${end}`,
-  {
-    headers: { Authorization: `Bearer ${token}` }
-  }
-);
-
+        `/analytics/sales-trend?start_date=${start}&end_date=${end}`,
+        {
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      );
 
       const analytics: SalesTrendData = res.data.analytics;
 
@@ -108,7 +108,9 @@ const Dashboard = () => {
 
         <div className="bg-white p-6 rounded-xl shadow border border-gray-200">
           <p className="text-sm text-gray-500">Best Performing Day</p>
-          <p className="text-2xl font-bold text-purple-600 mt-1">{bestDay}</p>
+          <p className="text-2xl font-bold text-purple-600 mt-1">
+            {bestDay}
+          </p>
         </div>
       </div>
 
@@ -135,7 +137,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-    </div>  // <-- CLOSING ROOT DIV, IMPORTANT!
+    </div>
   );
 };
 

@@ -1,72 +1,77 @@
 # src/api/routes/analytics.py
 
-from fastapi import APIRouter, Depends, HTTPException, Query
-from src.services.analytics_service import get_sales_trend
+from __future__ import annotations
+
+from fastapi import APIRouter, Depends, HTTPException
+from typing import Any, Optional
+
 from src.api.dependencies import get_current_user
-from src.models.schemas import SalesQuery
+from src.models.dto.analytics_dto import AnalyticsPeriod
+from src.services.analytics_service import (
+    compute_stock_analytics,
+    compute_sales_analytics,
+)
 
 router = APIRouter(
     prefix="/api/v1/analytics",
-    tags=["Analytics"]
+    tags=["Analytics"],
 )
 
 
-@router.get("/sales-trend")
-async def sales_trend_endpoint(
-    start_date: str = Query(..., description="Start date (YYYY-MM-DD)"),
-    end_date: str = Query(..., description="End date (YYYY-MM-DD)"),
-    current_user: dict = Depends(get_current_user)
-):
+# -----------------------------------------------------------
+# TOKEN EXTRACTOR — version stable et unifiée
+# -----------------------------------------------------------
+def _extract_token(current_user: Any) -> Optional[str]:
     """
-    Returns sales trend analytics between start_date and end_date.
-
-    DEV MODE:
-        - No JWT required
-        - Mock sales data used in analytics_service
-
-    PROD MODE:
-        - Requires valid Java-issued JWT
-        - Token validated via JavaJWTValidator
-        - Token forwarded to Java backend for real sales data
-    """
-
-    # ---------------------------------------------
-    # 1️⃣ Validate the dates via SalesQuery DTO
-    # ---------------------------------------------
-    try:
-        query = SalesQuery(start_date=start_date, end_date=end_date)
-    except Exception as e:
-        raise HTTPException(400, f"Invalid date input: {str(e)}")
-
-    # Extract unified token (DEV or PROD)
-    token = current_user["token"]
-
-    # ---------------------------------------------
-    # 2️⃣ Fetch analytics from Python service
-    # ---------------------------------------------
-    try:
-        analytics = await get_sales_trend(
-            auth_token=token,
-            start_date=query.start_date,
-            end_date=query.end_date
-        )
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(
-            500,
-            f"Analytics processing failed: {str(e)}"
-        )
-
-    # ---------------------------------------------
-    # 3️⃣ Structured API Response
-    # ---------------------------------------------
-    return {
-        "status": "success",
-        "mode": current_user["mode"],
-        "user": {
-            "username": current_user["username"],
-            "roles": current_user["roles"],
-        },
-        "analytics": analytics
+    Robust extractor compatible with:
+    {
+        "token": "...",
+        "access_token": "...",
+        "raw_token": "...",
+        ...
     }
+    """
+    if isinstance(current_user, dict):
+        return (
+            current_user.get("token")
+            or current_user.get("access_token")
+            or current_user.get("raw_token")
+            or current_user.get("jwt")
+        )
+    return None
+
+
+# -----------------------------------------------------------
+# STOCK ANALYTICS
+# -----------------------------------------------------------
+@router.get("/stock")
+async def stock_analytics(
+    period: AnalyticsPeriod = AnalyticsPeriod.daily,
+    current_user=Depends(get_current_user),
+):
+    token = _extract_token(current_user)
+    if not token:
+        raise HTTPException(status_code=401, detail="Missing authentication token")
+
+    return await compute_stock_analytics(
+        period=period,
+        token=token,
+    )
+
+
+# -----------------------------------------------------------
+# SALES ANALYTICS
+# -----------------------------------------------------------
+@router.get("/sales")
+async def sales_analytics(
+    period: AnalyticsPeriod = AnalyticsPeriod.daily,
+    current_user=Depends(get_current_user),
+):
+    token = _extract_token(current_user)
+    if not token:
+        raise HTTPException(status_code=401, detail="Missing authentication token")
+
+    return await compute_sales_analytics(
+        period=period,
+        token=token,
+    )
