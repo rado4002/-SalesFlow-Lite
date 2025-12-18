@@ -1,40 +1,87 @@
-# Java
-target/
+################################
+# Java / Maven
+################################
+/target/
 *.class
 *.jar
 *.war
+*.ear
+
+################################
+# Maven Wrapper
+################################
+.mvn/
+!.mvn/wrapper/
+!.mvn/wrapper/maven-wrapper.properties
+
+################################
+# IDEs (IntelliJ / VS Code)
+################################
+.idea/
+src/.idea/
 *.iml
+*.iws
+*.ipr
+.vscode/
+
+################################
+# Logs & temp files
+################################
+*.log
+*.tmp
+logs/
+
+################################
+# Secrets & environment files (CRITICAL)
+################################
+.env
+*.env
+jwt-secret.key
+*.key
+*.pem
+*.crt
+
+################################
+# Spring profiles (local / prod)
+################################
+application-local.properties
+application-local.yml
+application-prod.properties
+application-prod.yml
+
+################################
+# OS files
+################################
+.DS_Store
+Thumbs.db
+
+################################
+# Build tools (extra safety)
+################################
 .gradle/
 build/
 out/
-!.mvn/wrapper/maven-wrapper.jar
-.idea/
-*.iws
-*.ipr
-*.iml
 
-# Python
-__pycache__/
-*.py[cod]
-*.env
-*.venv
-env/
-venv/
-ENV/
-.Python
-
-# Node/React
+################################
+# Node / React (future frontend)
+################################
 node_modules/
 npm-debug.log*
 yarn-debug.log*
-/build
-/dist
+/dist/
+/build/
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-# General
-.DS_Store
-*.log
-.vscode/
+################################
+# Python (future analytics service)
+################################
+__pycache__/
+*.py[cod]
+*.venv
+venv/
+ENV/
+.Python
+
