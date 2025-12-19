@@ -1,0 +1,504 @@
+{
+  "app": {
+    "name": "SalesFlow Lite",
+    "subtitle": "Ujasusi wa Biashara na Hesabu ya Bidhaa"
+  },
+
+  "sidebar": {
+    "dashboard": "Nyumbani",
+    "products": "Bidhaa",
+    "sales": "Mauzo",
+    "inventory": "Hesabu ya Bidhaa",
+    "analytics": "Uchambuzi",
+    "forecast": "Utabiri wa AI",
+    "settings": "Mipangilio"
+  },
+
+  "navbar": {
+    "welcome": "Karibu",
+    "accountSettings": "Mipangilio ya Akaunti",
+    "logout": "Toka",
+    "language": "Lugha"
+  },
+
+  "languages": {
+    "en": "Kiingereza",
+    "fr": "Kifaransa",
+    "ln": "Kilingala",
+    "sw": "Kiswahili"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Ingia",
+      "subtitle": "Jaza maelezo hapa chini kuingia",
+      "username": "Jina la Mtumiaji au Nambari ya Simu",
+      "password": "Nenosiri",
+      "forgot": "Umesahau nenosiri?",
+      "submit": "INGIA",
+      "signingIn": "Inakuja ndani...",
+      "noAccount": "Huna akaunti?",
+      "register": "JIANDIKISHE"
+    },
+    "register": {
+      "title": "Jisajili",
+      "subtitle": "Unda akaunti yako ya SalesFlow",
+      "username": "Jina la Mtumiaji",
+      "phone": "Nambari ya Simu",
+      "email": "Anwani ya Barua Pepe",
+      "password": "Nenosiri",
+      "confirmPassword": "Thibitisha Nenosiri",
+      "submit": "JIANDIKISHE",
+      "creating": "Inaunda akaunti...",
+      "haveAccount": "Tayari una akaunti?",
+      "signIn": "Ingia",
+      "errors": {
+        "passwordMismatch": "Nenosiri hazifanani.",
+        "failed": "Usajili umeshindwa"
+      }
+    },
+    "errors": {
+      "invalidCredentials": "Nambari ya simu au nenosiri batili"
+    }
+  },
+
+"home": {
+  "badge": "UJASUSI WA BISHARA",
+  "greeting": "Karibu tena,",
+  "smartDashboard": "Dashibodi ya Kisasa",
+  "question": "Kila unachohitaji kuongeza biashara yako. Ufahamu wa wakati halisi, utabiri wa AI, na zana za kiotomatiki mkononi mwako.",
+  "launchDashboard": "Zindua Dashibodi",
+  "tryAI": "Jaribu Vipengele vya AI",
+  "performance": "Vionyeshi vya Utendaji",
+  "businessGoals": "Malengo ya Ujasusi wa Biashara",
+  "goalsDesc": "Chagua eneo lako la kulenga kupata ufahamu wa kibinafsi na mapendekezo",
+  "increaseSales": "Ongeza Mauzo",
+  "increaseSalesDesc": "Chambua na fuata utendaji wa mauzo",
+  "reduceStock": "Boresha Hesabu",
+  "reduceStockDesc": "Fuatilia hesabu na epuka upungufu",
+  "prepareReport": "Ripoti za Hali ya Juu",
+  "prepareReportDesc": "Tengeneza ripoti za usimamizi PDF & Excel",
+  "forecast": "Utabiri wa AI",
+  "forecastDesc": "Tabiri mauzo na boresha hesabu",
+  "quickStart": "Anza Haraka",
+  "quickDesc": "Anza mara moja kwa vipengele hivi vya nguvu",
+  "importExcel": "Ingiza Data",
+  "importExcelDesc": "Ingiza data yako ya mauzo kutoka Excel au CSV",
+  "addProduct": "Usimamizi wa Katalogi",
+  "addProductDesc": "Ongeza, hariri na simamia katalogi yako ya bidhaa",
+  "viewAnalytics": "Uchambuzi wa Moja kwa Moja",
+  "viewAnalyticsDesc": "Ufahamu wa wakati halisi na vielelezo",
+  "aiBadge": "INAENDESHA NA AKILI BANDIA",
+  "aiTitle": "Uwezo wa AI",
+  "exploreAI": "Gundua Vipengele vya AI",
+  "stats": {
+    "forecastAccuracy": "Usahihi wa Utabiri",
+    "activeMonitoring": "Ufuatiliaji Waendelevu",
+    "salesGrowth": "Ukuaji wa Mauzo",
+    "stockAvailability": "Upatikanaji wa Hesabu"
+  },
+  "goalFeatures": {
+    "realTimeAnalytics": "Uchambuzi wa wakati halisi",
+    "trendDetection": "Ugunduzi wa Mienendo",
+    "performanceMetrics": "Vigezo vya Utendaji",
+    "stockAlerts": "Arifa za Hesabu",
+    "replenishment": "Ujazaji Upya",
+    "deadStockAnalysis": "Uchambuzi wa Hesabu Zilizokufa",
+    "customTemplates": "Violezo Maalum",
+    "autoScheduling": "Upangaji Otomatiki",
+    "multiFormat": "Umbo Nyingi",
+    "mlPredictions": "Utabiri wa ML",
+    "anomalyDetection": "Ugunduzi wa Usahihi",
+    "smartAlerts": "Arifa za Kisasa"
+  },
+  "quickTimes": {
+    "5min": "dak 5",
+    "2min": "dak 2",
+    "instant": "Mara Moja"
+  },
+  "aiFeatures": {
+    "salesTracking": "Ufuatiliaji wa Mauzo",
+    "salesTrackingDesc": "Ufuatiliaji na uchambuzi wa wakati halisi wa vigezo vya utendaji wa mauzo",
+    "stockMonitoring": "Ufuatiliaji wa Hesabu",
+    "stockMonitoringDesc": "Ufuatiliaji otomatiki wa hesabu na arifa za utabiri",
+    "dataPersistence": "Udumifu wa Data",
+    "dataPersistenceDesc": "Hifadhi salama na ya kuaminika na nakala rudufu otomatiki"
+  },
+  "proFeatures": {
+    "title": "Vipengele vya Pro Vinatumika",
+    "realTimeML": "Miundo ya ML ya wakati halisi",
+    "customAlgorithms": "Algorithms maalum",
+    "prioritySupport": "Msaada wa kipaumbele",
+    "advancedAnalytics": "Uchambuzi wa hali ya juu"
+  }
+},
+
+  "common": {
+    "total": "Jumla",
+    "save": "Hifadhi",
+    "saving": "Inahifadhi...",
+    "cancel": "Ghairi",
+    "update": "Sasisha",
+    "remove": "Ondoa",
+    "delete": "Futa",
+    "edit": "Hariri",
+    "units": "vipimo",
+    "unitsPerDay": "vipimo/siku",
+    "days": "siku",
+    "days30": "siku 30",
+    "on": "tarehe",
+    "notAvailable": "Haipatikani",
+    "successPrefix": "Mafanikio:",
+    "devMode": "HALI YA UKUZISHI IMESHAWASHWA",
+    "page": "Ukurasa",
+    "of": "ya",
+    "previous": "← Nyuma",
+    "next": "Mbele →",
+    "loading": "Inapakia...",
+    "search": "Tafuta",
+    "learnMore": "Jifunze zaidi"
+  },
+
+  "period": {
+    "today": "Leo",
+    "last7Days": "Siku 7 zilizopita",
+    "thisMonth": "Mwezi huu",
+    "last90Days": "Siku 90 zilizopita"
+  },
+
+  "tables": {
+    "name": "Jina",
+    "sku": "SKU",
+    "price": "Bei",
+    "cost": "Gharama",
+    "stock": "Hesabu",
+    "category": "Kategoria",
+    "actions": "Vitendo",
+    "product": "Bidhaa",
+    "productName": "Jina la Bidhaa",
+    "quantity": "Kiasi",
+    "unitPrice": "Bei ya Kipimo",
+    "subtotal": "Jumla ndogo",
+    "date": "Tarehe",
+    "items": "Vitu",
+    "lastUpdated": "Ilisasishwa Mwisho"
+  },
+
+  "analytics": {
+    "loading": "Inapakia uchambuzi...",
+    "kpi": {
+      "totalRevenue": "Mapato ya Jumla",
+      "transactions": "Miamala",
+      "unitsSold": "Vipimo Viliuzwa",
+      "averageTicket": "Tikiti ya Wastani"
+    },
+    "stock": {
+      "stockValue": "Thamani ya Hesabu",
+      "outOfStock": "Hesabu Imekwisha",
+      "lowStock": "Hesabu Ndogo",
+      "urgentReorder": "Rejesta ya Haraka",
+      "deadStock": "Hesabu Iliyokufa",
+      "lowStockRatio": "% ya Hesabu Ndogo"
+    },
+    "salesTrends": "Mwenendo wa Mauzo",
+    "noSalesData": "Hakuna data ya mauzo kwa kipindi hiki",
+    "topProducts": "Bidhaa Bora",
+    "noProductSales": "Hakuna mauzo ya bidhaa yaliyorekodiwa",
+    "stockAlerts": "Arifa za Hesabu",
+    "stockHealthy": "Hesabu iko salama",
+    "stockPraise": "Bidhaa zote zina hesabu nzuri!",
+    "labels": {
+      "currentStock": "Hesabu ya Sasa",
+      "minStock": "Hesabu ya Chini",
+      "price": "Bei",
+      "value": "Thamani",
+      "lastSale": "Uuzaji wa Mwisho",
+      "coverage": "Chanjo"
+    },
+    "export": {
+      "title": "Toa Ripoti",
+      "description": "Pakua ripoti za kina za uchambuzi katika aina mbalimbali"
+    }
+  },
+
+  "inventory": {
+    "errors": {
+      "load": "Imeshindwa kupakia data ya hesabu",
+      "loadToast": "Hawezi kupakia hesabu"
+    },
+    "loading": "Inapakia hesabu...",
+    "title": "Usimamizi wa Hesabu",
+    "subtitle": "Fuata, simamia na boresha hesabu yako",
+    "actions": {
+      "addStock": "Ongeza Hesabu",
+      "edit": "Hariri",
+      "remove": "Ondoa"
+    },
+    "searchPlaceholder": "Tafuta kwa jina, SKU au kategoria...",
+    "table": {
+      "product": "Bidhaa",
+      "sku": "SKU",
+      "stock": "Hesabu",
+      "price": "Bei",
+      "cost": "Gharama",
+      "category": "Kategoria",
+      "updated": "Ilisasishwa Mwisho",
+      "actions": "Vitendo"
+    },
+    "stock": {
+      "out": "Hesabu Imekwisha",
+      "low": "Hesabu Ndogo"
+    },
+    "empty": "Hakuna vitu vya hesabu vilivyopatikana",
+    "summary": {
+      "total": "Bidhaa Jumla",
+      "low": "Vitu vya Hesabu Ndogo",
+      "out": "Hesabu Imekwisha"
+    },
+    "modals": {
+      "add": {
+        "title": "Ongeza Hesabu",
+        "select": "Chagua Bidhaa",
+        "choose": "Chagua bidhaa...",
+        "quantity": "Kiasi",
+        "quantityPlaceholder": "Weka kiasi",
+        "cost": "Gharama ya Kipimo ($)",
+        "costPlaceholder": "Weka gharama kwa kipimo"
+      },
+      "edit": {
+        "title": "Hariri Hesabu",
+        "current": "Hesabu ya sasa:",
+        "newQuantity": "Kiasi Kipya"
+      },
+      "delete": {
+        "title": "Ondoa Kutoka Hesabu"
+      }
+    }
+  },
+
+  "forecast": {
+  "header": {
+    "title": "SalesFlow AI"
+  },
+  "badge": {
+    "aiAnalytics": "UCHAMBUAJI WA UTABIRI WA AI"
+  },
+  "capabilities": {
+    "predictive": "Utabiri wa Kutabiri",
+    "predictiveDesc": "Algorithms za ML kwa utabiri sahihi wa mauzo",
+    "anomaly": "Ugunduzi wa Usahihi",
+    "anomalyDesc": "Ugunduzi wa wakati halisi wa muundo usio wa kawaida",
+    "trend": "Uchambuzi wa Mwenendo",
+    "trendDesc": "Tambua muundo wa msimu na mienendo"
+  },
+  "mode": {
+    "globalDesc": "Bidhaa zote zimejumlishwa",
+    "productDesc": "Uchambuzi wa bidhaa maalum"
+  },
+  "search": {
+    "selected": "Imechaguliwa kwa uchambuzi",
+    "clear": "Futa"
+  },
+  "settings": {
+    "daysUnit": "siku",
+    "confidenceLevel": "Kiwango cha Uaminifu",
+    "confidenceLow": "Chini (80%)",
+    "confidenceMedium": "Wastani (90%)",
+    "confidenceHigh": "Juu (95%)"
+  },
+  "errors": {
+    "title": "Hitilafu ya Utabiri"
+  },
+  "summary": {
+    "trendDirection": "Mwelekeo wa Mwenendo"
+  },
+  "chart": {
+    "confidenceInterval": "% kiwango cha uaminifu",
+    "forecast": "Utabiri",
+    "confidence": "Kiwango cha Uaminifu",
+    "upperBound": "Kikomo cha Juu",
+    "lowerBound": "Kikomo cha Chini"
+  },
+  "anomalies": {
+    "patterns": " muundo usio wa kawaida umegunduliwa",
+    "alerts": " Arifa",
+    "value": "Thamani:",
+    "zscore": "Alama Z:",
+    "type": "Aina:"
+  }
+},
+  "products": {
+    "errors": {
+      "load": "Imeshindwa kupakia bidhaa",
+      "loadDetails": "Imeshindwa kupakia maelezo ya bidhaa",
+      "required": "Jina na SKU vinahitajika",
+      "save": "Imeshindwa kuhifadhi bidhaa",
+      "delete": "Imeshindwa kufuta bidhaa"
+    },
+    "title": "Katalogi ya Bidhaa",
+    "subtitle": "Simamia bidhaa zako na maelezo",
+    "actions": {
+      "add": "Ongeza Bidhaa",
+      "manageStock": "Simamia Hesabu"
+    },
+    "search": "Tafuta bidhaa...",
+    "table": {
+      "name": "Jina la Bidhaa",
+      "sku": "SKU",
+      "price": "Bei",
+      "category": "Kategoria",
+      "actions": "Vitendo"
+    },
+    "empty": "Hakuna bidhaa zilizopatikana",
+    "emptySelection": "Chagua bidhaa kuona maelezo",
+    "form": {
+      "new": "Bidhaa Mpya",
+      "noImage": "Hakuna Picha",
+      "name": "Jina la Bidhaa",
+      "description": "Maelezo",
+      "price": "Bei ($)",
+      "sku": "SKU",
+      "category": "Kategoria",
+      "image": "URL ya Picha"
+    },
+    "success": {
+      "saved": "Bidhaa imehifadhiwa kikamilifu",
+      "deleted": "Bidhaa imefutwa kikamilifu"
+    },
+    "confirmDelete": "Una hakika unataka kufuta bidhaa hii?"
+  },
+
+  "sales": {
+    "errors": {
+      "load": "Imeshindwa kupakia data ya mauzo",
+      "invalidItems": "Tafadhali jaza vitu vyote na viwango sahihi",
+      "search": "Utafutaji umeshindwa"
+    },
+    "success": {
+      "created": "Uuzaji umeundwa kikamilifu",
+      "imported": "Mauzo yameingizwa kikamilifu",
+      "search": "Utafutaji umekamilika"
+    },
+    "create": {
+      "title": "Unda Uuzaji",
+      "selectProduct": "Chagua bidhaa...",
+      "addItem": "Ongeza Kitu",
+      "submit": "Unda Uuzaji"
+    },
+    "import": {
+      "title": "Ingiza Mauzo kutoka Excel",
+      "importing": "Inaingiza...",
+      "submit": "Ingiza Faili"
+    },
+    "details": {
+      "title": "Maelezo ya Uuzaji",
+      "select": "Chagua uuzaji kuona maelezo",
+      "id": "Kitambulisho cha Uuzaji"
+    },
+    "search": {
+      "placeholder": "Tafuta kwa SKU au jina la bidhaa...",
+      "searching": "Inatafuta..."
+    },
+    "recent": {
+      "title": "Mauzo ya Hivi Karibuni",
+      "loading": "Inapakia mauzo ya hivi karibuni...",
+      "items": "vitu"
+    },
+    "history": {
+      "loading": "Inapakia historia ya mauzo..."
+    }
+  },
+
+  "settings": {
+    "title": "Mipangilio",
+    "messages": {
+      "loadError": "Imeshindwa kupakia wasifu",
+      "profileUpdated": "Wasifu umesasishwa kikamilifu",
+      "profileUpdateFailed": "Imeshindwa kusasisha wasifu",
+      "passwordMismatch": "Nenosiri mpya hazifanani",
+      "passwordUpdated": "Nenosiri limesasishwa kikamilifu",
+      "passwordUpdateFailed": "Imeshindwa kusasisha nenosiri"
+    },
+    "profile": {
+      "title": "Maelezo ya Wasifu",
+      "username": "Jina la Mtumiaji",
+      "email": "Barua Pepe",
+      "phone": "Nambari ya Simu",
+      "save": "Hifadhi Wasifu"
+    },
+    "password": {
+      "title": "Badilisha Nenosiri",
+      "old": "Nenosiri la Zamani",
+      "new": "Nenosiri Jipya",
+      "confirm": "Thibitisha Nenosiri Jipya",
+      "update": "Sasisha Nenosiri"
+    }
+  },
+
+  "import": {
+    "title": "Ingiza Faili ya Excel",
+    "noFile": "Tafadhali chagua faili.",
+    "uploading": "Inapakia...",
+    "upload": "Pakia Faili",
+    "success": "Mafanikio: {{message}}",
+    "failed": "Upakiaji umeshindwa."
+  },
+
+  "reports": {
+    "title": "Ripoti",
+    "format": {
+      "pdf": "PDF",
+      "excel": "Excel"
+    },
+    "type": {
+      "sales": "Mauzo",
+      "stock": "Hesabu",
+      "combined": "Mauzo + Hesabu"
+    },
+    "period": {
+      "daily": "Leo",
+      "weekly": "Siku 7 zilizopita",
+      "monthly": "Mwezi huu"
+    },
+    "buttons": {
+      "generate": "Tengeneza sasa",
+      "generating": "Inatengeneza...",
+      "schedule": "Panga ripoti ya kila siku",
+      "scheduling": "Inapanga...",
+      "download": "Pakua iliyotengenezwa mwisho",
+      "downloading": "Inapakua..."
+    },
+    "schedule": {
+      "title": "Panga ripoti otomatiki"
+    },
+    "download": {
+      "title": "Ripoti iliyopangwa ya mwisho"
+    },
+    "messages": {
+      "generateError": "Hitilafu katika kutengeneza ripoti",
+      "scheduleError": "Hitilafu katika kupanga ripoti",
+      "downloadError": "Imeshindwa kupakua ripoti. Tafadhali jaribu tena baadaye.",
+      "invalidTime": "Wakati batili",
+      "noScheduled": "Hakuna ripoti iliyopangwa bado.",
+      "scheduled": "Ilipangwa saa {{time}} (kazi {{job}})"
+    }
+  },
+
+  "errors": {
+    "invalidCredentials": "Nambari ya simu au nenosiri batili",
+    "fileRequired": "Tafadhali chagua faili.",
+    "uploadFailed": "Upakiaji umeshindwa.",
+    "passwordsMismatch": "Nenosiri hazifanani.",
+    "registrationFailed": "Usajili umeshindwa",
+    "profileLoadFailed": "Hawezi kupakia wasifu wa mtumiaji.",
+    "profileUpdateFailed": "Imeshindwa kusasisha wasifu.",
+    "passwordChangeFailed": "Imeshindwa kubadilisha nenosiri."
+  },
+
+  "notifications": {
+    "success": "Mafanikio",
+    "error": "Hitilafu",
+    "warning": "Onyo",
+    "info": "Taarifa"
+  }
+}
