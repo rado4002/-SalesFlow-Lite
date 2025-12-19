@@ -1,14 +1,17 @@
 package com.SalesFlowLite.inventory.model.dto.inventory;
 
 import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.Instant;
 
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class InventoryResponse {
-
     private Long id;
-    private String sku;
     private String name;
     private String description;
     private Integer quantity;

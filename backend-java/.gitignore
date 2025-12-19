@@ -1,149 +1,33 @@
-# Build output
-target/
+# Build output 
+target 
 *.log
-*.class
-*.jar
-*.war
-*.ear
-
-# Maven
+#Maven
 .mvn/
 mvnw
 mvnw.cmd
-pom.xml.versionsBackup
-dependency-reduced-pom.xml
-
-# IDE (IntelliJ, Eclipse, VS Code)
+#IDE
 .idea/
 *.iml
 *.iws
-.classpath
-.project
-.settings/
-.vscode/
-
-# OS-specific files
-.DS_Store
+#os
+.DS_Store 
 Thumbs.db
-ehthumbs.db
-Desktop.ini
-
-# Secrets and sensitive files
-application.properties
-jwt-secret.key/
-*.pem
-*.key
-*.crt
-.env
-*.env.local
-application-dev.properties
-application-prod.properties
-
-# Logs and temp files
-logs/
-*.tmp
-*.bak
-*.swp
-*~.nib
-*.pid
-*.seed
-
-# Database dumps or backups
-*.sql.dump
-*.backup
+#Secrets 
+jwt-secret.key
 
 
-#Docker
-Dockerfile.dev
-Dockerfile.local
-Dockerfile.test
-Dockerfile.prod
-# Keep main Dockerfile committed
-
-# Misc
-
-
-HELP.md
-qodana.yaml
-
-# ================================================
-# ADDED FOR PYTHON & REACT
-# ================================================
-
-# Python
-__pycache__/
-*.py[cod]
-*.so
-.Python
-venv/
-env/
-ENV/
-env.bak/
-venv.bak/
-*.egg-info/
-*.egg
-dist/
-build/
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage
-.coverage.*
-.cache
-nosetests.xml
-coverage.xml
-*.cover
-*.py,cover
-.hypothesis/
-.pytest_cache/
-.ropeproject/
-
-# Node.js/React/JavaScript/TypeScript
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.yarn-integrity
-.next/
-out/
-dist/
-.nuxt/
-.cache/
-.serverless/
-*.tgz
-.jest/
-.parcel-cache/
-.eslintcache
-.stylelintcache
-*.tsbuildinfo
-
-# Vue.js (if using Vue alongside React)
-*.vue.swp
-
-# Svelte (if using)
-.svelte-kit/
-
-# IDE Additional
-*.code-workspace
-nbproject/
-private/
-*~
-.idea/workspace.xml
-.idea/tasks.xml
-.idea/dictionaries
-.idea/shelf/
-.idea/modules.xml
-.idea/dataSources/
-.idea/dataSources.ids
-.idea/dataSources.local.xml
-.idea/sonarlint/
-
-# OS Additional
-._*
-.Spotlight-V100
-.Trashes
-*.stackdump
-
-# Gradle (if using alongside Maven)
-.gradle/
-!gradle/wrapper/gradle-wrapper.jar
+# Frontend files (should be in frontend-react/)
+.env.development
+.env.production
+eslint.config.js
+index.html
+package-lock.json
+package.json
+postcss.config.js
+tailwind.config.js
+tsconfig.app.json
+tsconfig.json
+tsconfig.node.json
+vite.config.ts
+public/
+src/assets/

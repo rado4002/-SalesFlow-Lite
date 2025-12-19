@@ -1,0 +1,504 @@
+{
+  "app": {
+    "name": "SalesFlow Lite",
+    "subtitle": "Intelligence d'Affaires & Inventaire"
+  },
+
+  "sidebar": {
+    "dashboard": "Accueil",
+    "products": "Produits",
+    "sales": "Ventes",
+    "inventory": "Inventaire",
+    "analytics": "Analyses",
+    "forecast": "Prévision IA",
+    "settings": "Paramètres"
+  },
+
+  "navbar": {
+    "welcome": "Bienvenue",
+    "accountSettings": "Paramètres du compte",
+    "logout": "Déconnexion",
+    "language": "Langue"
+  },
+
+  "languages": {
+    "en": "Anglais",
+    "fr": "Français",
+    "ln": "Lingala",
+    "sw": "Swahili"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Connexion",
+      "subtitle": "Remplissez les informations ci-dessous pour vous connecter",
+      "username": "Nom d'utilisateur ou Numéro de téléphone",
+      "password": "Mot de passe",
+      "forgot": "Mot de passe oublié ?",
+      "submit": "SE CONNECTER",
+      "signingIn": "Connexion en cours...",
+      "noAccount": "Pas de compte ?",
+      "register": "S'INSCRIRE"
+    },
+    "register": {
+      "title": "Inscription",
+      "subtitle": "Créez votre compte SalesFlow",
+      "username": "Nom d'utilisateur",
+      "phone": "Numéro de téléphone",
+      "email": "Adresse email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "S'INSCRIRE",
+      "creating": "Création du compte...",
+      "haveAccount": "Déjà un compte ?",
+      "signIn": "Se connecter",
+      "errors": {
+        "passwordMismatch": "Les mots de passe ne correspondent pas.",
+        "failed": "Échec de l'inscription"
+      }
+    },
+    "errors": {
+      "invalidCredentials": "Numéro de téléphone ou mot de passe invalide"
+    }
+  },
+
+  "home": {
+  "badge": "INTELLIGENCE D'AFFAIRES",
+  "greeting": "Bon retour,",
+  "smartDashboard": "Tableau de Bord Intelligent",
+  "question": "Tout ce dont vous avez besoin pour développer votre entreprise. Insights en temps réel, prédictions IA et outils d'automatisation à portée de main.",
+  "launchDashboard": "Lancer le Tableau de Bord",
+  "tryAI": "Essayer les Fonctions IA",
+  "performance": "Points Forts de Performance",
+  "businessGoals": "Objectifs d'Intelligence d'Affaires",
+  "goalsDesc": "Sélectionnez votre domaine de concentration pour obtenir des insights personnalisés et des recommandations",
+  "increaseSales": "Augmenter les Ventes",
+  "increaseSalesDesc": "Analyser et suivre les performances des ventes",
+  "reduceStock": "Optimiser l'Inventaire",
+  "reduceStockDesc": "Surveiller les stocks et éviter les ruptures",
+  "prepareReport": "Rapports Avancés",
+  "prepareReportDesc": "Générer des rapports de gestion PDF & Excel",
+  "forecast": "Prévision IA",
+  "forecastDesc": "Prédire les ventes et optimiser les stocks",
+  "quickStart": "Démarrage Rapide",
+  "quickDesc": "Démarrez instantanément avec ces fonctionnalités puissantes",
+  "importExcel": "Importer des Données",
+  "importExcelDesc": "Importer vos données de ventes depuis Excel ou CSV",
+  "addProduct": "Gestion du Catalogue",
+  "addProductDesc": "Ajouter, modifier et gérer votre catalogue produits",
+  "viewAnalytics": "Analyses en Direct",
+  "viewAnalyticsDesc": "Insights et visualisations en temps réel",
+  "aiBadge": "ALIMENTÉ PAR L'INTELLIGENCE ARTIFICIELLE",
+  "aiTitle": "Capacités de l'IA",
+  "exploreAI": "Explorer les Fonctions IA",
+  "stats": {
+    "forecastAccuracy": "Précision des Prévisions",
+    "activeMonitoring": "Surveillance Active",
+    "salesGrowth": "Croissance des Ventes",
+    "stockAvailability": "Disponibilité des Stocks"
+  },
+  "goalFeatures": {
+    "realTimeAnalytics": "Analyses en temps réel",
+    "trendDetection": "Détection de tendances",
+    "performanceMetrics": "Métriques de performance",
+    "stockAlerts": "Alertes de stock",
+    "replenishment": "Réapprovisionnement",
+    "deadStockAnalysis": "Analyse de stock mort",
+    "customTemplates": "Modèles personnalisés",
+    "autoScheduling": "Planification automatique",
+    "multiFormat": "Multi-format",
+    "mlPredictions": "Prédictions ML",
+    "anomalyDetection": "Détection d'anomalies",
+    "smartAlerts": "Alertes intelligentes"
+  },
+  "quickTimes": {
+    "5min": "5 min",
+    "2min": "2 min",
+    "instant": "Instantané"
+  },
+  "aiFeatures": {
+    "salesTracking": "Suivi des Ventes",
+    "salesTrackingDesc": "Surveillance et analyse en temps réel des métriques de performance des ventes",
+    "stockMonitoring": "Surveillance des Stocks",
+    "stockMonitoringDesc": "Suivi automatisé des stocks avec alertes prédictives",
+    "dataPersistence": "Persistance des Données",
+    "dataPersistenceDesc": "Stockage sécurisé et fiable avec sauvegardes automatiques"
+  },
+  "proFeatures": {
+    "title": "Fonctionnalités Pro Actives",
+    "realTimeML": "Modèles ML en temps réel",
+    "customAlgorithms": "Algorithmes personnalisés",
+    "prioritySupport": "Support prioritaire",
+    "advancedAnalytics": "Analyses avancées"
+  }
+},
+
+  "common": {
+    "total": "Total",
+    "save": "Enregistrer",
+    "saving": "Enregistrement...",
+    "cancel": "Annuler",
+    "update": "Mettre à jour",
+    "remove": "Supprimer",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "units": "unités",
+    "unitsPerDay": "unités/jour",
+    "days": "jours",
+    "days30": "30 jours",
+    "on": "le",
+    "notAvailable": "N/D",
+    "successPrefix": "Succès :",
+    "devMode": "MODE DÉVELOPPEMENT ACTIF",
+    "page": "Page",
+    "of": "sur",
+    "previous": "← Précédent",
+    "next": "Suivant →",
+    "loading": "Chargement...",
+    "search": "Rechercher",
+    "learnMore": "En savoir plus"
+  },
+
+  "period": {
+    "today": "Aujourd'hui",
+    "last7Days": "7 derniers jours",
+    "thisMonth": "Ce mois",
+    "last90Days": "90 derniers jours"
+  },
+
+  "tables": {
+    "name": "Nom",
+    "sku": "SKU",
+    "price": "Prix",
+    "cost": "Coût",
+    "stock": "Stock",
+    "category": "Catégorie",
+    "actions": "Actions",
+    "product": "Produit",
+    "productName": "Nom du produit",
+    "quantity": "Quantité",
+    "unitPrice": "Prix unitaire",
+    "subtotal": "Sous-total",
+    "date": "Date",
+    "items": "Articles",
+    "lastUpdated": "Dernière mise à jour"
+  },
+
+  "analytics": {
+    "loading": "Chargement des analyses...",
+    "kpi": {
+      "totalRevenue": "Revenu total",
+      "transactions": "Transactions",
+      "unitsSold": "Unités vendues",
+      "averageTicket": "Ticket moyen"
+    },
+    "stock": {
+      "stockValue": "Valeur du stock",
+      "outOfStock": "Rupture de stock",
+      "lowStock": "Stock faible",
+      "urgentReorder": "Réappro urgent",
+      "deadStock": "Stock mort",
+      "lowStockRatio": "% Stock faible"
+    },
+    "salesTrends": "Tendances des ventes",
+    "noSalesData": "Aucune donnée de vente pour cette période",
+    "topProducts": "Top Produits",
+    "noProductSales": "Aucune vente produit enregistrée",
+    "stockAlerts": "Alertes de stock",
+    "stockHealthy": "Le stock est sain",
+    "stockPraise": "Tous les produits sont bien approvisionnés !",
+    "labels": {
+      "currentStock": "Stock actuel",
+      "minStock": "Stock minimum",
+      "price": "Prix",
+      "value": "Valeur",
+      "lastSale": "Dernière vente",
+      "coverage": "Couverture"
+    },
+    "export": {
+      "title": "Exporter les rapports",
+      "description": "Téléchargez des rapports d'analyse détaillés dans plusieurs formats"
+    }
+  },
+
+  "inventory": {
+    "errors": {
+      "load": "Échec du chargement des données d'inventaire",
+      "loadToast": "Impossible de charger l'inventaire"
+    },
+    "loading": "Chargement de l'inventaire...",
+    "title": "Gestion d'Inventaire",
+    "subtitle": "Suivez, gérez et optimisez votre stock",
+    "actions": {
+      "addStock": "Ajouter du stock",
+      "edit": "Modifier",
+      "remove": "Supprimer"
+    },
+    "searchPlaceholder": "Rechercher par nom, SKU ou catégorie...",
+    "table": {
+      "product": "Produit",
+      "sku": "SKU",
+      "stock": "Stock",
+      "price": "Prix",
+      "cost": "Coût",
+      "category": "Catégorie",
+      "updated": "Dernière mise à jour",
+      "actions": "Actions"
+    },
+    "stock": {
+      "out": "Rupture de stock",
+      "low": "Stock faible"
+    },
+    "empty": "Aucun article d'inventaire trouvé",
+    "summary": {
+      "total": "Total produits",
+      "low": "Articles en stock faible",
+      "out": "Rupture de stock"
+    },
+    "modals": {
+      "add": {
+        "title": "Ajouter du stock",
+        "select": "Sélectionner un produit",
+        "choose": "Choisir un produit...",
+        "quantity": "Quantité",
+        "quantityPlaceholder": "Entrez la quantité",
+        "cost": "Coût unitaire ($)",
+        "costPlaceholder": "Entrez le coût par unité"
+      },
+      "edit": {
+        "title": "Modifier le stock",
+        "current": "Stock actuel :",
+        "newQuantity": "Nouvelle quantité"
+      },
+      "delete": {
+        "title": "Retirer de l'inventaire"
+      }
+    }
+  },
+
+  "forecast": {
+  "header": {
+    "title": "SalesFlow AI"
+  },
+  "badge": {
+    "aiAnalytics": "ANALYTIQUE PRÉDICTIVE IA"
+  },
+  "capabilities": {
+    "predictive": "Prévision Prédictive",
+    "predictiveDesc": "Algorithmes ML pour des prédictions de vente précises",
+    "anomaly": "Détection d'Anomalies",
+    "anomalyDesc": "Détection en temps réel des modèles inhabituels",
+    "trend": "Analyse de Tendance",
+    "trendDesc": "Identifier les modèles saisonniers et les tendances"
+  },
+  "mode": {
+    "globalDesc": "Tous les produits agrégés",
+    "productDesc": "Analyse de produit spécifique"
+  },
+  "search": {
+    "selected": "Sélectionné pour analyse",
+    "clear": "Effacer"
+  },
+  "settings": {
+    "daysUnit": "jours",
+    "confidenceLevel": "Niveau de Confiance",
+    "confidenceLow": "Faible (80%)",
+    "confidenceMedium": "Moyen (90%)",
+    "confidenceHigh": "Élevé (95%)"
+  },
+  "errors": {
+    "title": "Erreur de Prévision"
+  },
+  "summary": {
+    "trendDirection": "Direction de la Tendance"
+  },
+  "chart": {
+    "confidenceInterval": "% intervalle de confiance",
+    "forecast": "Prévision",
+    "confidence": "Intervalle de Confiance",
+    "upperBound": "Limite Supérieure",
+    "lowerBound": "Limite Inférieure"
+  },
+  "anomalies": {
+    "patterns": " modèles inhabituels identifiés",
+    "alerts": " Alertes",
+    "value": "Valeur :",
+    "zscore": "Score Z :",
+    "type": "Type :"
+  }
+},
+  "products": {
+    "errors": {
+      "load": "Échec du chargement des produits",
+      "loadDetails": "Échec du chargement des détails du produit",
+      "required": "Le nom et le SKU sont requis",
+      "save": "Échec de l'enregistrement du produit",
+      "delete": "Échec de la suppression du produit"
+    },
+    "title": "Catalogue Produits",
+    "subtitle": "Gérez vos produits et descriptions",
+    "actions": {
+      "add": "Ajouter un produit",
+      "manageStock": "Gérer le stock"
+    },
+    "search": "Rechercher des produits...",
+    "table": {
+      "name": "Nom du produit",
+      "sku": "SKU",
+      "price": "Prix",
+      "category": "Catégorie",
+      "actions": "Actions"
+    },
+    "empty": "Aucun produit trouvé",
+    "emptySelection": "Sélectionnez un produit pour voir les détails",
+    "form": {
+      "new": "Nouveau produit",
+      "noImage": "Pas d'image",
+      "name": "Nom du produit",
+      "description": "Description",
+      "price": "Prix ($)",
+      "sku": "SKU",
+      "category": "Catégorie",
+      "image": "URL de l'image"
+    },
+    "success": {
+      "saved": "Produit enregistré avec succès",
+      "deleted": "Produit supprimé avec succès"
+    },
+    "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce produit ?"
+  },
+
+  "sales": {
+    "errors": {
+      "load": "Échec du chargement des données de vente",
+      "invalidItems": "Veuillez remplir tous les articles avec des quantités valides",
+      "search": "Échec de la recherche"
+    },
+    "success": {
+      "created": "Vente créée avec succès",
+      "imported": "Ventes importées avec succès",
+      "search": "Recherche terminée"
+    },
+    "create": {
+      "title": "Créer une vente",
+      "selectProduct": "Sélectionner un produit...",
+      "addItem": "Ajouter un article",
+      "submit": "Créer la vente"
+    },
+    "import": {
+      "title": "Importer des ventes Excel",
+      "importing": "Importation...",
+      "submit": "Importer le fichier"
+    },
+    "details": {
+      "title": "Détails de la vente",
+      "select": "Sélectionnez une vente pour voir les détails",
+      "id": "ID Vente"
+    },
+    "search": {
+      "placeholder": "Rechercher par SKU ou nom de produit...",
+      "searching": "Recherche..."
+    },
+    "recent": {
+      "title": "Ventes récentes",
+      "loading": "Chargement des ventes récentes...",
+      "items": "articles"
+    },
+    "history": {
+      "loading": "Chargement de l'historique des ventes..."
+    }
+  },
+
+  "settings": {
+    "title": "Paramètres",
+    "messages": {
+      "loadError": "Échec du chargement du profil",
+      "profileUpdated": "Profil mis à jour avec succès",
+      "profileUpdateFailed": "Échec de la mise à jour du profil",
+      "passwordMismatch": "Les nouveaux mots de passe ne correspondent pas",
+      "passwordUpdated": "Mot de passe mis à jour avec succès",
+      "passwordUpdateFailed": "Échec de la mise à jour du mot de passe"
+    },
+    "profile": {
+      "title": "Informations du profil",
+      "username": "Nom d'utilisateur",
+      "email": "Email",
+      "phone": "Numéro de téléphone",
+      "save": "Enregistrer le profil"
+    },
+    "password": {
+      "title": "Changer le mot de passe",
+      "old": "Ancien mot de passe",
+      "new": "Nouveau mot de passe",
+      "confirm": "Confirmer le nouveau mot de passe",
+      "update": "Mettre à jour le mot de passe"
+    }
+  },
+
+  "import": {
+    "title": "Importer un fichier Excel",
+    "noFile": "Veuillez sélectionner un fichier.",
+    "uploading": "Téléchargement...",
+    "upload": "Télécharger le fichier",
+    "success": "Succès : {{message}}",
+    "failed": "Échec du téléchargement."
+  },
+
+  "reports": {
+    "title": "Rapports",
+    "format": {
+      "pdf": "PDF",
+      "excel": "Excel"
+    },
+    "type": {
+      "sales": "Ventes",
+      "stock": "Stock",
+      "combined": "Ventes + Stock"
+    },
+    "period": {
+      "daily": "Aujourd'hui",
+      "weekly": "7 derniers jours",
+      "monthly": "Ce mois"
+    },
+    "buttons": {
+      "generate": "Générer maintenant",
+      "generating": "Génération...",
+      "schedule": "Planifier un rapport quotidien",
+      "scheduling": "Planification...",
+      "download": "Télécharger le dernier généré",
+      "downloading": "Téléchargement..."
+    },
+    "schedule": {
+      "title": "Planifier un rapport automatique"
+    },
+    "download": {
+      "title": "Dernier rapport planifié"
+    },
+    "messages": {
+      "generateError": "Erreur de génération du rapport",
+      "scheduleError": "Erreur de planification du rapport",
+      "downloadError": "Échec du téléchargement du rapport. Veuillez réessayer plus tard.",
+      "invalidTime": "Heure invalide",
+      "noScheduled": "Aucun rapport planifié disponible.",
+      "scheduled": "Planifié à {{time}} (tâche {{job}})"
+    }
+  },
+
+  "errors": {
+    "invalidCredentials": "Numéro de téléphone ou mot de passe invalide",
+    "fileRequired": "Veuillez sélectionner un fichier.",
+    "uploadFailed": "Échec du téléchargement.",
+    "passwordsMismatch": "Les mots de passe ne correspondent pas.",
+    "registrationFailed": "Échec de l'inscription",
+    "profileLoadFailed": "Impossible de charger le profil utilisateur.",
+    "profileUpdateFailed": "Échec de la mise à jour du profil.",
+    "passwordChangeFailed": "Échec du changement de mot de passe."
+  },
+
+  "notifications": {
+    "success": "Succès",
+    "error": "Erreur",
+    "warning": "Avertissement",
+    "info": "Information"
+  }
+}

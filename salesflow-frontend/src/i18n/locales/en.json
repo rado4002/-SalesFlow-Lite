@@ -1,0 +1,547 @@
+{
+  "app": {
+    "name": "SalesFlow Lite",
+    "subtitle": "Business Intelligence & Inventory"
+  },
+
+  "sidebar": {
+    "dashboard": "Home",
+    "products": "Products",
+    "sales": "Sales",
+    "inventory": "Inventory",
+    "analytics": "Analytics",
+    "forecast": "Forecast AI",
+    "settings": "Settings"
+  },
+
+  "navbar": {
+    "welcome": "Welcome",
+    "accountSettings": "Account settings",
+    "logout": "Log out",
+    "language": "Language"
+  },
+
+  "languages": {
+    "en": "English",
+    "fr": "Français",
+    "ln": "Lingala",
+    "sw": "Swahili"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Log In",
+      "subtitle": "Fill the below information to Log In",
+      "username": "User Name or Phone Number",
+      "password": "Password",
+      "forgot": "In case you forgot password?",
+      "submit": "LOG IN",
+      "signingIn": "Signing in...",
+      "noAccount": "Don't have an account?",
+      "register": "REGISTER"
+    },
+    "register": {
+      "title": "Register",
+      "subtitle": "Create your SalesFlow account",
+      "username": "Username",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "REGISTER",
+      "creating": "Creating account...",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "errors": {
+        "passwordMismatch": "Passwords do not match.",
+        "failed": "Registration failed"
+      }
+    },
+    "errors": {
+      "invalidCredentials": "Invalid phone number or password"
+    }
+  },
+
+  "home": {
+  "badge": "BUSINESS INTELLIGENCE",
+  "greeting": "Welcome back,",
+  "smartDashboard": "Smart Dashboard",
+  "question": "Everything you need to scale your business. Real-time insights, AI predictions, and automation tools at your fingertips.",
+  "launchDashboard": "Launch Dashboard",
+  "tryAI": "Try AI Features",
+  "performance": "Performance Highlights",
+  "businessGoals": "Business Intelligence Goals",
+  "goalsDesc": "Select your focus area to get personalized insights and recommendations",
+  "increaseSales": "Increase Sales",
+  "increaseSalesDesc": "Analyze and track sales performance",
+  "reduceStock": "Optimize Inventory",
+  "reduceStockDesc": "Monitor inventory and avoid stockouts",
+  "prepareReport": "Advanced Reports",
+  "prepareReportDesc": "Generate PDF & Excel management reports",
+  "forecast": "AI Forecasting",
+  "forecastDesc": "Predict sales and optimize stock",
+  "quickStart": "Quick Start",
+  "quickDesc": "Get started instantly with these powerful features",
+  "importExcel": "Import Data",
+  "importExcelDesc": "Import your sales data from Excel or CSV",
+  "addProduct": "Catalog Management",
+  "addProductDesc": "Add, edit, and manage your product catalog",
+  "viewAnalytics": "Live Analytics",
+  "viewAnalyticsDesc": "Real-time insights and visualizations",
+  "aiBadge": "POWERED BY ARTIFICIAL INTELLIGENCE",
+  "aiTitle": "AI Capabilities",
+  "exploreAI": "Explore AI Features",
+  "stats": {
+    "forecastAccuracy": "Forecast Accuracy",
+    "activeMonitoring": "Active Monitoring",
+    "salesGrowth": "Sales Growth",
+    "stockAvailability": "Stock Availability"
+  },
+  "goalFeatures": {
+    "realTimeAnalytics": "Real-time analytics",
+    "trendDetection": "Trend detection",
+    "performanceMetrics": "Performance metrics",
+    "stockAlerts": "Stock alerts",
+    "replenishment": "Replenishment",
+    "deadStockAnalysis": "Dead stock analysis",
+    "customTemplates": "Custom templates",
+    "autoScheduling": "Auto-scheduling",
+    "multiFormat": "Multi-format",
+    "mlPredictions": "ML predictions",
+    "anomalyDetection": "Anomaly detection",
+    "smartAlerts": "Smart alerts"
+  },
+  "quickTimes": {
+    "5min": "5 min",
+    "2min": "2 min",
+    "instant": "Instant"
+  },
+  "aiFeatures": {
+    "salesTracking": "Sales Tracking",
+    "salesTrackingDesc": "Real-time monitoring and analysis of sales performance metrics",
+    "stockMonitoring": "Stock Monitoring",
+    "stockMonitoringDesc": "Automated inventory tracking with predictive stock alerts",
+    "dataPersistence": "Data Persistence",
+    "dataPersistenceDesc": "Secure and reliable data storage with automatic backups"
+  },
+  "proFeatures": {
+    "title": "Pro Features Active",
+    "realTimeML": "Real-time ML models",
+    "customAlgorithms": "Custom algorithms",
+    "prioritySupport": "Priority support",
+    "advancedAnalytics": "Advanced analytics"
+  }
+},
+
+  "common": {
+    "total": "Total",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "update": "Update",
+    "remove": "Remove",
+    "delete": "Delete",
+    "edit": "Edit",
+    "units": "units",
+    "unitsPerDay": "units/day",
+    "days": "days",
+    "days30": "30-day",
+    "on": "on",
+    "notAvailable": "N/A",
+    "successPrefix": "Success:",
+    "devMode": "DEV MODE ACTIVE",
+    "page": "Page",
+    "of": "of",
+    "previous": "← Previous",
+    "next": "Next →",
+    "loading": "Loading...",
+    "search": "Search",
+    "learnMore": "Learn more"
+  },
+
+  "period": {
+    "today": "Today",
+    "last7Days": "Last 7 Days",
+    "thisMonth": "This Month",
+    "last90Days": "Last 90 Days"
+  },
+
+  "tables": {
+    "name": "Name",
+    "sku": "SKU",
+    "price": "Price",
+    "cost": "Cost",
+    "stock": "Stock",
+    "category": "Category",
+    "actions": "Actions",
+    "product": "Product",
+    "productName": "Product Name",
+    "quantity": "Quantity",
+    "unitPrice": "Unit Price",
+    "subtotal": "Subtotal",
+    "date": "Date",
+    "items": "Items",
+    "lastUpdated": "Last Updated"
+  },
+
+  "analytics": {
+    "loading": "Loading analytics data...",
+    "kpi": {
+      "totalRevenue": "Total Revenue",
+      "transactions": "Transactions",
+      "unitsSold": "Units Sold",
+      "averageTicket": "Average Ticket"
+    },
+    "stock": {
+      "stockValue": "Stock Value",
+      "outOfStock": "Out of Stock",
+      "lowStock": "Low Stock",
+      "urgentReorder": "Urgent Reorder",
+      "deadStock": "Dead Stock",
+      "lowStockRatio": "Low Stock %"
+    },
+    "salesTrends": "Sales Trends",
+    "noSalesData": "No sales data available for this period",
+    "topProducts": "Top Products",
+    "noProductSales": "No product sales recorded",
+    "stockAlerts": "Stock Alerts",
+    "stockHealthy": "Stock is healthy",
+    "stockPraise": "All products are well stocked!",
+    "labels": {
+      "currentStock": "Current Stock",
+      "minStock": "Min Stock",
+      "price": "Price",
+      "value": "Value",
+      "lastSale": "Last Sale",
+      "coverage": "Coverage"
+    },
+    "export": {
+      "title": "Export Reports",
+      "description": "Download detailed analytics reports in multiple formats"
+    }
+  },
+
+  "inventory": {
+    "errors": {
+      "load": "Failed to load inventory data",
+      "loadToast": "Cannot load inventory"
+    },
+    "loading": "Loading inventory...",
+    "title": "Inventory Management",
+    "subtitle": "Track, manage and optimize your stock",
+    "actions": {
+      "addStock": "Add Stock",
+      "edit": "Edit",
+      "remove": "Remove"
+    },
+    "searchPlaceholder": "Search by product name, SKU or category...",
+    "table": {
+      "product": "Product",
+      "sku": "SKU",
+      "stock": "Stock",
+      "price": "Price",
+      "cost": "Cost",
+      "category": "Category",
+      "updated": "Last Updated",
+      "actions": "Actions"
+    },
+    "stock": {
+      "out": "Out of stock",
+      "low": "Low stock"
+    },
+    "empty": "No inventory items found",
+    "summary": {
+      "total": "Total Products",
+      "low": "Low Stock Items",
+      "out": "Out of Stock"
+    },
+    "modals": {
+      "add": {
+        "title": "Add Stock to Inventory",
+        "select": "Select Product",
+        "choose": "Choose a product...",
+        "quantity": "Quantity",
+        "quantityPlaceholder": "Enter quantity",
+        "cost": "Unit Cost ($)",
+        "costPlaceholder": "Enter cost per unit"
+      },
+      "edit": {
+        "title": "Edit Stock",
+        "current": "Current stock:",
+        "newQuantity": "New Quantity"
+      },
+      "delete": {
+        "title": "Remove from Inventory"
+      }
+    }
+  },
+
+  
+  "forecast": {
+    "header": {
+      "title": "SalesFlow AI"
+    },
+    "badge": {
+      "aiAnalytics": "AI PREDICTIVE ANALYTICS"
+    },
+    "title": "AI Forecasting",
+    "subtitle": "Leverage machine learning to predict sales trends, detect anomalies, and optimize your inventory with precision.",
+    "capabilities": {
+      "predictive": "Predictive Forecasting",
+      "predictiveDesc": "ML algorithms for accurate sales predictions",
+      "anomaly": "Anomaly Detection",
+      "anomalyDesc": "Real-time detection of unusual patterns",
+      "trend": "Trend Analysis",
+      "trendDesc": "Identify seasonal patterns and trends"
+    },
+    "parameters": {
+      "title": "Forecast Parameters",
+      "mode": "Forecast Scope"
+    },
+    "mode": {
+      "global": "Global Forecast",
+      "globalDesc": "All products aggregated",
+      "product": "Product Forecast",
+      "productDesc": "Specific product analysis"
+    },
+    "search": {
+      "label": "Select Product",
+      "placeholder": "Search by name or SKU...",
+      "selected": "Selected for analysis",
+      "clear": "Clear"
+    },
+    "settings": {
+      "days": "Forecast Period",
+      "daysUnit": "days",
+      "period": "Time Granularity",
+      "confidence": "Confidence Level",
+      "confidenceLevel": "Confidence Level",
+      "confidenceLow": "Low (80%)",
+      "confidenceMedium": "Medium (90%)",
+      "confidenceHigh": "High (95%)"
+    },
+    "period": {
+      "daily": "Daily",
+      "weekly": "Weekly",
+      "monthly": "Monthly"
+    },
+    "actions": {
+      "forecasting": "Generating forecast...",
+      "runForecast": "Run Forecast",
+      "scanning": "Scanning for anomalies...",
+      "detectAnomalies": "Detect Anomalies"
+    },
+    "errors": {
+      "title": "Forecast Error",
+      "selectProduct": "Please select a product first",
+      "forecastFailed": "Forecast failed: {{error}}",
+      "anomalyFailed": "Anomaly detection failed: {{error}}"
+    },
+    "summary": {
+      "total": "Total Forecast",
+      "dailyAverage": "Daily Average",
+      "peak": "Peak Day",
+      "trend": "Trend",
+      "trendDirection": "Trend Direction"
+    },
+    "chart": {
+      "title": "Sales Forecast",
+      "confidenceInterval": "% confidence interval",
+      "forecast": "Forecast",
+      "confidence": "Confidence Interval",
+      "upperBound": "Upper Bound",
+      "lowerBound": "Lower Bound"
+    },
+    "anomalies": {
+      "title": "Anomalies Detected",
+      "patterns": " unusual patterns identified",
+      "alerts": " Alerts",
+      "value": "Value:",
+      "observed": "Observed value:",
+      "zscore": "Z-Score:",
+      "type": "Type:",
+      "severity": {
+        "high": "High",
+        "moderate": "Moderate"
+      },
+      "none": {
+        "title": "No Anomalies Detected",
+        "subtitle": "Your sales patterns appear normal and predictable. Continue monitoring for optimal performance."
+      }
+    }
+  },
+  "products": {
+    "errors": {
+      "load": "Failed to load products",
+      "loadDetails": "Failed to load product details",
+      "required": "Name and SKU are required",
+      "save": "Failed to save product",
+      "delete": "Failed to delete product"
+    },
+    "title": "Product Catalogue",
+    "subtitle": "Manage your products and descriptions",
+    "actions": {
+      "add": "Add Product",
+      "manageStock": "Manage Stock"
+    },
+    "search": "Search products...",
+    "table": {
+      "name": "Product Name",
+      "sku": "SKU",
+      "price": "Price",
+      "category": "Category",
+      "actions": "Actions"
+    },
+    "empty": "No products found",
+    "emptySelection": "Select a product to view details",
+    "form": {
+      "new": "New Product",
+      "noImage": "No image",
+      "name": "Product Name",
+      "description": "Description",
+      "price": "Price ($)",
+      "sku": "SKU",
+      "category": "Category",
+      "image": "Image URL"
+    },
+    "success": {
+      "saved": "Product saved successfully",
+      "deleted": "Product deleted successfully"
+    },
+    "confirmDelete": "Are you sure you want to delete this product?"
+  },
+
+  "sales": {
+    "errors": {
+      "load": "Failed to load sales data",
+      "invalidItems": "Please fill all items with valid quantities",
+      "search": "Search failed"
+    },
+    "success": {
+      "created": "Sale created successfully",
+      "imported": "Sales imported successfully",
+      "search": "Search completed"
+    },
+    "create": {
+      "title": "Create Sale",
+      "selectProduct": "Select a product...",
+      "addItem": "Add Item",
+      "submit": "Create Sale"
+    },
+    "import": {
+      "title": "Import Sales from Excel",
+      "importing": "Importing...",
+      "submit": "Import File"
+    },
+    "details": {
+      "title": "Sale Details",
+      "select": "Select a sale to view details",
+      "id": "Sale ID"
+    },
+    "search": {
+      "placeholder": "Search by SKU or product name...",
+      "searching": "Searching..."
+    },
+    "recent": {
+      "title": "Recent Sales",
+      "loading": "Loading recent sales...",
+      "items": "items"
+    },
+    "history": {
+      "loading": "Loading sales history..."
+    }
+  },
+
+  "settings": {
+    "title": "Settings",
+    "messages": {
+      "loadError": "Failed to load profile",
+      "profileUpdated": "Profile updated successfully",
+      "profileUpdateFailed": "Failed to update profile",
+      "passwordMismatch": "New passwords do not match",
+      "passwordUpdated": "Password updated successfully",
+      "passwordUpdateFailed": "Failed to update password"
+    },
+    "profile": {
+      "title": "Profile Information",
+      "username": "Username",
+      "email": "Email",
+      "phone": "Phone Number",
+      "save": "Save Profile"
+    },
+    "password": {
+      "title": "Change Password",
+      "old": "Old Password",
+      "new": "New Password",
+      "confirm": "Confirm New Password",
+      "update": "Update Password"
+    }
+  },
+
+  "import": {
+    "title": "Import Excel File",
+    "noFile": "Please select a file.",
+    "uploading": "Uploading…",
+    "upload": "Upload File",
+    "success": "Success: {{message}}",
+    "failed": "Upload failed."
+  },
+
+  "reports": {
+    "title": "Reports",
+    "format": {
+      "pdf": "PDF",
+      "excel": "Excel"
+    },
+    "type": {
+      "sales": "Sales",
+      "stock": "Stock",
+      "combined": "Sales + Stock"
+    },
+    "period": {
+      "daily": "Today",
+      "weekly": "Last 7 days",
+      "monthly": "This month"
+    },
+    "buttons": {
+      "generate": "Generate now",
+      "generating": "Generating...",
+      "schedule": "Schedule daily report",
+      "scheduling": "Scheduling...",
+      "download": "Download last generated",
+      "downloading": "Downloading..."
+    },
+    "schedule": {
+      "title": "Schedule automatic report"
+    },
+    "download": {
+      "title": "Last scheduled report"
+    },
+    "messages": {
+      "generateError": "Error generating report",
+      "scheduleError": "Error scheduling report",
+      "downloadError": "Failed to download the report. Please try again later.",
+      "invalidTime": "Invalid time",
+      "noScheduled": "No scheduled report available yet.",
+      "scheduled": "Scheduled at {{time}} (job {{job}})"
+    }
+  },
+
+  "errors": {
+    "invalidCredentials": "Invalid phone number or password",
+    "fileRequired": "Please select a file.",
+    "uploadFailed": "Upload failed.",
+    "passwordsMismatch": "Passwords do not match.",
+    "registrationFailed": "Registration failed",
+    "profileLoadFailed": "Unable to load user profile.",
+    "profileUpdateFailed": "Failed to update profile.",
+    "passwordChangeFailed": "Failed to change password."
+  },
+
+  "notifications": {
+    "success": "Success",
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
+  }
+}

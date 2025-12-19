@@ -1,17 +1,13 @@
 package com.SalesFlowLite.inventory.service;
 
-import com.SalesFlowLite.inventory.model.dto.inventory.InventoryAdjustRequest; // NEW
 import com.SalesFlowLite.inventory.model.dto.inventory.InventoryRequest;
 import com.SalesFlowLite.inventory.model.dto.inventory.InventoryResponse;
-import com.SalesFlowLite.inventory.model.dto.inventory.InventoryUpdateRequest;
 import com.SalesFlowLite.inventory.model.entity.InventoryItem;
-import com.SalesFlowLite.inventory.model.entity.Product;
 import com.SalesFlowLite.inventory.repository.InventoryRepository;
-import com.SalesFlowLite.inventory.repository.ProductRepository;
+
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,13 +17,12 @@ import java.util.stream.Collectors;
 public class InventoryService {
 
     private final InventoryRepository inventoryRepository;
-    private final ProductRepository productRepository;
 
-    // CREATE - unchanged
-    @Transactional
+    // ============================
+    // CREATE
+    // ============================
     public InventoryResponse createItem(InventoryRequest request) {
         InventoryItem item = InventoryItem.builder()
-                .sku(request.getSku())
                 .name(request.getName())
                 .description(request.getDescription())
                 .quantity(request.getQuantity())
@@ -37,169 +32,50 @@ public class InventoryService {
                 .build();
 
         InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
         return mapToResponse(saved);
     }
 
-    // Sync helper - unchanged
-    private void syncInventoryToProduct(InventoryItem item) {
-        Product product = productRepository.findBySku(item.getSku())
-                .orElseGet(() -> {
-                    Product newProduct = Product.builder()
-                            .sku(item.getSku())
-                            .name(item.getName())
-                            .description(item.getDescription())
-                            .price(item.getPrice().doubleValue())
-                            .stockQuantity(0)
-                            .lowStockThreshold(10)
-                            .build();
-                    return productRepository.save(newProduct);
-                });
-
-        product.setStockQuantity(product.getStockQuantity() + item.getQuantity());
-        productRepository.save(product);
-    }
-
-    // GET methods - unchanged
+    // ============================
+    // READ - GET BY ID
+    // ============================
     public InventoryResponse getItem(Long id) {
         InventoryItem item = inventoryRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with ID: " + id));
         return mapToResponse(item);
     }
 
-    public InventoryResponse getItemBySku(String sku) {
-        InventoryItem item = inventoryRepository.findBySku(sku)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with SKU: " + sku));
-        return mapToResponse(item);
-    }
-
-    public InventoryResponse getItemByName(String name) {
-        InventoryItem item = inventoryRepository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with name: " + name));
-        return mapToResponse(item);
-    }
-
+    // ============================
+    // READ - LIST ALL
+    // ============================
     public List<InventoryResponse> getAllItems() {
-        return inventoryRepository.findAll().stream()
+        return inventoryRepository.findAll()
+                .stream()
                 .map(this::mapToResponse)
                 .collect(Collectors.toList());
     }
 
-    // === EXISTING UPDATES KEPT FOR BACKWARD COMPATIBILITY ===
-    @Transactional
+    // ============================
+    // UPDATE
+    // ============================
     public InventoryResponse updateItem(Long id, InventoryRequest request) {
+
         InventoryItem item = inventoryRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with ID: " + id));
-        updateFields(item, request);
+
+        item.setName(request.getName());
+        item.setDescription(request.getDescription());
+        item.setQuantity(request.getQuantity());
+        item.setPrice(request.getPrice());
+        item.setCost(request.getCost());
+        item.setCategory(request.getCategory());
+
         InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
         return mapToResponse(saved);
     }
 
-    @Transactional
-    public InventoryResponse updateItemBySku(String sku, InventoryRequest request) {
-        InventoryItem item = inventoryRepository.findBySku(sku)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with SKU: " + sku));
-        updateFields(item, request);
-        InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
-        return mapToResponse(saved);
-    }
-
-    @Transactional
-    public InventoryResponse updateItemByName(String name, InventoryRequest request) {
-        InventoryItem item = inventoryRepository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with name: " + name));
-        updateFields(item, request);
-        InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
-        return mapToResponse(saved);
-    }
-
-    // Existing partial (all fields optional) - unchanged
-    @Transactional
-    public InventoryResponse updateItemPartial(Long id, InventoryUpdateRequest request) {
-        InventoryItem item = inventoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with ID: " + id));
-        applyPartialUpdates(item, request);
-        InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
-        return mapToResponse(saved);
-    }
-
-    @Transactional
-    public InventoryResponse updateItemBySkuPartial(String sku, InventoryUpdateRequest request) {
-        InventoryItem item = inventoryRepository.findBySku(sku)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with SKU: " + sku));
-        applyPartialUpdates(item, request);
-        InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
-        return mapToResponse(saved);
-    }
-
-    @Transactional
-    public InventoryResponse updateItemByNamePartial(String name, InventoryUpdateRequest request) {
-        InventoryItem item = inventoryRepository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with name: " + name));
-        applyPartialUpdates(item, request);
-        InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
-        return mapToResponse(saved);
-    }
-
-    // === NEW MINIMAL ADJUST METHODS (quantity + cost only) ===
-    @Transactional
-    public InventoryResponse adjustItemPartial(Long id, InventoryAdjustRequest request) {
-        InventoryItem item = inventoryRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with ID: " + id));
-        applyAdjustUpdates(item, request);
-        InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
-        return mapToResponse(saved);
-    }
-
-    @Transactional
-    public InventoryResponse adjustItemBySkuPartial(String sku, InventoryAdjustRequest request) {
-        InventoryItem item = inventoryRepository.findBySku(sku)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with SKU: " + sku));
-        applyAdjustUpdates(item, request);
-        InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
-        return mapToResponse(saved);
-    }
-
-    @Transactional
-    public InventoryResponse adjustItemByNamePartial(String name, InventoryAdjustRequest request) {
-        InventoryItem item = inventoryRepository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with name: " + name));
-        applyAdjustUpdates(item, request);
-        InventoryItem saved = inventoryRepository.save(item);
-        syncInventoryToProduct(saved);
-        return mapToResponse(saved);
-    }
-
-    // New helper for minimal adjust
-    private void applyAdjustUpdates(InventoryItem item, InventoryAdjustRequest request) {
-        if (request.getQuantity() != null) {
-            item.setQuantity(request.getQuantity());
-        }
-        if (request.getCost() != null) {
-            item.setCost(request.getCost());
-        }
-    }
-
-    // Existing partial helper - unchanged
-    private void applyPartialUpdates(InventoryItem item, InventoryUpdateRequest request) {
-        if (request.getSku() != null) item.setSku(request.getSku());
-        if (request.getName() != null) item.setName(request.getName());
-        if (request.getDescription() != null) item.setDescription(request.getDescription());
-        if (request.getQuantity() != null) item.setQuantity(request.getQuantity());
-        if (request.getPrice() != null) item.setPrice(request.getPrice());
-        if (request.getCost() != null) item.setCost(request.getCost());
-        if (request.getCategory() != null) item.setCategory(request.getCategory());
-    }
-
-    // DELETE methods - unchanged
+    // ============================
+    // DELETE
+    // ============================
     public void deleteItem(Long id) {
         if (!inventoryRepository.existsById(id)) {
             throw new EntityNotFoundException("Item not found with ID: " + id);
@@ -207,23 +83,12 @@ public class InventoryService {
         inventoryRepository.deleteById(id);
     }
 
-    public void deleteItemBySku(String sku) {
-        InventoryItem item = inventoryRepository.findBySku(sku)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with SKU: " + sku));
-        inventoryRepository.delete(item);
-    }
-
-    public void deleteItemByName(String name) {
-        InventoryItem item = inventoryRepository.findByName(name)
-                .orElseThrow(() -> new EntityNotFoundException("Item not found with name: " + name));
-        inventoryRepository.delete(item);
-    }
-
-    // MAPPER & full update helper - unchanged
+    // ============================
+    // MAP ENTITY → DTO
+    // ============================
     private InventoryResponse mapToResponse(InventoryItem item) {
         return InventoryResponse.builder()
                 .id(item.getId())
-                .sku(item.getSku())
                 .name(item.getName())
                 .description(item.getDescription())
                 .quantity(item.getQuantity())
@@ -233,15 +98,5 @@ public class InventoryService {
                 .createdAt(item.getCreatedAt())
                 .updatedAt(item.getUpdatedAt())
                 .build();
-    }
-
-    private void updateFields(InventoryItem item, InventoryRequest request) {
-        item.setSku(request.getSku());
-        item.setName(request.getName());
-        item.setDescription(request.getDescription());
-        item.setQuantity(request.getQuantity());
-        item.setPrice(request.getPrice());
-        item.setCost(request.getCost());
-        item.setCategory(request.getCategory());
     }
 }

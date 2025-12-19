@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ==========================================================
- SALESFLOW-LITE — BACKEND JAVA (POM STABLE 2025 – JAVA 17 LOCKED)
-==============================================================
- • Spring Boot 3.3.5
- • Java 17 (HARD LOCKED – prevents javac 25 issues)
- • Spring Security 6.3.x
- • Hibernate ORM 6.5.3
- • SpringDoc OpenAPI 2.6.0
- • Flyway 10.20.1 (PostgreSQL 14.20+ / 15)
- • JWT jjwt 0.11.5
-============================================================== -->
+<!--
+    ==========================================================
+      SALESFLOW-LITE — BACKEND JAVA (POM stable 2025)
+    ==========================================================
+    ✔ Spring Boot 3.3.5  (compatible Swagger)
+    ✔ SpringDoc OpenAPI 2.6.0
+    ✔ Spring Security 6.x
+    ✔ Hibernate ORM 6.4.x
+    ✔ JWT jjwt 0.11.5
+    ✔ Flyway, JPA, Validation, H2, Actuator
+    ==========================================================
+-->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <!-- 🧱 Spring Boot parent (manages dependency versions) -->
     <modelVersion>4.0.0</modelVersion>
-
-    <!-- Spring Boot Parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -25,95 +25,68 @@
         <relativePath/>
     </parent>
 
+    <!-- 📦 Project info -->
     <groupId>com.SalesFlowLite</groupId>
     <artifactId>inventory</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>SalesFlow-Lite Backend</name>
-    <description>
-        Inventory and Sales backend API for SalesFlow-Lite – PostgreSQL 15 production ready
-    </description>
+    <description>Inventory and Sales backend API for SalesFlow-Lite</description>
 
-    <!-- ========================= -->
-    <!-- GLOBAL PROPERTIES (LOCKS) -->
-    <!-- ========================= -->
+    <!-- 🔧 Java version -->
     <properties>
-        <!-- 🔒 HARD JAVA LOCK -->
         <java.version>17</java.version>
-
-        <!-- Dependency Versions -->
-        <postgresql.version>42.7.4</postgresql.version>
-        <flyway.version>10.20.1</flyway.version>
-        <jjwt.version>0.11.5</jjwt.version>
-        <springdoc.version>2.6.0</springdoc.version>
-
-        <!-- Compiler Safety -->
-        <maven.compiler.release>17</maven.compiler.release>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <!-- ================= -->
-    <!-- DEPENDENCIES -->
-    <!-- ================= -->
+    <!-- =======================================================
+         📚 DEPENDENCIES
+         ======================================================= -->
     <dependencies>
 
-        <!-- Web / REST -->
+        <!-- 🌐 Web (REST Controllers) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- JPA / Hibernate -->
+        <!-- 🛢 JPA + Hibernate ORM -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- Security -->
+        <!-- 🔐 Spring Security -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
-        <!-- Bean Validation -->
+        <!-- 🧹 Bean Validation (DTO @Valid) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- Flyway Core -->
+        <!-- 🚀 Flyway migrations -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
         </dependency>
 
-        <!-- Flyway PostgreSQL Support -->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-database-postgresql</artifactId>
-        </dependency>
-
-        <!-- Swagger / OpenAPI -->
+        <!-- 📘 Swagger OpenAPI (compatible Spring Boot 3.3.x) -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>${springdoc.version}</version>
+            <version>2.6.0</version>
         </dependency>
 
-        <!-- Apache Commons -->
+        <!-- 🧰 Apache Commons utilities -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.14.0</version>
         </dependency>
 
-        <!-- Actuator -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
-
-        <!-- DevTools (DEV ONLY) -->
+        <!-- ⚡ Hot reload (development) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -121,60 +94,60 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- PostgreSQL (PROD) -->
+        <!-- 📊 Actuator (Health checks) -->
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
-            <scope>runtime</scope>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- H2 (TEST ONLY) -->
+        <!-- 🧪 H2 in-memory DB -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>test</scope>
+            <scope>runtime</scope>
         </dependency>
 
-        <!-- Lombok -->
+        <!-- 🧬 Lombok (auto getters/setters) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- JWT -->
+        <!-- 🔑 JWT Token (JJWT library) -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
-            <version>${jjwt.version}</version>
+            <version>0.11.5</version>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-impl</artifactId>
-            <version>${jjwt.version}</version>
+            <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-jackson</artifactId>
-            <version>${jjwt.version}</version>
+            <version>0.11.5</version>
             <scope>runtime</scope>
         </dependency>
 
-        <!-- JAXB (JDK 17 compatibility) -->
+        <!-- 🛠 Needed for Swagger + JJWT -->
         <dependency>
             <groupId>jakarta.xml.bind</groupId>
             <artifactId>jakarta.xml.bind-api</artifactId>
             <version>4.0.2</version>
         </dependency>
 
-        <!-- Tests -->
+        <!-- 🧪 Spring Test -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- 🧪 Security Test -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
@@ -183,19 +156,16 @@
 
     </dependencies>
 
-    <!-- ================= -->
-    <!-- BUILD / COMPILER -->
-    <!-- ================= -->
+    <!-- =======================================================
+         🔧 BUILD PLUGINS
+         ======================================================= -->
     <build>
         <plugins>
-
-            <!-- 🔒 MAVEN COMPILER (JAVA 17 HARD LOCK) -->
+            <!-- Compiles Java & enables Lombok annotations -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
                 <configuration>
-                    <release>17</release>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -205,20 +175,11 @@
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot Executable JAR -->
+            <!-- Boot JAR plugin -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
             </plugin>
-
         </plugins>
     </build>
 

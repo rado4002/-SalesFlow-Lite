@@ -1,3 +1,4 @@
+// backend-java/src/main/java/com/SalesFlowLite/inventory/service/ProductService.java
 package com.SalesFlowLite.inventory.service;
 
 import com.SalesFlowLite.inventory.model.dto.ProductDto;
@@ -13,34 +14,13 @@ public interface ProductService {
 
     ProductDto getProductById(Long id);
 
-    ProductDto getProductByName(String name);
-
-    ProductDto getProductBySku(String sku);
-
-    Product findByIdWithPessimisticLock(Long id);
-
-    Product findProductEntityBySku(String sku);
-
-    Product findProductEntityByName(String name);
+    Product findByIdWithPessimisticLock(Long id); // ← for safe stock deduction
 
     ProductDto updateProduct(Long id, ProductDto dto);
 
-    ProductDto updateProductByName(String name, ProductDto dto);
-
-    ProductDto updateProductBySku(String sku, ProductDto dto);
-
     void deleteProduct(Long id);
-
-    void deleteProductByName(String name);
-
-    void deleteProductBySku(String sku);
 
     List<ProductDto> getLowStockProducts();
 
-    void reduceStock(Product product, int quantity);
-
-    List<ProductDto> getUpdatedProductsSince(Long timestamp);
-
-    // === NEW: SKU with pessimistic lock (fixes compilation in SaleServiceImpl) ===
-    Product findBySkuWithPessimisticLock(String sku);
+    void reduceStock(Product product, int quantity); // ← safe stock reduction
 }

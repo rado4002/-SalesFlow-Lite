@@ -4,8 +4,12 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import java.math.BigDecimal;
 
-@Data @NoArgsConstructor @AllArgsConstructor @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class ProductDto {
+
     private Long id;
 
     @NotBlank(message = "Product name is required")
@@ -25,11 +29,11 @@ public class ProductDto {
     @Builder.Default
     private Integer stockQuantity = 0;
 
-    private String description;
+    private String description;      // optional
 
-    private String imageUrl;
+    private String imageUrl;         // optional
 
     @Min(value = 1, message = "Low stock threshold must be at least 1")
     @Builder.Default
-    private Integer lowStockThreshold = 10;
+    private Integer lowStockThreshold = 10;  // sensible default
 }

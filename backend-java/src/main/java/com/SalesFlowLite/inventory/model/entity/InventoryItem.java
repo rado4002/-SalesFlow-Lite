@@ -2,30 +2,33 @@ package com.SalesFlowLite.inventory.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import java.math.BigDecimal;
 import java.time.Instant;
 
 @Entity
 @Table(name = "inventory_items")
-@Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class InventoryItem {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 255, unique = true)
-    private String sku;
-
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String name;
 
     @Column(length = 1000)
     private String description;
 
     @Column(nullable = false)
-    @Builder.Default
-    private Integer quantity = 0;
+    private Integer quantity;
 
     @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal price;
@@ -33,19 +36,13 @@ public class InventoryItem {
     @Column(nullable = false, precision = 15, scale = 2)
     private BigDecimal cost;
 
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false)
     private String category;
 
-    @Column(nullable = false)
-    @Builder.Default
-    private Instant createdAt = Instant.now();
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Instant createdAt;
 
-    @Column(nullable = false)
-    @Builder.Default
-    private Instant updatedAt = Instant.now();
-
-    @PreUpdate
-    public void preUpdate() {
-        this.updatedAt = Instant.now();
-    }
+    @UpdateTimestamp
+    private Instant updatedAt;
 }

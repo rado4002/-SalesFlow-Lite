@@ -1,7 +1,11 @@
+// backend-java/src/main/java/com/SalesFlowLite/inventory/service/impl/SaleServiceImpl.java
 package com.SalesFlowLite.inventory.service.impl;
 
 import com.SalesFlowLite.inventory.exception.InsufficientStockException;
-import com.SalesFlowLite.inventory.model.dto.*;
+import com.SalesFlowLite.inventory.model.dto.CreateSaleRequest;
+import com.SalesFlowLite.inventory.model.dto.SaleItemResponse;
+import com.SalesFlowLite.inventory.model.dto.SaleResponse;
+import com.SalesFlowLite.inventory.model.dto.SalesHistoryDto;
 import com.SalesFlowLite.inventory.model.entity.Product;
 import com.SalesFlowLite.inventory.model.entity.Sale;
 import com.SalesFlowLite.inventory.model.entity.SaleItem;
@@ -29,44 +33,28 @@ public class SaleServiceImpl implements SaleService {
     @Override
     @Transactional
     public SaleResponse createSale(CreateSaleRequest request) {
-        return processSaleItems(request.items());
-    }
-
-    @Override
-    @Transactional
-    public SaleResponse createSingleSale(CreateSingleSaleRequest request) {
-        return processSaleItems(request.items());
-    }
-
-    private SaleResponse processSaleItems(List<SaleItemRequest> itemRequests) {
         Sale sale = Sale.builder()
                 .saleDate(LocalDateTime.now())
                 .build();
 
         BigDecimal total = BigDecimal.ZERO;
 
-        for (SaleItemRequest itemReq : itemRequests) {
-            Product product = itemReq.productId() != null
-                    ? productService.findByIdWithPessimisticLock(itemReq.productId())
-                    : productService.findBySkuWithPessimisticLock(itemReq.sku()); // Now compiles!
-
+        for (var itemReq : request.items()) {
+            Product product = productService.findByIdWithPessimisticLock(itemReq.productId());
             int available = product.getStockQuantity() != null ? product.getStockQuantity() : 0;
             if (available < itemReq.quantity()) {
-                throw new InsufficientStockException(
-                        "Not enough stock for product " + product.getSku());
+                throw new InsufficientStockException("Not enough stock for product " + product.getSku());
             }
 
-            BigDecimal unitPrice = BigDecimal.valueOf(product.getPrice());
-            BigDecimal quantity = BigDecimal.valueOf(itemReq.quantity());
-            BigDecimal subtotal = unitPrice.multiply(quantity);
+            BigDecimal unitPrice = product.getPrice();
+            BigDecimal qty = BigDecimal.valueOf(itemReq.quantity());
+            BigDecimal subtotal = unitPrice.multiply(qty);
 
             productService.reduceStock(product, itemReq.quantity());
 
             SaleItem item = SaleItem.builder()
                     .sale(sale)
                     .product(product)
-                    .productSku(product.getSku())
-                    .productName(product.getName())
                     .quantity(itemReq.quantity())
                     .unitPrice(unitPrice)
                     .subtotal(subtotal)
@@ -83,8 +71,7 @@ public class SaleServiceImpl implements SaleService {
 
     @Override
     public List<SaleResponse> getAllSales() {
-        return saleRepository.findAll()
-                .stream()
+        return saleRepository.findAll().stream()
                 .map(this::toResponse)
                 .toList();
     }
@@ -92,26 +79,24 @@ public class SaleServiceImpl implements SaleService {
     @Override
     public List<SaleResponse> getSalesToday() {
         LocalDate today = LocalDate.now();
-        return saleRepository
-                .findSalesToday(today.atStartOfDay(), today.plusDays(1).atStartOfDay())
-                .stream()
+        LocalDateTime startOfDay = today.atStartOfDay();
+        LocalDateTime startOfNextDay = today.plusDays(1).atStartOfDay();
+        return saleRepository.findSalesToday(startOfDay, startOfNextDay).stream()
                 .map(this::toResponse)
                 .toList();
     }
 
     @Override
     public List<SaleResponse> getSalesLastDays(int days) {
-        return saleRepository
-                .findSalesAfterDate(LocalDate.now().minusDays(days).atStartOfDay())
-                .stream()
+        LocalDateTime startDate = LocalDate.now().minusDays(days).atStartOfDay();
+        return saleRepository.findSalesAfterDate(startDate).stream()
                 .map(this::toResponse)
                 .toList();
     }
 
     @Override
     public List<SaleResponse> getRecentSales(int limit) {
-        return saleRepository.findRecentSales()
-                .stream()
+        return saleRepository.findRecentSales().stream()
                 .limit(limit)
                 .map(this::toResponse)
                 .toList();
@@ -120,34 +105,26 @@ public class SaleServiceImpl implements SaleService {
     @Override
     @Transactional
     public void bulkCreateSales(List<CreateSaleRequest> requests) {
-        requests.forEach(this::createSale);
+        for (CreateSaleRequest request : requests) {
+            createSale(request); // Reuse safe logic
+        }
     }
 
     @Override
-    public List<SalesHistoryDto> getProductSalesHistoryBySku(String sku, int days) {
-        Product product = productService.findProductEntityBySku(sku);
-        return getSalesHistoryForProduct(product.getId(), days);
-    }
+    public List<SalesHistoryDto> getProductSalesHistory(Long productId, int days) {
+        LocalDateTime startDate = LocalDate.now().minusDays(days).atStartOfDay();
 
-    @Override
-    public List<SalesHistoryDto> getProductSalesHistoryByName(String name, int days) {
-        Product product = productService.findProductEntityByName(name);
-        return getSalesHistoryForProduct(product.getId(), days);
-    }
-
-    private List<SalesHistoryDto> getSalesHistoryForProduct(Long productId, int days) {
-        return saleRepository
-                .findSaleItemsByProductAndDate(
-                        productId,
-                        LocalDate.now().minusDays(days).atStartOfDay())
-                .stream()
+        return saleRepository.findSaleItemsByProductAndDate(productId, startDate).stream()
                 .collect(Collectors.groupingBy(
                         item -> item.getSale().getSaleDate().toLocalDate(),
-                        Collectors.summingInt(SaleItem::getQuantity)))
-                .entrySet()
-                .stream()
-                .map(e -> new SalesHistoryDto(e.getKey().toString(), e.getValue()))
-                .sorted(Comparator.comparing(SalesHistoryDto::getDate))
+                        Collectors.summingInt(SaleItem::getQuantity)
+                ))
+                .entrySet().stream()
+                .map(entry -> new SalesHistoryDto(
+                        entry.getKey().toString(),  // "yyyy-MM-dd"
+                        entry.getValue()
+                ))
+                .sorted(Comparator.comparing(SalesHistoryDto::getDate))  // Fixed: ::getDate (matches getter)
                 .toList();
     }
 
@@ -155,8 +132,8 @@ public class SaleServiceImpl implements SaleService {
         List<SaleItemResponse> items = sale.getItems().stream()
                 .map(item -> new SaleItemResponse(
                         item.getProduct().getId(),
-                        item.getProductName(),
-                        item.getProductSku(),
+                        item.getProduct().getName(),
+                        item.getProduct().getSku(),
                         item.getQuantity(),
                         item.getUnitPrice().doubleValue(),
                         item.getSubtotal().doubleValue()

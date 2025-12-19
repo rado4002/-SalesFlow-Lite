@@ -2,7 +2,6 @@ package com.SalesFlowLite.inventory.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -32,14 +31,4 @@ public class Sale {
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<SaleItem> items = new ArrayList<>();
-
-    // NEW: For offline sync
-    @Column(name = "last_updated")
-    private Long lastUpdated;
-
-    @PrePersist
-    @PreUpdate
-    public void updateTimestamp() {
-        this.lastUpdated = System.currentTimeMillis();
-    }
 }

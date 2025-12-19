@@ -1,0 +1,505 @@
+{
+  "app": {
+    "name": "SalesFlow Lite",
+    "subtitle": "Bomoi ya Business & Stock"
+  },
+
+  "sidebar": {
+    "dashboard": "Ndako",
+    "products": "Biloko",
+    "sales": "Kotɛkɛ",
+    "inventory": "Stock",
+    "analytics": "Analyses",
+    "forecast": "Koloba Mosika na IA",
+    "settings": "Bokɔnɔ"
+  },
+
+  "navbar": {
+    "welcome": "Boyei",
+    "accountSettings": "Bokɔnɔ ya Konti",
+    "logout": "Kobima",
+    "language": "Lokota"
+  },
+
+  "languages": {
+    "en": "Lingɛlɛ́sa",
+    "fr": "Falansé",
+    "ln": "Lingala",
+    "sw": "Swahili"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Kokɔtɔ",
+      "subtitle": "Kotya makambo o kati mpo na kokɔtɔ",
+      "username": "Nkombo to Nimero ya Téléphone",
+      "password": "Mot de passe",
+      "forgot": "Mot de passe o zangisaki?",
+      "submit": "KOKƆTƆ",
+      "signingIn": "Kokɔtɔ...",
+      "noAccount": "Konti te?",
+      "register": "KOSANGISA"
+    },
+    "register": {
+      "title": "Kosangisa",
+      "subtitle": "Kosala konti na yo ya SalesFlow",
+      "username": "Nkombo ya Mosaleli",
+      "phone": "Nimero ya Téléphone",
+      "email": "Adresse Email",
+      "password": "Mot de passe",
+      "confirmPassword": "Kondima mot de passe",
+      "submit": "KOSANGISA",
+      "creating": "Kosalela konti...",
+      "haveAccount": "Konti ezali?",
+      "signIn": "Kokɔtɔ",
+      "errors": {
+        "passwordMismatch": "Bamot de passe ezangani.",
+        "failed": "Kosangisa ekosilisaki te"
+      }
+    },
+    "errors": {
+      "invalidCredentials": "Nimero ya téléphone to mot de passe mabe"
+    }
+  },
+
+  "home": {
+  "badge": "MAYELE YA BUSINESS",
+  "greeting": "Boyei malamu,",
+  "smartDashboard": "Tableau de Bord ya Mayele",
+  "question": "Nyonso oyo osengeli mpo na kobakisa business na yo. Makambo ya sika, koloba mosika ya IA mpe bambongiseli na maboko na yo.",
+  "launchDashboard": "Kotinda Tableau de Bord",
+  "tryAI": "Komeka Bafonction ya IA",
+  "performance": "Bamakambo ya Likolo",
+  "businessGoals": "Bamikano ya Mayele ya Business",
+  "goalsDesc": "Kopona ndambo na yo mpo na kozwa makambo ya moto moko mpe ba conseils",
+  "increaseSales": "Kobakisa Kotɛkɛ",
+  "increaseSalesDesc": "Koluka mpe kolanda makambo ya kotɛkɛ",
+  "reduceStock": "Kobongisa Stock",
+  "reduceStockDesc": "Kolanda stock mpe kobundisa stock ekoki",
+  "prepareReport": "Rapɔ ya Avancé",
+  "prepareReportDesc": "Kosalela rapɔ ya PDF & Excel mpo na bakonzi",
+  "forecast": "Koloba Mosika ya IA",
+  "forecastDesc": "Koloba kotɛkɛ mpe kobongisa stock",
+  "quickStart": "Kobanda na Nguya",
+  "quickDesc": "Bandá sika na bafonction oyo makasi",
+  "importExcel": "Kozwa Makambo",
+  "importExcelDesc": "Kozwa makambo na yo ya kotɛkɛ na Excel to CSV",
+  "addProduct": "Kobongisa Katalɔgɛ",
+  "addProductDesc": "Kobakisa, kobongola mpe kobongisa katalɔgɛ ya biloko na yo",
+  "viewAnalytics": "Analyses ya Sika",
+  "viewAnalyticsDesc": "Makambo mpe komona makambo na temps réel",
+  "aiBadge": "EZA NA MAYELE YA ARTIFICIEL",
+  "aiTitle": "Makoki ya IA",
+  "exploreAI": "Koluka Bafonction ya IA",
+  "stats": {
+    "forecastAccuracy": "Koloba Mosika malamu",
+    "activeMonitoring": "Kolanda na nguya",
+    "salesGrowth": "Kobakisa Kotɛkɛ",
+    "stockAvailability": "Stock ezali"
+  },
+  "goalFeatures": {
+    "realTimeAnalytics": "Analyses na temps réel",
+    "trendDetection": "Koluka makambo",
+    "performanceMetrics": "Makambo ya kosala",
+    "stockAlerts": "Batemeli ya stock",
+    "replenishment": "Kozongisa",
+    "deadStockAnalysis": "Koluka stock akufi",
+    "customTemplates": "Bamodele ya moto moko",
+    "autoScheduling": "Kopesa otomatiki",
+    "multiFormat": "Multi-format",
+    "mlPredictions": "Koloba mosika ya ML",
+    "anomalyDetection": "Koluka biloko mabe",
+    "smartAlerts": "Batemeli ya mayele"
+  },
+  "quickTimes": {
+    "5min": "min 5",
+    "2min": "min 2",
+    "instant": "Sika"
+  },
+  "aiFeatures": {
+    "salesTracking": "Kolanda Kotɛkɛ",
+    "salesTrackingDesc": "Kolanda mpe koluka makambo ya kotɛkɛ na temps réel",
+    "stockMonitoring": "Kolanda Stock",
+    "stockMonitoringDesc": "Kolanda stock na otomatiki na batenemi ya koloba mosika",
+    "dataPersistence": "Kobatela Makambo",
+    "dataPersistenceDesc": "Kobatela makambo na kati malamu na kopakola otomatiki"
+  },
+  "proFeatures": {
+    "title": "Bafonction Pro Eza",
+    "realTimeML": "Bamodele ML na temps réel",
+    "customAlgorithms": "Bakombina ya moto moko",
+    "prioritySupport": "Lisalisi ya liboso",
+    "advancedAnalytics": "Analyses ya avancé"
+  }
+},
+
+  "common": {
+    "total": "Motango",
+    "save": "Kobatela",
+    "saving": "Kobatela...",
+    "cancel": "Kozongisa",
+    "update": "Kobongisa",
+    "remove": "Kolongola",
+    "delete": "Kolimwisa",
+    "edit": "Kobongola",
+    "units": "bakitini",
+    "unitsPerDay": "bakitini/mokolo",
+    "days": "mikolo",
+    "days30": "mokolo 30",
+    "on": "na",
+    "notAvailable": "Tɛ́",
+    "successPrefix": "Lokumu:",
+    "devMode": "MODE YA DEVELOPPEUR EZA",
+    "page": "Lokasa",
+    "of": "ya",
+    "previous": "← Liboso",
+    "next": "Sima →",
+    "loading": "Kozwa...",
+    "search": "Koluka",
+    "learnMore": "Koyekola lisusu"
+  },
+
+  "period": {
+    "today": "Lɛlɔ",
+    "last7Days": "Mikolo 7 ya liboso",
+    "thisMonth": "Sanza oyo",
+    "last90Days": "Mikolo 90 ya liboso"
+  },
+
+  "tables": {
+    "name": "Nkombo",
+    "sku": "SKU",
+    "price": "Ntalo",
+    "cost": "Moto",
+    "stock": "Stock",
+    "category": "Catégorie",
+    "actions": "Bakosala",
+    "product": "Eloko",
+    "productName": "Nkombo ya eloko",
+    "quantity": "Moto",
+    "unitPrice": "Ntalo moko",
+    "subtotal": "Moto ya ndambo",
+    "date": "Mokolo",
+    "items": "Biloko",
+    "lastUpdated": "Bongoli ya nsuka"
+  },
+
+  "analytics": {
+    "loading": "Kozwa analyses...",
+    "kpi": {
+      "totalRevenue": "Moyamba motango",
+      "transactions": "Makoki",
+      "unitsSold": "Bakitini eteki",
+      "averageTicket": "Ticket ya moyeni"
+    },
+    "stock": {
+      "stockValue": "Moto ya stock",
+      "outOfStock": "Stock ekoki",
+      "lowStock": "Stock moke",
+      "urgentReorder": "Kozongisa na nguya",
+      "deadStock": "Stock akufi",
+      "lowStockRatio": "% Stock moke"
+    },
+    "salesTrends": "Makambo ya kotɛkɛ",
+    "noSalesData": "Makambo ya kotɛkɛ tɛ́ na eleko oyo",
+    "topProducts": "Biloko ya likolo",
+    "noProductSales": "Kotɛkɛ ya biloko tɛ́",
+    "stockAlerts": "Batemeli ya stock",
+    "stockHealthy": "Stock ezali malamu",
+    "stockPraise": "Biloko nyonso ezali na stock malamu!",
+    "labels": {
+      "currentStock": "Stock ya lɛlɔ",
+      "minStock": "Stock moke",
+      "price": "Ntalo",
+      "value": "Moto",
+      "lastSale": "Kotɛkɛ ya liboso",
+      "coverage": "Kozipa"
+    },
+    "export": {
+      "title": "Kobimisa rapɔ",
+      "description": "Kozwa rapɔ ya analyses na bamode ebele"
+    }
+  },
+
+  "inventory": {
+    "errors": {
+      "load": "Kozwa makambo ya stock ekosilisaki te",
+      "loadToast": "Kozwa stock ekoki te"
+    },
+    "loading": "Kozwa stock...",
+    "title": "Kobongisa Stock",
+    "subtitle": "Kolanda, kobongisa mpe kobongisa stock na yo",
+    "actions": {
+      "addStock": "Kobakisa stock",
+      "edit": "Kobongola",
+      "remove": "Kolongola"
+    },
+    "searchPlaceholder": "Koluka na nkombo, SKU to catégorie...",
+    "table": {
+      "product": "Eloko",
+      "sku": "SKU",
+      "stock": "Stock",
+      "price": "Ntalo",
+      "cost": "Moto",
+      "category": "Catégorie",
+      "updated": "Bongoli ya nsuka",
+      "actions": "Bakosala"
+    },
+    "stock": {
+      "out": "Stock ekoki",
+      "low": "Stock moke"
+    },
+    "empty": "Eloko ya stock tɛ́",
+    "summary": {
+      "total": "Biloko motango",
+      "low": "Biloko na stock moke",
+      "out": "Stock ekoki"
+    },
+    "modals": {
+      "add": {
+        "title": "Kobakisa stock",
+        "select": "Kopona eloko",
+        "choose": "Kopona eloko...",
+        "quantity": "Moto",
+        "quantityPlaceholder": "Kotya moto",
+        "cost": "Moto ya moko ($)",
+        "costPlaceholder": "Kotya moto ya moko"
+      },
+      "edit": {
+        "title": "Kobongola stock",
+        "current": "Stock ya lɛlɔ:",
+        "newQuantity": "Moto ya sika"
+      },
+      "delete": {
+        "title": "Kolongola na stock"
+      }
+    }
+  },
+
+  "forecast": {
+  "header": {
+    "title": "SalesFlow IA"
+  },
+  "badge": {
+    "aiAnalytics": "ANALYTICS YA KOLOBA MOSIKA IA"
+  },
+  "capabilities": {
+    "predictive": "Koloba Mosika",
+    "predictiveDesc": "Bakombina ML mpo na koloba mosika malamu ya kotɛkɛ",
+    "anomaly": "Koluka Biloko Mabe",
+    "anomalyDesc": "Koluka biloko mabe na temps réel",
+    "trend": "Koluka Makambo",
+    "trendDesc": "Koluka makambo ya eleko mpe bamakambo"
+  },
+  "mode": {
+    "globalDesc": "Biloko nyonso ezwami",
+    "productDesc": "Koluka eloko moko"
+  },
+  "search": {
+    "selected": "Koponami mpo na koluka",
+    "clear": "Kozongisa"
+  },
+  "settings": {
+    "daysUnit": "mikolo",
+    "confidenceLevel": "Niveau ya kondima",
+    "confidenceLow": "Moke (80%)",
+    "confidenceMedium": "Kati (90%)",
+    "confidenceHigh": "Mingi (95%)"
+  },
+  "errors": {
+    "title": "Lisusu ya Koloba Mosika"
+  },
+  "summary": {
+    "trendDirection": "Makambo ya kolanda"
+  },
+  "chart": {
+    "confidenceInterval": "% intervalle ya kondima",
+    "forecast": "Koloba Mosika",
+    "confidence": "Intervalle ya Kondima",
+    "upperBound": "Likolo",
+    "lowerBound": "Nse"
+  },
+  "anomalies": {
+    "patterns": " bamodele mabe ezwami",
+    "alerts": " Batemeli",
+    "value": "Moto :",
+    "zscore": "Score Z :",
+    "type": "Ndéngé :"
+  }
+},
+
+  "products": {
+    "errors": {
+      "load": "Kozwa biloko ekosilisaki te",
+      "loadDetails": "Kozwa makambo ya eloko ekosilisaki te",
+      "required": "Nkombo mpe SKU esengeli",
+      "save": "Kobatela eloko ekosilisaki te",
+      "delete": "Kolimwisa eloko ekosilisaki te"
+    },
+    "title": "Katalɔgɛ ya Biloko",
+    "subtitle": "Kobongisa biloko na yo mpe bamakambo",
+    "actions": {
+      "add": "Kobakisa eloko",
+      "manageStock": "Kobongisa stock"
+    },
+    "search": "Koluka biloko...",
+    "table": {
+      "name": "Nkombo ya eloko",
+      "sku": "SKU",
+      "price": "Ntalo",
+      "category": "Catégorie",
+      "actions": "Bakosala"
+    },
+    "empty": "Eloko tɛ́",
+    "emptySelection": "Kopona eloko mpo na komona makambo",
+    "form": {
+      "new": "Eloko ya sika",
+      "noImage": "Elilingi tɛ́",
+      "name": "Nkombo ya eloko",
+      "description": "Makambo",
+      "price": "Ntalo ($)",
+      "sku": "SKU",
+      "category": "Catégorie",
+      "image": "URL ya elilingi"
+    },
+    "success": {
+      "saved": "Eloko ebatelami malamu",
+      "deleted": "Eloko elimwisi malamu"
+    },
+    "confirmDelete": "O komati mpo na kolimwisa eloko oyo?"
+  },
+
+  "sales": {
+    "errors": {
+      "load": "Kozwa makambo ya kotɛkɛ ekosilisaki te",
+      "invalidItems": "Kotya biloko nyonso na bamoto malamu",
+      "search": "Koluka ekosilisaki te"
+    },
+    "success": {
+      "created": "Kotɛkɛ esalemi malamu",
+      "imported": "Kotɛkɛ ezwami malamu",
+      "search": "Koluka ekosili"
+    },
+    "create": {
+      "title": "Kosalela kotɛkɛ",
+      "selectProduct": "Kopona eloko...",
+      "addItem": "Kobakisa eloko",
+      "submit": "Kosalela kotɛkɛ"
+    },
+    "import": {
+      "title": "Kozwa kotɛkɛ na Excel",
+      "importing": "Kozwa...",
+      "submit": "Kozwa fisyɛ"
+    },
+    "details": {
+      "title": "Makambo ya kotɛkɛ",
+      "select": "Kopona kotɛkɛ mpo na komona makambo",
+      "id": "ID ya Kotɛkɛ"
+    },
+    "search": {
+      "placeholder": "Koluka na SKU to nkombo ya eloko...",
+      "searching": "Koluka..."
+    },
+    "recent": {
+      "title": "Kotɛkɛ ya lɛlɔ",
+      "loading": "Kozwa kotɛkɛ ya lɛlɔ...",
+      "items": "biloko"
+    },
+    "history": {
+      "loading": "Kozwa makambo ya kotɛkɛ..."
+    }
+  },
+
+  "settings": {
+    "title": "Bokɔnɔ",
+    "messages": {
+      "loadError": "Kozwa profil ekosilisaki te",
+      "profileUpdated": "Profil ebongisami malamu",
+      "profileUpdateFailed": "Kobongisa profil ekosilisaki te",
+      "passwordMismatch": "Bamot de passe ya sika ezangani",
+      "passwordUpdated": "Mot de passe ebongisami malamu",
+      "passwordUpdateFailed": "Kobongisa mot de passe ekosilisaki te"
+    },
+    "profile": {
+      "title": "Makambo ya profil",
+      "username": "Nkombo ya mosaleli",
+      "email": "Email",
+      "phone": "Nimero ya téléphone",
+      "save": "Kobatela profil"
+    },
+    "password": {
+      "title": "Kobongisa mot de passe",
+      "old": "Mot de passe ya kala",
+      "new": "Mot de passe ya sika",
+      "confirm": "Kondima mot de passe ya sika",
+      "update": "Kobongisa mot de passe"
+    }
+  },
+
+  "import": {
+    "title": "Kozwa fisyɛ Excel",
+    "noFile": "Sengeli kopona fisyɛ.",
+    "uploading": "Kozwa...",
+    "upload": "Kozwa fisyɛ",
+    "success": "Lokumu: {{message}}",
+    "failed": "Kozwa ekosilisaki te."
+  },
+
+  "reports": {
+    "title": "Rapɔ",
+    "format": {
+      "pdf": "PDF",
+      "excel": "Excel"
+    },
+    "type": {
+      "sales": "Kotɛkɛ",
+      "stock": "Stock",
+      "combined": "Kotɛkɛ + Stock"
+    },
+    "period": {
+      "daily": "Lɛlɔ",
+      "weekly": "Mikolo 7 ya liboso",
+      "monthly": "Sanza oyo"
+    },
+    "buttons": {
+      "generate": "Kosalela sika",
+      "generating": "Kosalela...",
+      "schedule": "Kopesa rapɔ mokolo na mokolo",
+      "scheduling": "Kopesa...",
+      "download": "Kozwa ya liboso",
+      "downloading": "Kozwa..."
+    },
+    "schedule": {
+      "title": "Kopesa rapɔ otomatiki"
+    },
+    "download": {
+      "title": "Rapɔ ya liboso"
+    },
+    "messages": {
+      "generateError": "Lisusu ya kosalela rapɔ",
+      "scheduleError": "Lisusu ya kopesa rapɔ",
+      "downloadError": "Kozwa rapɔ ekosilisaki te. Zela moke.",
+      "invalidTime": "Eleko mabe",
+      "noScheduled": "Rapɔ ya kopesa tɛ́",
+      "scheduled": "Kopesami na {{time}} (mosala {{job}})"
+    }
+  },
+
+  "errors": {
+    "invalidCredentials": "Nimero ya téléphone to mot de passe mabe",
+    "fileRequired": "Sengeli kopona fisyɛ.",
+    "uploadFailed": "Kozwa ekosilisaki te.",
+    "passwordsMismatch": "Bamot de passe ezangani.",
+    "registrationFailed": "Kosangisa ekosilisaki te",
+    "profileLoadFailed": "Kozwa profil ya mosaleli ekoki te.",
+    "profileUpdateFailed": "Kobongisa profil ekosilisaki te.",
+    "passwordChangeFailed": "Kobongisa mot de passe ekosilisaki te."
+  },
+
+  "notifications": {
+    "success": "Lokumu",
+    "error": "Lisusu",
+    "warning": "Kebisi",
+    "info": "Sango"
+  }
+}
