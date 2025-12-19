@@ -1,0 +1,20 @@
+services:
+  db:
+    image: postgres:14-alpine  # Latest 14.x (14.20+ – supported by Flyway 10.20.1)
+    container_name: salesflow-postgres
+    environment:
+      POSTGRES_DB: salesflow_db
+      POSTGRES_USER: salesflow_user
+      POSTGRES_PASSWORD: securepassword123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U salesflow_user -d salesflow_db"]
+      interval: 8s
+      timeout: 5s
+      retries: 6
+
+volumes:
+  postgres_data:

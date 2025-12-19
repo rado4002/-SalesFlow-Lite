@@ -1,16 +1,58 @@
-# Build output 
-target 
-*.log
-#Maven
+# Java
+*.class
+*.jar
+*.war
+*.ear
+target/
+build/
+.gradle/
 .mvn/
 mvnw
 mvnw.cmd
-#IDE
+!mvnw
+!mvnw.cmd
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+dist/
+
+# Node/React
+node_modules/
+npm-debug.log*
+.next/
+out/
+dist/
+
+# IDE
 .idea/
+.vscode/
 *.iml
-*.iws
-#os
-.DS_Store 
+.classpath
+.project
+.settings/
+
+# OS
+.DS_Store
 Thumbs.db
-#Secrets 
-jwt-secret.key
+Desktop.ini
+
+# Secrets
+*.key
+*.pem
+*.crt
+.env
+*.env.local
+application-dev.properties
+application-prod.properties
+
+# Logs
+logs/
+*.log
+*.tmp
+*.bak
