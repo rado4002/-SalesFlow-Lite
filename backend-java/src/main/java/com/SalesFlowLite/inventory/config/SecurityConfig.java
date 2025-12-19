@@ -1,7 +1,7 @@
-<<<<<<< HEAD:backend-java/src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
+
 // backend-java/src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
-=======
->>>>>>> dev-java:src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
+
+
 package com.SalesFlowLite.inventory.config;
 
 import com.SalesFlowLite.inventory.security.JwtAuthenticationFilter;
@@ -66,22 +66,21 @@ public class SecurityConfig {
                         .requestMatchers(
                                 "/auth/**",
                                 "/api/v1/auth/**",
-<<<<<<< HEAD:backend-java/src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
-=======
+
                                 "/actuator/health",
                                 "/actuator/info",
->>>>>>> dev-java:src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
+
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/h2-console/**"
                         ).permitAll()
-<<<<<<< HEAD:backend-java/src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
+
                         .requestMatchers("/api/v1/sales/history/**").hasAnyRole("ADMIN", "PYTHON_SERVICE")
                         .requestMatchers("/api/v1/sales/**").hasAnyRole("ADMIN", "PYTHON_SERVICE")
-=======
+
                         .requestMatchers("/api/v1/sync/**").authenticated()
->>>>>>> dev-java:src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
+
                         .anyRequest().authenticated()
                 )
                 .authenticationProvider(authenticationProvider())
@@ -95,10 +94,10 @@ public class SecurityConfig {
     @Bean(name = "corsConfigurationSource")
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-<<<<<<< HEAD:backend-java/src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
+
         config.setAllowedOriginPatterns(List.of("*")); // ou List.of("http://localhost:8000")
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-=======
+
 
         // === UPDATED: Added common dev ports + your remote IP if frontend is served there ===
         // Why these? Covers Vite dev (5173), preview (4173), and any custom.
@@ -120,7 +119,7 @@ public class SecurityConfig {
         // Why? Browsers send preflight OPTIONS for PATCH + JSON content-type
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
 
->>>>>>> dev-java:src/main/java/com/SalesFlowLite/inventory/config/SecurityConfig.java
+
         config.setAllowedHeaders(List.of("*"));
         config.setExposedHeaders(List.of("Authorization"));
         config.setAllowCredentials(true); // Needed for JWT in cookies or future auth
