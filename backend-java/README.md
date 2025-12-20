@@ -1,34 +1,56 @@
-# Backend (Java – Spring Boot)
+# 💻 SalesFlow-Lite Backend
 
-This folder  contains the Java backend for SalesFlow Lite.  
-It provides APIs for managing products, sales entries, and stock tracking.
+SalesFlow-Lite is a powerful, lightweight Java backend built on Spring Boot, designed to provide a secure and efficient RESTful API for inventory, sales, and user management systems.
 
-## Tech Stack
-- Java 17+
-- Spring Boot
-- Maven or Gradle
+## ✨ Key Features
 
-## Features
-- Product CRUD (Create, Read, Update, Delete)
-- Sales entry endpoints
-- Stock alerts
-- (Add more features as you build them)
+This application exposes a RESTful API with the following core functionalities:
 
-## How to Run
+### Authentication & Security
+* **Secure User Authentication:** User Registration and Login endpoints.
+* **Role-Based Access Control (RBAC):** Manages user permissions via roles.
+* **JWT (JSON Web Token) Implementation:** Secure token-based session management.
+* **Refresh Token Mechanism:** Provides extended session validity without frequent re-login.
 
-1. Install Java (version 17 or above).
-2. Install Maven or Gradle.
-3. Clone this repository.
-4. Open a terminal in this folder.
-5. Run:
+### Inventory & Sales
+* **Product Management:** Full CRUD (Create, Read, Update, Delete) operations for managing products.
+* **Inventory Tracking:** Dedicated service for managing and tracking stock levels.
+* **Sales Transactions:** API for creating new sales and tracking associated sale items.
+* **Automated Stock Control:** Automatic deduction of stock upon sale creation.
 
-   ```
-   ./mvnw spring-boot:run
-   ```
-   *(or use Gradle if your project uses it)*
+### Architecture & Quality of Life
+* **Clean Layered Architecture:** Clear separation of concerns (Controller → Service → Repository).
+* **Robust Error Handling:** Utilizes a global exception handler for clean, consistent API error responses.
+* **API Documentation:** Integrated Swagger/OpenAPI for easy testing and documentation.
+* **Asynchronous Processing:** Configured for handling non-critical tasks efficiently.
+* **Database Migrations:** Version-controlled schema evolution using Flyway.
+* **CORS Configuration:** Configured for frontend integration.
 
-6. The backend will start on [http://localhost:8080](http://localhost:8080)
+## 🛠️ Technology Stack
 
-## API Documentation
+| Category | Technology | Purpose |
+| :--- | :--- | :--- |
+| **Backend Framework** | Java 17+ | Core programming language |
+| **Web Framework** | Spring Boot 3.x | Rapid development of RESTful services |
+| **API Documentation** | Springdoc-OpenAPI / Swagger UI | Automatic API documentation generation |
+| **Security** | Spring Security & JWT | Authentication and Authorization |
+| **Database** | Spring Data JPA / Hibernate | Object-Relational Mapping (ORM) |
+| **Database Migrations** | Flyway | Managing database schema evolution |
+| **Build Tool** | Apache Maven | Project build automation and dependency management |
+| **Testing** | JUnit 5 & Mockito | Unit and integration testing |
+| **Database (Development)** | H2 Database | In-memory database for development |
+| **Database (Production)** | PostgreSQL | Production-grade relational database |
 
-API docs will be added as endpoints are built.
+## 🚀 Getting Started
+
+### Prerequisites
+* Java Development Kit (JDK) 17 or higher.
+* Apache Maven.
+* A relational database (H2 is used by default for development).
+
+### Installation and Setup
+
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/rado4002/-SalesFlow-Lite.git](https://github.com/rado4002/-SalesFlow-Lite.git)
+   cd -SalesFlow-Lite/codebase/backend-java
