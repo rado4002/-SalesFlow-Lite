@@ -13,7 +13,7 @@ import jakarta.persistence.LockModeType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // ← CORRECT IMPORT (Spring, has readOnly)
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final InventoryRepository inventoryRepository;
-    private final EntityManager em; // Still needed if you want manual lock (optional now)
+    private final EntityManager em;
 
     @Override
     @Transactional
@@ -33,7 +33,8 @@ public class ProductServiceImpl implements ProductService {
         Product product = Product.builder()
                 .name(dto.getName())
                 .sku(dto.getSku())
-                .price(dto.getPrice() != null ? dto.getPrice().doubleValue() : 0.0)
+                // FIXED: direct BigDecimal assignment (dto.price is already BigDecimal)
+                .price(dto.getPrice() != null ? dto.getPrice() : BigDecimal.ZERO)
                 .stockQuantity(dto.getStockQuantity() != null ? dto.getStockQuantity() : 0)
                 .description(dto.getDescription())
                 .imageUrl(dto.getImageUrl())
@@ -52,7 +53,8 @@ public class ProductServiceImpl implements ProductService {
                             .sku(product.getSku())
                             .name(product.getName())
                             .description(product.getDescription())
-                            .price(BigDecimal.valueOf(product.getPrice()))
+                            // FIXED: direct BigDecimal from product.price
+                            .price(product.getPrice() != null ? product.getPrice() : BigDecimal.ZERO)
                             .cost(BigDecimal.ZERO)
                             .category("Uncategorized")
                             .quantity(0)
@@ -86,9 +88,8 @@ public class ProductServiceImpl implements ProductService {
         return toDto(findBySkuOrThrow(sku));
     }
 
-    // === FIXED: Use Spring @Transactional with readOnly + @Lock ===
     @Override
-    @Transactional(readOnly = true) // ← Now compiles!
+    @Transactional(readOnly = true)
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     public Product findByIdWithPessimisticLock(Long id) {
         return productRepository.findById(id)
@@ -107,14 +108,12 @@ public class ProductServiceImpl implements ProductService {
                 .orElseThrow(() -> new ProductNotFoundException("name", name));
     }
 
-    // === FIXED: Same pattern for SKU – readOnly + lock ===
     @Override
-    @Transactional(readOnly = true) // ← Now compiles!
+    @Transactional(readOnly = true)
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     public Product findBySkuWithPessimisticLock(String sku) {
         return productRepository.findBySku(sku)
                 .orElseThrow(() -> new ProductNotFoundException("sku", sku));
-        // No manual em.lock/refresh needed – @Lock on method works with custom finder in Spring Boot 3+
     }
 
     @Override
@@ -213,7 +212,8 @@ public class ProductServiceImpl implements ProductService {
     private void updateFields(Product product, ProductDto dto) {
         product.setName(dto.getName());
         product.setSku(dto.getSku());
-        product.setPrice(dto.getPrice() != null ? dto.getPrice().doubleValue() : 0.0);
+        // FIXED: direct BigDecimal assignment
+        product.setPrice(dto.getPrice() != null ? dto.getPrice() : BigDecimal.ZERO);
         product.setStockQuantity(dto.getStockQuantity());
         product.setDescription(dto.getDescription());
         product.setImageUrl(dto.getImageUrl());
@@ -225,7 +225,8 @@ public class ProductServiceImpl implements ProductService {
                 .id(p.getId())
                 .name(p.getName())
                 .sku(p.getSku())
-                .price(p.getPrice() != null ? BigDecimal.valueOf(p.getPrice()) : null)
+                // FIXED: direct BigDecimal (no double conversion)
+                .price(p.getPrice())
                 .stockQuantity(p.getStockQuantity())
                 .description(p.getDescription())
                 .imageUrl(p.getImageUrl())

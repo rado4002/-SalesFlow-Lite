@@ -1,6 +1,6 @@
 package com.SalesFlowLite.inventory.service;
 
-import com.SalesFlowLite.inventory.model.dto.inventory.InventoryAdjustRequest; // NEW
+import com.SalesFlowLite.inventory.model.dto.inventory.InventoryAdjustRequest;
 import com.SalesFlowLite.inventory.model.dto.inventory.InventoryRequest;
 import com.SalesFlowLite.inventory.model.dto.inventory.InventoryResponse;
 import com.SalesFlowLite.inventory.model.dto.inventory.InventoryUpdateRequest;
@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,6 @@ public class InventoryService {
     private final InventoryRepository inventoryRepository;
     private final ProductRepository productRepository;
 
-    // CREATE - unchanged
     @Transactional
     public InventoryResponse createItem(InventoryRequest request) {
         InventoryItem item = InventoryItem.builder()
@@ -41,7 +41,6 @@ public class InventoryService {
         return mapToResponse(saved);
     }
 
-    // Sync helper - unchanged
     private void syncInventoryToProduct(InventoryItem item) {
         Product product = productRepository.findBySku(item.getSku())
                 .orElseGet(() -> {
@@ -49,7 +48,8 @@ public class InventoryService {
                             .sku(item.getSku())
                             .name(item.getName())
                             .description(item.getDescription())
-                            .price(item.getPrice().doubleValue())
+                            // FIXED: direct BigDecimal from inventory price
+                            .price(item.getPrice() != null ? item.getPrice() : BigDecimal.ZERO)
                             .stockQuantity(0)
                             .lowStockThreshold(10)
                             .build();
@@ -60,7 +60,6 @@ public class InventoryService {
         productRepository.save(product);
     }
 
-    // GET methods - unchanged
     public InventoryResponse getItem(Long id) {
         InventoryItem item = inventoryRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Item not found with ID: " + id));
@@ -85,7 +84,6 @@ public class InventoryService {
                 .collect(Collectors.toList());
     }
 
-    // === EXISTING UPDATES KEPT FOR BACKWARD COMPATIBILITY ===
     @Transactional
     public InventoryResponse updateItem(Long id, InventoryRequest request) {
         InventoryItem item = inventoryRepository.findById(id)
@@ -116,7 +114,6 @@ public class InventoryService {
         return mapToResponse(saved);
     }
 
-    // Existing partial (all fields optional) - unchanged
     @Transactional
     public InventoryResponse updateItemPartial(Long id, InventoryUpdateRequest request) {
         InventoryItem item = inventoryRepository.findById(id)
@@ -147,7 +144,6 @@ public class InventoryService {
         return mapToResponse(saved);
     }
 
-    // === NEW MINIMAL ADJUST METHODS (quantity + cost only) ===
     @Transactional
     public InventoryResponse adjustItemPartial(Long id, InventoryAdjustRequest request) {
         InventoryItem item = inventoryRepository.findById(id)
@@ -178,7 +174,6 @@ public class InventoryService {
         return mapToResponse(saved);
     }
 
-    // New helper for minimal adjust
     private void applyAdjustUpdates(InventoryItem item, InventoryAdjustRequest request) {
         if (request.getQuantity() != null) {
             item.setQuantity(request.getQuantity());
@@ -188,7 +183,6 @@ public class InventoryService {
         }
     }
 
-    // Existing partial helper - unchanged
     private void applyPartialUpdates(InventoryItem item, InventoryUpdateRequest request) {
         if (request.getSku() != null) item.setSku(request.getSku());
         if (request.getName() != null) item.setName(request.getName());
@@ -199,7 +193,6 @@ public class InventoryService {
         if (request.getCategory() != null) item.setCategory(request.getCategory());
     }
 
-    // DELETE methods - unchanged
     public void deleteItem(Long id) {
         if (!inventoryRepository.existsById(id)) {
             throw new EntityNotFoundException("Item not found with ID: " + id);
@@ -219,7 +212,6 @@ public class InventoryService {
         inventoryRepository.delete(item);
     }
 
-    // MAPPER & full update helper - unchanged
     private InventoryResponse mapToResponse(InventoryItem item) {
         return InventoryResponse.builder()
                 .id(item.getId())

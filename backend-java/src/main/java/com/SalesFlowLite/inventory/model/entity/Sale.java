@@ -25,6 +25,7 @@ public class Sale {
     @Builder.Default
     private LocalDateTime saleDate = LocalDateTime.now();
 
+    // Money field – already perfect with BigDecimal
     @Column(nullable = false, precision = 12, scale = 2)
     @Builder.Default
     private BigDecimal totalAmount = BigDecimal.ZERO;
@@ -33,7 +34,8 @@ public class Sale {
     @Builder.Default
     private List<SaleItem> items = new ArrayList<>();
 
-    // NEW: For offline sync
+    // FIXED: Back to Long to match existing DB column (bigint) – safe, no migration needed
+    // Consistent with Product, easy for sync comparison
     @Column(name = "last_updated")
     private Long lastUpdated;
 

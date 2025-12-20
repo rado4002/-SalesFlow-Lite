@@ -48,7 +48,7 @@ public class SaleServiceImpl implements SaleService {
         for (SaleItemRequest itemReq : itemRequests) {
             Product product = itemReq.productId() != null
                     ? productService.findByIdWithPessimisticLock(itemReq.productId())
-                    : productService.findBySkuWithPessimisticLock(itemReq.sku()); // Now compiles!
+                    : productService.findBySkuWithPessimisticLock(itemReq.sku());
 
             int available = product.getStockQuantity() != null ? product.getStockQuantity() : 0;
             if (available < itemReq.quantity()) {
@@ -56,7 +56,8 @@ public class SaleServiceImpl implements SaleService {
                         "Not enough stock for product " + product.getSku());
             }
 
-            BigDecimal unitPrice = BigDecimal.valueOf(product.getPrice());
+            // FIXED: direct BigDecimal from product.price
+            BigDecimal unitPrice = product.getPrice() != null ? product.getPrice() : BigDecimal.ZERO;
             BigDecimal quantity = BigDecimal.valueOf(itemReq.quantity());
             BigDecimal subtotal = unitPrice.multiply(quantity);
 
@@ -138,8 +139,7 @@ public class SaleServiceImpl implements SaleService {
     private List<SalesHistoryDto> getSalesHistoryForProduct(Long productId, int days) {
         return saleRepository
                 .findSaleItemsByProductAndDate(
-                        productId,
-                        LocalDate.now().minusDays(days).atStartOfDay())
+                        productId, LocalDate.now().minusDays(days).atStartOfDay())
                 .stream()
                 .collect(Collectors.groupingBy(
                         item -> item.getSale().getSaleDate().toLocalDate(),
@@ -158,15 +158,16 @@ public class SaleServiceImpl implements SaleService {
                         item.getProductName(),
                         item.getProductSku(),
                         item.getQuantity(),
-                        item.getUnitPrice().doubleValue(),
-                        item.getSubtotal().doubleValue()
+                        // These DTOs expect double – safe conversion only here at boundary
+                        item.getUnitPrice() != null ? item.getUnitPrice().doubleValue() : 0.0,
+                        item.getSubtotal() != null ? item.getSubtotal().doubleValue() : 0.0
                 ))
                 .toList();
 
         return new SaleResponse(
                 sale.getId(),
                 sale.getSaleDate(),
-                sale.getTotalAmount().doubleValue(),
+                sale.getTotalAmount() != null ? sale.getTotalAmount().doubleValue() : 0.0,
                 items
         );
     }
