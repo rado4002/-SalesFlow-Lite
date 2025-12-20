@@ -20,7 +20,7 @@
 
 ## 🛠️ Tech Stack
 
-**Backend:** FastAPI, Python 3.11+, Pydantic, SQLAlchemy  
+**Backend:** FastAPI, Python 3.11+, Pydantic 
 **Database:** PostgreSQL, Redis  
 **ML & Data:** scikit-learn, pandas, numpy  
 **Auth & Security:** JWT, bcrypt  
