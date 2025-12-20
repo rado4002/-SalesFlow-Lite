@@ -1,4 +1,4 @@
--- V3__create_refresh_tokens.sql
+-- V4__create_refresh_tokens.sql
 CREATE TABLE IF NOT EXISTS refresh_tokens (
                                               id VARCHAR(36) PRIMARY KEY,
     token VARCHAR(255) NOT NULL UNIQUE,

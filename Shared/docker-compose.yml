@@ -15,6 +15,7 @@ services:
       interval: 8s
       timeout: 5s
       retries: 6
+    restart: unless-stopped
 
   backend:
     build:
@@ -36,3 +37,11 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  default:
+    name: salesflow_network
+
+
+    #docker compose up --build or docker compose ps
+    #docker compose -f ./shared/docker-compose.yml ps
