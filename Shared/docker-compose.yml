@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:14-alpine  # Latest 14.x (14.20+ – supported by Flyway 10.20.1)
+    image: postgres:14.12-alpine
     container_name: salesflow-postgres
     environment:
       POSTGRES_DB: salesflow_db
@@ -15,6 +15,24 @@ services:
       interval: 8s
       timeout: 5s
       retries: 6
+
+  backend:
+    build:
+      context: ../backend-java
+      dockerfile: Dockerfile
+    container_name: salesflow-backend
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/salesflow_db
+      SPRING_DATASOURCE_USERNAME: salesflow_user
+      SPRING_DATASOURCE_PASSWORD: securepassword123
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    mem_limit: 768m
 
 volumes:
   postgres_data:
