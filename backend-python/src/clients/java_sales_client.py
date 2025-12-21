@@ -22,7 +22,7 @@ from src.api.settings import DEV_MODE
 
 JAVA_API_URL = os.getenv(
     "JAVA_API_URL",
-    "http://10.131.221.179:8080/api/v1"
+    "http://localhost:8080/api/v1"
 ).rstrip("/")
 
 logger = logging.getLogger(__name__)

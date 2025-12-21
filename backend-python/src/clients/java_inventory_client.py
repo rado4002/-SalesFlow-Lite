@@ -13,7 +13,7 @@ from src.mock.mock_inventory_stock import MOCK_INVENTORY
 
 JAVA_API_URL = os.getenv(
     "JAVA_API_URL",
-    "http://10.131.221.179:8080/api/v1"
+    "http://localhost:8080/api/v1"
 ).rstrip("/")
 
 logger = logging.getLogger(__name__)

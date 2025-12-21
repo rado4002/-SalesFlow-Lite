@@ -12,13 +12,13 @@ export default defineConfig({
     proxy: {
       // 🔥 JAVA BACKEND PROXY
       "/java": {
-        target: "http://10.131.221.179:8080/api/v1",
+        target: "http://localhost:8080/api/v1",
         changeOrigin: true,
       },
 
       // 🔥 PYTHON BACKEND PROXY
       "/py": {
-        target: "http://127.0.0.1:8081",
+        target: "http://localhost:8081",
         changeOrigin: true,
       },
     },

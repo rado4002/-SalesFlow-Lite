@@ -8,35 +8,35 @@ import type {
 
 export const reportsAPI = {
   // -------------------------------------------------------------
-  // GENERATE REPORT (MANUAL) → Blob + filename
+  // GENERATE REPORT → retourne Blob + filename + media_type
   // -------------------------------------------------------------
   generate: async (payload: ReportRequestPayload) => {
+    console.log("📤 Sending REPORT payload =", payload);
+
+    // ⭐ WRAPPER OBLIGATOIRE (aligné backend FastAPI)
+    const wrapped = {
+      payload,
+      required_roles: [],
+    };
+
     const res = await pythonApi.post(
       "/reports/generate",
+      wrapped,
       {
-        payload,
-        required_roles: [],
-      },
-      {
-        responseType: "arraybuffer",
-        headers: { "Content-Type": "application/json" },
+        responseType: "blob", // ✅ OBLIGATOIRE pour PDF / Excel
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
 
+    // -----------------------------------------------------
+    // Extract filename from Content-Disposition
+    // -----------------------------------------------------
     const disposition = res.headers["content-disposition"];
-    if (!disposition) {
-      throw new Error("Missing Content-Disposition header");
-    }
-
     const filename =
-      disposition
-        .split("filename=")[1]
-        ?.replace(/"/g, "")
-        ?.trim();
-
-    if (!filename) {
-      throw new Error("Unable to extract filename");
-    }
+      disposition?.split("filename=")[1]?.replace(/"/g, "") ??
+      `report.${payload.format}`;
 
     return {
       file: res.data,
@@ -44,7 +44,6 @@ export const reportsAPI = {
       media_type: res.headers["content-type"],
     };
   },
-
   // -------------------------------------------------------------
   // SCHEDULE REPORT (CRON + SAVE TO DISK)
   // -------------------------------------------------------------

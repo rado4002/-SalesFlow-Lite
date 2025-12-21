@@ -13,7 +13,7 @@ class JavaAPIClient:
 
     def __init__(
         self,
-        base_url: str = "http://10.131.175.145:8080/api/v1",
+        base_url: str = "http://localhost:8080/api/v1",
         timeout: float = 10.0,
         max_retries: int = 3
     ):

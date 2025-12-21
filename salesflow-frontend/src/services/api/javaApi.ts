@@ -1,7 +1,7 @@
 // src/services/api/javaApi.ts
 import http from "./http";
 
-export const JAVA_API_URL = "http://10.131.221.179:8080/api/v1";
+export const JAVA_API_URL = "http://localhost:8080/api/v1";
 
 export const javaApi = {
   get: (path: string, config: object = {}) =>

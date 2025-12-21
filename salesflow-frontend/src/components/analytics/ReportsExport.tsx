@@ -23,32 +23,31 @@ export default function ReportsExport() {
   // -----------------------------
   // MANUAL GENERATION
   // -----------------------------
-  const generateNow = async () => {
-    setLoading(true);
-    try {
-      const res = await reportsAPI.generate({
-        format,
-        report_type: reportType,
-        period,
-      });
+const generateNow = async () => {
+  setLoading(true);
 
-      const blob = new Blob([res.file], { type: res.media_type });
-      const url = URL.createObjectURL(blob);
+  try {
+    const res = await reportsAPI.generate({
+      report_type: reportType,
+      format,
+      period,
+    });
+
+    // 🔽 Téléchargement direct dans le navigateur
+    const blob = new Blob([res.file], { type: res.media_type });
+      const url = window.URL.createObjectURL(blob);
 
       const a = document.createElement("a");
       a.href = url;
       a.download = res.filename;
       a.click();
 
-      URL.revokeObjectURL(url);
+      window.URL.revokeObjectURL(url);
     } catch (err) {
-      alert(t("reports.messages.generateError"));
-      console.error(err);
-    } finally {
-      setLoading(false);
+      console.error("❌ Report generation failed", err);
+      alert("Error generating report. Check console.");
     }
-  };
-
+  }
   // -----------------------------
   // SCHEDULE REPORT
   // -----------------------------

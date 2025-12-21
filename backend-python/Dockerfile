@@ -30,4 +30,4 @@ EXPOSE 8081
 # ============================
 # START FASTAPI
 # ============================
-CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8081"]
+CMD ["uvicorn", "src.api.main:app", "--host", "0.0.0.0", "--port", "8081", "--reload"]

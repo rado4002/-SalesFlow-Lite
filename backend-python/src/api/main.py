@@ -51,6 +51,8 @@ app.add_middleware(
         "http://127.0.0.1:4173",   # React Vite Preview
         "http://localhost:8080",   # Spring Boot
         "http://localhost:8081",   # FastAPI
+        "http://localhost:4173",
+        "http://localhost:5174",
         "http://10.131.221.179:8080/api/v1" # Spring boot network url 
 
     ],

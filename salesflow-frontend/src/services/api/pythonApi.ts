@@ -1,7 +1,7 @@
 // src/services/api/pythonApi.ts
 import http from "./http";
 
-export const PYTHON_API_URL = "http://127.0.0.1:8081/api/v1";
+export const PYTHON_API_URL = "http://localhost:8081/api/v1";
 
 export const pythonApi = {
   get: (path: string, config: object = {}) =>
