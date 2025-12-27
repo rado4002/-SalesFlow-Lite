@@ -76,7 +76,7 @@ graph TD
         Offline["Offline Sync<br/>(IndexedDB, localForage)"]
     end
 
-    subgraph Java["Java Spring Boot - System of Record"]
+    subgraph Java["Java Spring Boot - System "]
         Ctrl["Controllers<br/>(REST Endpoints)"]
         Svc["Services<br/>(Business Logic, Transactions)"]
         Repo["Repositories<br/>(JPA)"]
