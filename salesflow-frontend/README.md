@@ -1,73 +1,145 @@
-# React + TypeScript + Vite
+# 🖥️ SalesFlow-Lite — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend web application for **SalesFlow-Lite**, a commercial management and analytics platform built with **React 18**, **TypeScript**, and **Vite**, and connected to a **microservices backend architecture (Java + Python)**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 Frontend Purpose
 
-## React Compiler
+The frontend provides a **modern, responsive, and secure user interface** that enables users to:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* Visualize **sales performance and key business KPIs**
+* Monitor **inventory levels and stock alerts**
+* Access **advanced analytics dashboards**
+* Run and visualize **machine learning forecasts**
+* Import business data via **Excel files**
+* Generate and download **PDF / Excel reports**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🧱 Technology Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### ⚛️ Core Technologies
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+* **React 18**
+* **TypeScript**
+* **Vite** (fast dev server, HMR, optimized builds)
+* **React Router v6**
+* **Axios**
+* **React Context API**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 🎨 UI / UX
+
+* **Tailwind CSS**
+* Reusable UI components
+* SaaS-style dashboard layout
+* Responsive design (desktop & tablet)
+
+### 📊 Data Visualization
+
+* **Recharts**
+* Interactive charts and KPI cards
+* Dynamic data tables
+
+---
+
+## 🧠 Application Architecture
+
+The frontend is implemented as a **Single Page Application (SPA)** that acts as the **presentation and orchestration layer**, consuming multiple backend services:
+
+* **Java Backend (Spring Boot)**
+
+  * Authentication (JWT)
+  * Products, sales, inventory
+
+* **Python Backend (FastAPI)**
+
+  * Analytics
+  * Machine learning pipelines
+  * Excel import
+  * Report generation
+
+The frontend remains **stateless**, handling only UI logic and delegating all business logic to backend services.
+
+---
+
+## 🔐 Authentication & Security
+
+* JWT-based authentication
+* Centralized session management using **React Context**
+* Protected routes with authorization checks
+* Axios interceptors for:
+
+  * automatic token injection
+  * centralized 401 / 403 handling
+* No sensitive secrets stored on the client side
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Node.js ≥ 18
+* npm or yarn
+* Java and Python backends running locally or remotely
+
+### Installation
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Environment Configuration
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Create a `.env` file at the project root:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```env
+VITE_JAVA_API_URL=http://localhost:8080
+VITE_PYTHON_API_URL=http://localhost:8081
 ```
+
+### Development Server
+
+```bash
+npm run dev
+```
+
+---
+
+## 🧪 Code Quality & Tooling
+
+* ESLint with TypeScript support
+* Strict typing for safer refactoring
+* Consistent code style across components
+* Clear separation between UI, services, and types
+
+### Recommended Enhancements
+
+* Unit tests with Jest / React Testing Library
+* End-to-end testing (Playwright or Cypress)
+* Server-state caching with React Query
+* Accessibility improvements (WCAG / ARIA)
+
+---
+
+## 🧩 Design Patterns Used
+
+* **Component Pattern** — reusable UI building blocks
+* **Composite Pattern** — layout composed of nested components
+* **Context Pattern** — global authentication state
+* **Facade Pattern** — API service abstraction
+* **Observer Pattern** — reactive UI updates via state
+* **Adapter Pattern** — backend DTO to frontend models
+* **Client–Server Architecture**
+
+---
+
+## 📌 Project Status
+
+* ✅ Functional MVP
+* ✅ Fully integrated with backend services
+* 🔄 Designed for scalability and extension
+* 🎓 Suitable for engineering portfolio and academic evaluation
+
+
