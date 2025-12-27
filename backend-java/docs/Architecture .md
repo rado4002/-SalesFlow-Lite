@@ -62,6 +62,80 @@ graph TB
 
 
 ---
+---
+
+## 📋 Architecture Decision Records (ADRs)
+
+Architecture Decision Records capture **why** key architectural choices were made, not just **what** was built.  
+They provide long-term clarity for maintainers and future contributors.
+
+### ADR-001: Spring Boot Framework
+
+* **Status:** Approved  
+* **Decision:** Use Spring Boot for backend development  
+* **Rationale:**  
+  * Rapid project bootstrap  
+  * Strong ecosystem (Security, JPA, Validation)  
+  * Production-ready defaults  
+* **Consequences:**  
+  * Faster development velocity  
+  * Slightly larger memory footprint compared to lightweight frameworks  
+
+---
+
+### ADR-002: Layered Architecture Pattern
+
+* **Status:** Approved  
+* **Decision:** Adopt Controller → Service → Repository layering  
+* **Rationale:**  
+  * Clear separation of concerns  
+  * Easier testing and maintenance  
+  * Aligns with Spring Boot best practices  
+* **Consequences:**  
+  * Clean responsibility boundaries  
+  * Risk of anemic domain model if business logic leaks into controllers  
+
+---
+
+### ADR-003: JPA / Hibernate ORM
+
+* **Status:** Approved  
+* **Decision:** Use JPA/Hibernate for persistence  
+* **Consequences:**  
+  * High productivity and rapid CRUD development  
+  * Performance tuning required for complex queries  
+
+---
+
+### ADR-004: Mobile-First Synchronization
+
+* **Status:** Approved  
+* **Decision:** Offline-first synchronization using last-write-wins strategy  
+* **Consequences:**  
+  * Strong offline usability  
+  * Potential data conflicts requiring future enhancement  
+
+---
+
+### ADR-005: JWT for Authentication
+
+* **Status:** Approved  
+* **Decision:** Stateless JWT-based authentication  
+* **Consequences:**  
+  * Horizontally scalable security model  
+  * Tokens cannot be revoked instantly without extra infrastructure  
+
+---
+
+### ADR-006: PostgreSQL Database
+
+* **Status:** Approved  
+* **Decision:** PostgreSQL as primary database  
+* **Consequences:**  
+  * Advanced features (JSONB, full-text search, strong ACID guarantees)  
+  * Slightly higher operational complexity than MySQL  
+
+---
 
 ## 🏗️ 4+1 View Model
 
