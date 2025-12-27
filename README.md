@@ -87,14 +87,51 @@ SalesFlow-Lite uses modern, lightweight technologies chosen for reliability, off
 | **PHASE 2: REQUIREMENTS PROCESS** | **R.VALIDATION** | **VOLDI BOKANGA 少坎** | ✅ Completed  | 2025-10-02 |
 | **PHASE 3: REQUIREMENTS** | **REQUIREMENTS** | **BILUGE MOISE 比路** | ✅ Completed  | 2025-10-02 |
 | **PHASE 4: ARCHITECTURE** | **ARCHITECTURE** | **BOTH**| ✅ Completed | 2025-10-13 |
+| **PHASE 4: ARCHITECTURE** | **ARCHITECTURE(4 view +1 and Design patterns)** | **BOTH**| ✅ Completed | 2025-12-01 |
+| **PHASE 5: IMPLEMENTATION** | **PYTHON FAST API** | **VOLDI BOKANGA 少坎**| ✅ Completed | 2025-12-20 |
+| **PHASE 5: IMPLEMENTATION** | **JAVA SPRINGBOOT** | **BILUGE MOISE 比路**| ✅ Completed | 2025-12-20 |
+| **PHASE 5: IMPLEMENTATION** | **FRONTEND REACT** | **VOLDI BOKANGA 少坎**| ✅ Completed | 2025-12-20 |
+| **PHASE 6: LOCAL DEPLOYEMENT** | **DOCKER** | **BOTH**| ✅ Completed | 2025-12-26 |
+
 
 ---
 
 ## 🛠️ Getting Started
 
+## 📋 Prerequisites
+
+### System Requirements
+- **Node.js** v18+ 
+- **npm** v9+ 
+- **Docker** v24+ & **Docker Compose**
+  
+### Optional (for local development without Docker)
+- **Java JDK 17+** (for Spring Boot backend)
+- **Python 3.9+** (for ML services)
+- **Maven** 3.8+ (for Java builds)
+
+---
+
+## 🐳 Quick Start with Docker (Recommended)
+
 ```bash
-git clone https://github.com/rado4002/-SalesFlow-Lite.git
-cd -SalesFlow-Lite
-npm install     # frontend dependencies (React)
-# backend setup (Java / Python) instructions to come
-npm start       # launch dev frontend
+# Clone the repository
+git clone https://github.com/rado4002/SalesFlow-Lite.git
+cd SalesFlow-Lite/Shared
+
+# Start all services (Frontend + Backends)
+docker-compose up --build
+
+# For detached mode (run in background)
+docker-compose up -d --build
+
+# View logs
+docker-compose logs -f
+
+# Stop all services
+docker-compose down
+
+# Stop and remove volumes
+docker-compose down -v
+```
+## [Click here above to watch the full demo](https://www.bilibili.com/video/BV1ueBCBYEFY/?vd_source=85ee87274d95cc5e411f072f2f79f19d)
