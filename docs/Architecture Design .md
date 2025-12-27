@@ -140,12 +140,17 @@ src/
 #### Frontend (React)
 ```plaintext
 src/
-├── features/       # Feature-based folders (sales/, products/, analytics/, etc.)
-├── components/     # Reusable UI components
-├── services/       # API facades (Axios/fetch to Java & Python)
-├── context/        # Global state (AuthContext, etc.)
-├── hooks/          # Custom hooks
-└── types/          # TypeScript interfaces
+├───components/
+│   ├───analytics/
+│   └───Layout/        
+├───contexts/
+│
+├───pages/
+│
+├───services/
+│
+└───types/
+        
 ```
 
 **Rules**  
@@ -169,6 +174,14 @@ sequenceDiagram
     Java-->>Frontend: Success
     Frontend->>Python: Async analytics refresh (fire-and-forget)
 ```
+<img width="1557" height="737" alt="90a541ebcd6d3979dc4e9645b1c0b4d4" src="https://github.com/user-attachments/assets/acff5528-8e75-4a92-bc55-b634621fcecb" />
+
+
+
+<img width="402" height="1655" alt="09871e49ccb19d521d59b8ada1c9d4c8" src="https://github.com/user-attachments/assets/bd7b2a07-0ae4-4554-a76e-2cd07f904b66" />
+
+
+
 
 ### 4. Physical View (Deployment)
 
@@ -191,7 +204,11 @@ graph TB
 
 **Deployment Options**  
 - **Local**: `docker-compose up` (Java:8080, Python:8081, Frontend dev server)  
-- **Production**: Kubernetes or separate hosts with HTTPS termination  
+- **Production**: Kubernetes or separate hosts with HTTPS termination
+
+<img width="986" height="1281" alt="8f934963fe22b21809fa9207a93e73d2" src="https://github.com/user-attachments/assets/f7a647e8-7158-418d-83d8-69a32d1a695f" />
+
+
 
 ### +1 Scenarios View (Key Use Cases)
 
