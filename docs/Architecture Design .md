@@ -233,4 +233,42 @@ Here are the primary use cases that drive the system's behavior:
 - **Operational Schema**: `logs`, `audits`, cached data  
 
 ---
+## 🛠 Design Patterns
+
+### 3.1 Common Patterns (Defensible Across the Entire System)
+
+| Pattern              | Usage & Why It Matters                                                                 |
+|----------------------|----------------------------------------------------------------------------------------|
+| **Client–Server**    | React frontend as client, Java & Python as REST servers. Clear separation, stateless APIs, easy scaling. |
+| **Layered Architecture** | Consistent layering in every part:<br>• Frontend: UI → API services → types<br>• Java: Controller → Service → Repository<br>• Python: Routes → Services → Integration/Infra |
+| **DTO / Schema Pattern** | Explicit contracts: Java DTOs, Python Pydantic models, TypeScript interfaces. Prevents leakage, enforces validation, makes refactoring safe. |
+| **Facade**           | Simplifies complex subsystems:<br>• Frontend API services (axios wrappers) hide backend details<br>• Python cache manager + Java clients hide infrastructure |
+| **Adapter**          | Normalizes differences: camelCase ↔ snake_case mapping, JWT/payload normalization between layers. |
+| **Proxy**            | Python acts as processing proxy to Java (System of Record).<br>Redis acts as read proxy (cache-aside pattern). |
+| **Dependency Injection** | FastAPI `Depends()`, Spring `@Autowired`/constructor injection, React Context/Providers (soft DI). Promotes testability and loose coupling. |
+
+### 3.2 Dominant Patterns Per Layer
+
+#### Frontend (React + TypeScript)
+- **Component / Composite**: Layout + pages + reusable components (ProductCard, Dashboard, etc.)
+- **Context**: Global state like AuthContext
+- **Observer (implicit)**: React state changes → automatic re-renders
+- **Command / Async Pipeline**: Multi-step async flows (Excel upload → preview → batch insert, report generation → polling → download)
+- **Facade**: Central `services/api/*.ts` files that hide Axios complexity
+
+#### Java (Spring Boot – System of Record)
+- **MVC**: Core Spring pattern (Controllers = View handlers for REST)
+- **Layered Architecture**: Strict Controller → Service → Repository flow
+- **Repository Pattern**: Spring Data JPA interfaces for data access
+- **DTO Pattern**: Separate API contracts from entities
+- **Transaction Script / Boundary**: `@Transactional` on service methods for ACID guarantees
+- **Global Exception Handler**: `@ControllerAdvice` for consistent error responses
+
+#### Python (FastAPI – System of Insight)
+- **Pipeline (explicit)**: Dedicated pipelines for analytics, ML, Excel import, reports, alerting
+- **Strategy**: Interchangeable ML strategies (forecasting vs anomaly detection)
+- **Factory**: Report generators (PDF vs Excel)
+- **Cache-Aside**: Redis with TTL + in-memory fallback
+- **Observer / Pub-Sub (implicit)**: Job status tracking + polling, anomaly detection → alerts
+- **Singleton (implicit)**: Settings object, Redis client, HTTP client
 
