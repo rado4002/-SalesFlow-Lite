@@ -11,6 +11,7 @@ Welcome to the SalesFlow Lite documentation repository. This folder contains all
 | **[Requirements.md](Requirements.md)** | Functional & non-functional requirements, constraints, and specifications | ✅ **Complete** |
 | **[Architecture.md](Architecture.md)** | System architecture, technical decisions, and component design | ✅ **Complete** |
 | **[Requiements Process.md](Requiements-Process.md)** | User research, stakeholder feedback, and design validation | ✅ **Complete** |
+| **[Final report.md](https://github.com/rado4002/-SalesFlow-Lite/blob/main/docs/Final%20report.md)** | java springboot, python python , react frontend implementation | ✅ **Complete** |
 
 
 
