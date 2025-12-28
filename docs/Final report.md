@@ -1,4 +1,4 @@
-```markdown
+
 # SalesFlow-Lite — Backend Engineering Report  
 **(Final Consolidated Version)**
 
