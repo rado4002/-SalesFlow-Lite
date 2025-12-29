@@ -136,3 +136,4 @@ docker-compose down
 docker-compose down -v
 ```
 ## [Click here above to watch the full demo](https://www.bilibili.com/video/BV1ueBCBYEFY/?vd_source=85ee87274d95cc5e411f072f2f79f19d)
+## [Click here above to watch the full demo 2](https://www.bilibili.com/video/BV1QtvpBKEP6/?vd_source=85ee87274d95cc5e411f072f2f79f19d)
