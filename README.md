@@ -76,6 +76,7 @@ SalesFlow-Lite uses modern, lightweight technologies chosen for reliability, off
 | **Proxy**            | Python acts as processing proxy to Java (System of Record).<br>Redis acts as read proxy (cache-aside pattern). |
 | **Dependency Injection** | FastAPI `Depends()`, Spring `@Autowired`/constructor injection, React Context/Providers (soft DI). Promotes testability and loose coupling. |
 
+## [Click here for more detail on the documentation](https://github.com/rado4002/-SalesFlow-Lite/tree/main/docs#-salesflow-lite---documentation-hub)
 
 ## 📊 TASK DISTRIBUTION - SALESFLOW-LITE PROJECT
 
